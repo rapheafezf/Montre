@@ -3,48 +3,48 @@ import { Type, Sparkles, Check } from 'lucide-react';
 
 const TYPO_STYLES = [
   {
-    id: 'vendome',
-    name: 'Vendôme',
+    id: 'bodoni',
+    name: 'Place Vendôme',
+    subtitle: 'Bodoni & Didot',
+    fontFamily: '"Bodoni Moda", "Didot", "Prata", Georgia, serif',
+    description: 'L’élégance suprême du luxe français (Cartier, Vogue, Dior)',
+  },
+  {
+    id: 'prata',
+    name: 'Haute Couture',
+    subtitle: 'Prata',
+    fontFamily: '"Prata", "Bodoni Moda", Georgia, serif',
+    description: 'Lignes racées, courbures délicates et empattements ciselés',
+  },
+  {
+    id: 'cormorant',
+    name: 'Grandes Complications',
+    subtitle: 'Cormorant',
+    fontFamily: '"Cormorant Garamond", Georgia, serif',
+    description: 'Tradition horlogère genevoise (Patek Philippe, Vacheron Constantin)',
+  },
+  {
+    id: 'tenor',
+    name: 'Chic Épuré',
     subtitle: 'Tenor Sans',
     fontFamily: '"Tenor Sans", sans-serif',
-    description: 'Chic minimaliste, joaillerie & horlogerie de prestige',
+    description: 'Minimalisme moderne aux fûts évasés sans empattement',
   },
   {
-    id: 'riviera',
-    name: 'Riviera',
-    subtitle: 'Italiana',
-    fontFamily: '"Italiana", serif',
-    description: 'Haute couture, lignes racées inspirées de la Riviera',
-  },
-  {
-    id: 'manufacture',
-    name: 'Manufacture',
+    id: 'syne',
+    name: 'Manufacture Contemporaine',
     subtitle: 'Syne',
     fontFamily: '"Syne", sans-serif',
-    description: 'Design architectural contemporain (style Audemars Piguet)',
-  },
-  {
-    id: 'geneve',
-    name: 'Genève',
-    subtitle: 'Outfit',
-    fontFamily: '"Outfit", sans-serif',
-    description: 'Minimalisme suisse moderne (style Bucherer / Rolex)',
-  },
-  {
-    id: 'atelier',
-    name: 'Atelier',
-    subtitle: 'Cormorant',
-    fontFamily: '"Cormorant Garamond", serif',
-    description: 'Noblesse classique des grandes manufactures traditionnelles',
+    description: 'Design architectural puissant (Audemars Piguet, Richard Mille)',
   },
 ];
 
 export default function LuxuryTypographyToolbar() {
-  const [activeStyle, setActiveStyle] = useState('vendome');
+  const [activeStyle, setActiveStyle] = useState('bodoni');
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem('lemouvement_typo_style') || 'vendome';
+    const saved = localStorage.getItem('lemouvement_typo_v2') || 'bodoni';
     applyStyle(saved);
   }, []);
 
@@ -52,7 +52,7 @@ export default function LuxuryTypographyToolbar() {
     const styleObj = TYPO_STYLES.find(s => s.id === styleId) || TYPO_STYLES[0];
     setActiveStyle(styleObj.id);
     document.documentElement.style.setProperty('--font-luxury-heading', styleObj.fontFamily);
-    localStorage.setItem('lemouvement_typo_style', styleObj.id);
+    localStorage.setItem('lemouvement_typo_v2', styleObj.id);
   };
 
   const currentStyleObj = TYPO_STYLES.find(s => s.id === activeStyle) || TYPO_STYLES[0];

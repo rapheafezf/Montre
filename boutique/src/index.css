@@ -22,16 +22,16 @@
 
   --color-sand: #989186;
 
-  /* Haute Horlogerie & Contemporary Luxury Typography (Zero AI) */
-  --font-serif: var(--font-luxury-heading, "Tenor Sans", "Italiana", sans-serif);
-  --font-display: var(--font-luxury-heading, "Tenor Sans", "Italiana", sans-serif);
-  --font-sans: var(--font-luxury-body, "Outfit", "Plus Jakarta Sans", system-ui, sans-serif);
+  /* Ultra-Luxury Haute Horlogerie & Joaillerie Typography (Didot / Bodoni Moda) */
+  --font-serif: var(--font-luxury-heading, "Bodoni Moda", "Didot", "Prata", Georgia, serif);
+  --font-display: var(--font-luxury-heading, "Bodoni Moda", "Didot", "Prata", Georgia, serif);
+  --font-sans: var(--font-luxury-body, "Plus Jakarta Sans", system-ui, -apple-system, sans-serif);
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
 :root {
-  --font-luxury-heading: "Tenor Sans", "Italiana", sans-serif;
-  --font-luxury-body: "Outfit", "Plus Jakarta Sans", sans-serif;
+  --font-luxury-heading: "Bodoni Moda", "Didot", "Prata", Georgia, serif;
+  --font-luxury-body: "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
 html {
@@ -42,13 +42,14 @@ html {
 body {
   background-color: #060709;
   color: #f8f6f0;
-  font-family: var(--font-luxury-body, "Outfit", "Plus Jakarta Sans", sans-serif);
+  font-family: var(--font-luxury-body, "Plus Jakarta Sans", sans-serif);
   overflow-x: hidden;
 }
 
-/* Explicit Haute Horlogerie Title Binding */
-h1, h2, h3, .font-serif, .font-luxury {
-  font-family: var(--font-luxury-heading, "Tenor Sans", "Italiana", sans-serif) !important;
+/* Explicit Ultra-Luxury Title Binding (Didot / Bodoni Moda High-Contrast Serifs) */
+h1, h2, h3, .font-serif, .font-luxury, .font-display {
+  font-family: var(--font-luxury-heading, "Bodoni Moda", "Didot", "Prata", Georgia, serif) !important;
+  font-optical-sizing: auto;
 }
 
 /* Custom subtle scrollbar */
