@@ -1,159 +1,87 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { 
-  RotateCw, Eye, Sparkles, Compass, ShieldCheck, 
-  Activity, ArrowRight, Layers, Maximize2, Check 
+  Sparkles, Compass, ShieldCheck, Activity, ArrowRight, 
+  ChevronLeft, ChevronRight, Eye, EyeOff
 } from 'lucide-react';
+import { PRODUCTS } from '../data/products';
 
-const WATCH_MODELS = [
-  {
-    id: 'rolex-datejust',
-    brand: 'Rolex',
-    title: 'Datejust 36 Ref. 16234',
-    year: '1995',
-    image: 'https://lemouvement-watches.fr/cdn/shop/files/DSC02450.jpg?width=900',
-    altImage: 'https://lemouvement-watches.fr/cdn/shop/files/DSC02451.jpg?width=900',
-    calibre: 'Calibre Manufacture 3135',
-    frequency: "28'800 A/h (4 Hz)",
-    amplitude: '294°',
-    rate: '+1.5 s/j',
-    materials: 'Acier Oystersteel 904L & Or Blanc 18k',
-    dial: 'Argent Soleillé d’origine',
-    waterproof: '100 mètres (Twinlock)',
-    hotspots: [
-      {
-        id: 'bezel',
-        title: 'Lunette Cannelée en Or Blanc',
-        desc: 'Façonnée en or gris massif 18 carats, ses facettes réfléchissent la lumière sous tous les angles avec une brillance incomparable.',
-        x: 62,
-        y: 28,
-        spec: 'Or Gris 750‰ • Polissage Miroir'
-      },
-      {
-        id: 'dial',
-        title: 'Cadran Soleillé & Index Or',
-        desc: 'Finition brossée radiale créant des reflets argentés changeants selon l’éclairage ambiant. Index appliqués à la main.',
-        x: 48,
-        y: 52,
-        spec: 'Soleillé d’origine • Tritium T<25'
-      },
-      {
-        id: 'cyclops',
-        title: 'Loupe Cyclope 2.5x',
-        desc: 'Grossissement optique iconique sur la date instantanée à 3 heures avec changement net à minuit précis.',
-        x: 74,
-        y: 48,
-        spec: 'Glace Saphir Inrayable'
-      },
-      {
-        id: 'crown',
-        title: 'Couronne Vissée Twinlock',
-        desc: 'Double zone d’étanchéité garantissant une étanchéité absolue à 100 mètres de profondeur.',
-        x: 88,
-        y: 50,
-        spec: 'Système Twinlock Breveté'
-      }
-    ]
-  },
-  {
-    id: 'cartier-santos',
-    brand: 'Cartier',
-    title: 'Santos Galbée Ref. 1564',
-    year: '1998',
-    image: 'https://lemouvement-watches.fr/cdn/shop/files/DSC02218.jpg?width=900',
-    altImage: 'https://lemouvement-watches.fr/cdn/shop/files/DSC02219.jpg?width=900',
-    calibre: 'Calibre Cartier Haute Précision',
-    frequency: 'Quartz Régulé Thermocompensé',
-    amplitude: 'N/A (Électromécanique)',
-    rate: '+0.2 s/j',
-    materials: 'Acier Inoxydable & Vis Or',
-    dial: 'Gris Opalescent Chiffres Romains',
-    waterproof: '30 mètres',
-    hotspots: [
-      {
-        id: 'bezel',
-        title: 'Lunette Galbée à Vis Apparentes',
-        desc: 'Inspirée de l’architecture Eiffel de 1904, chaque vis en or est minutieusement alignée dans la masse.',
-        x: 60,
-        y: 30,
-        spec: 'Design Historique 1904'
-      },
-      {
-        id: 'hands',
-        title: 'Aiguilles Glaive en Acier Bleui',
-        desc: 'Trempées à la flamme à 290°C pour obtenir cet oxyde bleu cobalt naturel et protecteur.',
-        x: 48,
-        y: 46,
-        spec: 'Bleuissement Thermique Traditionnel'
-      },
-      {
-        id: 'crown',
-        title: 'Couronne à Cabochon Spinelle Saphir',
-        desc: 'La signature joaillière de Cartier : une pierre bleue taillée en cabochon sertie sur la couronne heptagonale.',
-        x: 86,
-        y: 50,
-        spec: 'Cabochon Saphir Bleu Intense'
-      }
-    ]
-  },
-  {
-    id: 'tudor-prince',
-    brand: 'Tudor',
-    title: 'Prince Oysterdate Ref. 74000',
-    year: '1991',
-    image: 'https://lemouvement-watches.fr/cdn/shop/files/DSC02321_b420a646-7d52-45a8-b037-791fd35659c9.jpg?width=900',
-    altImage: 'https://lemouvement-watches.fr/cdn/shop/files/DSC02322_51578351-e7c6-47eb-ba6d-47ea79ca8433.jpg?width=900',
-    calibre: 'Calibre ETA 2824-2 Finition Top',
-    frequency: "28'800 A/h (4 Hz)",
-    amplitude: '288°',
-    rate: '+2.1 s/j',
-    materials: 'Boîtier Oyster Rolex en Acier',
-    dial: 'Cadran Lin Strié (Linen Dial)',
-    waterproof: '100 mètres (Oyster Case)',
-    hotspots: [
-      {
-        id: 'case',
-        title: 'Boîtier Oyster By Rolex Geneva',
-        desc: 'Gravé « Original Oyster Case By Rolex Geneva » au dos, ce boîtier légendaire est taillé dans un bloc d’acier massif.',
-        x: 28,
-        y: 40,
-        spec: 'Brevet Oyster 1926'
-      },
-      {
-        id: 'dial',
-        title: 'Cadran Lin Haute Texture',
-        desc: 'Un motif quadrillé micro-strié simulant le tissage d’une étoffe de lin noble, un des cadrans les plus recherchés des collectionneurs.',
-        x: 50,
-        y: 54,
-        spec: 'Texture Tissée Vintage Réfractaire'
-      },
-      {
-        id: 'movement',
-        title: 'Rotor Auto-Prince',
-        desc: 'Remontage automatique bidirectionnel haute efficacité avec réserve de marche de 38 heures.',
-        x: 65,
-        y: 65,
-        spec: 'Calibre Robuste Révisé Atelier'
-      }
-    ]
-  }
-];
+// Clean title helper
+const cleanTitle = (str) => (str || '').replace(/\s+/g, ' ').trim();
 
 export default function WatchInspectorShowcase({ onSelectProduct, navigateTo }) {
-  const [selectedModelIndex, setSelectedModelIndex] = useState(0);
-  const currentWatch = WATCH_MODELS[selectedModelIndex];
-  
-  const [activeHotspot, setActiveHotspot] = useState(currentWatch.hotspots[0]);
+  // All 30 watches with transparent cutout fallback
+  const allWatches = useMemo(() => {
+    return PRODUCTS.map(p => {
+      const slug = p.slug || p.id;
+      return {
+        ...p,
+        cleanTitle: cleanTitle(p.title),
+        cutoutImage: `/cutouts/${slug}.png`,
+        fallbackImage: p.featuredImage || (p.images && p.images[0])
+      };
+    });
+  }, []);
+
+  // Brands list
+  const brands = useMemo(() => {
+    const list = ['TOUTES'];
+    const brandCounts = {};
+    allWatches.forEach(w => {
+      const b = w.brand || 'Autre';
+      brandCounts[b] = (brandCounts[b] || 0) + 1;
+    });
+    Object.keys(brandCounts).sort().forEach(b => list.push(b));
+    return list;
+  }, [allWatches]);
+
+  const [selectedBrand, setSelectedBrand] = useState('TOUTES');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showHotspots, setShowHotspots] = useState(true);
+  const [activeHotspotId, setActiveHotspotId] = useState('dial');
   const [rotationAngle, setRotationAngle] = useState(45);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
-  const [activeView, setActiveView] = useState('face'); // 'face' | 'macro'
+  const [zoomLevel, setZoomLevel] = useState(1);
 
   const containerRef = useRef(null);
 
-  // Switch hotspot when watch model changes
+  // Filtered list
+  const filteredWatches = useMemo(() => {
+    if (selectedBrand === 'TOUTES') return allWatches;
+    return allWatches.filter(w => w.brand === selectedBrand);
+  }, [allWatches, selectedBrand]);
+
+  // Current active watch (guaranteed 1 single watch displayed)
+  const currentWatch = filteredWatches[currentIndex] || filteredWatches[0] || allWatches[0];
+
+  // Reset index when brand changes so the watch changes immediately
+  const handleBrandChange = (brand) => {
+    setSelectedBrand(brand);
+    setCurrentIndex(0);
+    setZoomLevel(1);
+  };
+
+  // Next watch
+  const handleNext = () => {
+    setCurrentIndex(prev => (prev < filteredWatches.length - 1 ? prev + 1 : 0));
+    setZoomLevel(1);
+  };
+
+  // Previous watch
+  const handlePrev = () => {
+    setCurrentIndex(prev => (prev > 0 ? prev - 1 : filteredWatches.length - 1));
+    setZoomLevel(1);
+  };
+
+  // Keyboard navigation
   useEffect(() => {
-    setActiveHotspot(currentWatch.hotspots[0]);
-  }, [selectedModelIndex]);
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'ArrowLeft') handlePrev();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [filteredWatches.length]);
 
   // 3D perspective mouse tilt calculation
   const handleMouseMove = (e) => {
@@ -163,7 +91,6 @@ export default function WatchInspectorShowcase({ onSelectProduct, navigateTo }) 
     const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
     setMousePos({ x, y });
 
-    // Rotate conic angle gauge based on cursor position
     const angle = Math.round(((Math.atan2(y, x) * 180) / Math.PI + 180));
     setRotationAngle(angle);
   };
@@ -173,12 +100,55 @@ export default function WatchInspectorShowcase({ onSelectProduct, navigateTo }) 
     setIsHovered(false);
   };
 
+  // Dynamic hotspots centered on the watch head
+  const hotspots = useMemo(() => {
+    const b = currentWatch.brand || 'Horlogerie';
+    return [
+      {
+        id: 'dial',
+        title: currentWatch.dial ? `Cadran ${currentWatch.dial}` : 'Cadran & Aiguilles',
+        desc: `Cadran de manufacture d'origine certifié non retouché. Index appliqués à la main et patine historique préservée.`,
+        spec: `Millésime ${currentWatch.year || 'Vintage'} • 100% Authentique`,
+        x: 50,
+        y: 50
+      },
+      {
+        id: 'bezel',
+        title: `Boîtier ${currentWatch.diameter || '36mm'}`,
+        desc: `Boîtier ${currentWatch.materials || 'en acier'} aux lignes affûtées et brossages de manufacture intacts, sans sur-polissage.`,
+        spec: `${currentWatch.materials || 'Acier Inoxydable'} • Diamètre ${currentWatch.diameter || 'Origine'}`,
+        x: 50,
+        y: 34
+      },
+      {
+        id: 'crown',
+        title: b === 'Cartier' ? 'Cabochon Saphir' : (b === 'Rolex' ? 'Couronne Twinlock' : 'Couronne de Remontoir'),
+        desc: b === 'Cartier' 
+          ? 'Couronne ornée du cabochon de spinelle bleu signature de la maison Cartier.' 
+          : (b === 'Rolex' ? 'Couronne vissée brevetée Twinlock garantissant une étanchéité absolue.' : 'Couronne d’origine assurant le remontage mécanique.'),
+        spec: b === 'Cartier' ? 'Cabochon Bleu Nuit' : (b === 'Rolex' ? 'Brevet Twinlock 100m' : 'Couronne Signée'),
+        x: 68,
+        y: 50
+      },
+      {
+        id: 'movement',
+        title: `Calibre ${currentWatch.movement || 'Mécanique'}`,
+        desc: `${currentWatch.revision || 'Entièrement révisé dans notre atelier avec lubrification synthétique.'} Marche et amplitude contrôlées sur chronocomparateur.`,
+        spec: `${currentWatch.movement || 'Automatique'} • Garantie 12 mois`,
+        x: 50,
+        y: 66
+      }
+    ];
+  }, [currentWatch]);
+
+  const activeHotspot = hotspots.find(h => h.id === activeHotspotId) || hotspots[0];
+
   return (
-    <section className="relative py-24 bg-obsidian-950 border-y border-obsidian-800/80 overflow-hidden select-none">
+    <section className="relative py-20 bg-obsidian-950 overflow-hidden select-none">
       
-      {/* Background Radial Glow */}
+      {/* Background Soft Glow */}
       <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brass-500/5 rounded-full blur-[180px] pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-brass-500/5 rounded-full blur-[200px] pointer-events-none"
         style={{
           transform: `translate(calc(-50% + ${mousePos.x * 40}px), calc(-50% + ${mousePos.y * 40}px))`
         }}
@@ -186,153 +156,239 @@ export default function WatchInspectorShowcase({ onSelectProduct, navigateTo }) 
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header with Cominvi-style micro-eyebrows */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-obsidian-800 gap-6">
+        {/* Top Header & Brand Switcher */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between pb-8 border-b border-obsidian-850 gap-6">
           <div>
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-brass-400 animate-pulse" />
               <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-brass-400 font-bold">
-                Atelier Métrologie • Inspection 3D
+                Atelier Métrologie • Vue Détourée Sans Fond
               </span>
             </div>
             <h2 className="font-serif text-3xl sm:text-5xl text-ivory-100 font-normal uppercase tracking-wide mt-2">
               L'Anatomie du Garde-Temps
             </h2>
             <p className="text-sand/80 text-xs sm:text-sm font-light mt-1 max-w-xl">
-              Inspectez chaque composant au micron près. Du boîtier taillé dans la masse aux facettes de la lunette en or, découvrez l’exigence horlogère Le Mouvement.
+              Inspectez chaque pièce en grand format, détourée sans fond. Utilisez les flèches pour changer de montre.
             </p>
           </div>
 
-          {/* Model Switcher Tabs (Cominvi-style pill buttons) */}
-          <div className="flex items-center gap-1.5 p-1 bg-obsidian-900 border border-obsidian-800 self-start md:self-auto">
-            {WATCH_MODELS.map((w, idx) => (
-              <button
-                key={w.id}
-                onClick={() => setSelectedModelIndex(idx)}
-                className={`px-3 sm:px-4 py-2 text-xs font-mono uppercase tracking-wider transition-all cursor-pointer ${
-                  selectedModelIndex === idx
-                    ? 'bg-brass-500 text-obsidian-950 font-bold shadow-md'
-                    : 'text-sand hover:text-ivory-100 hover:bg-obsidian-850'
-                }`}
-              >
-                {w.brand}
-              </button>
-            ))}
+          {/* Brand Switcher Pills: Clicking a brand immediately changes the watch */}
+          <div className="flex items-center flex-wrap gap-1.5 p-1 bg-obsidian-900/80 border border-obsidian-800 self-start lg:self-auto">
+            {brands.map((b) => {
+              const count = b === 'TOUTES' ? allWatches.length : allWatches.filter(w => w.brand === b).length;
+              return (
+                <button
+                  key={b}
+                  onClick={() => handleBrandChange(b)}
+                  className={`px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider transition-all cursor-pointer ${
+                    selectedBrand === b
+                      ? 'bg-brass-500 text-obsidian-950 font-bold shadow-md'
+                      : 'text-sand hover:text-ivory-100 hover:bg-obsidian-850'
+                  }`}
+                >
+                  {b} <span className="opacity-70 text-[9px]">({count})</span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Main Interactive Stage Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-12">
+        {/* Quick Model Selector Bar (Select any watch instantly) */}
+        <div className="pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-mono uppercase tracking-wider text-sand/70">
+              Montre {currentIndex + 1} sur {filteredWatches.length} :
+            </span>
+
+            {/* Dropdown to jump directly to any watch */}
+            <select
+              value={currentIndex}
+              onChange={(e) => {
+                setCurrentIndex(Number(e.target.value));
+                setZoomLevel(1);
+              }}
+              className="bg-obsidian-900 border border-brass-600/40 text-ivory-100 font-serif text-sm px-3 py-1.5 cursor-pointer focus:outline-none focus:border-brass-400"
+            >
+              {filteredWatches.map((w, idx) => (
+                <option key={w.id || idx} value={idx} className="bg-obsidian-950 text-ivory-100 font-sans">
+                  {w.brand} — {w.cleanTitle} ({w.priceFormatted})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Toggle Hotspots button & Zoom buttons */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setShowHotspots(!showHotspots)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono uppercase border transition-all cursor-pointer ${
+                showHotspots
+                  ? 'border-brass-500/60 bg-brass-500/10 text-brass-300'
+                  : 'border-obsidian-750 bg-obsidian-900 text-sand hover:text-ivory-100'
+              }`}
+              title="Afficher ou masquer les points d'inspection"
+            >
+              {showHotspots ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+              <span>{showHotspots ? 'Repères Activés' : 'Repères Masqués'}</span>
+            </button>
+
+            <div className="flex items-center border border-obsidian-800 bg-obsidian-900/80 p-0.5">
+              {[1, 1.35, 1.7].map((z) => (
+                <button
+                  key={z}
+                  onClick={() => setZoomLevel(z)}
+                  className={`px-2 py-1 text-[10px] font-mono transition-colors cursor-pointer ${
+                    zoomLevel === z ? 'bg-brass-500 text-obsidian-950 font-bold' : 'text-sand hover:text-ivory-100'
+                  }`}
+                >
+                  {z === 1 ? '1x' : `${z}x`}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Giant Main Stage (Zero box container, zero dark background) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-6">
           
-          {/* Left Telemetry HUD (3 cols) */}
+          {/* Left HUD: Specs of current watch (3 cols) */}
           <div className="lg:col-span-3 space-y-4 order-2 lg:order-1">
-            <div className="p-5 bg-obsidian-900/60 border border-obsidian-800 space-y-3">
+            <div className="p-5 bg-obsidian-900/40 border border-obsidian-850/80 backdrop-blur-sm space-y-3">
               <div className="flex items-center justify-between text-[10px] font-mono text-sand/70 uppercase">
-                <span>Rapport Chronocomparateur</span>
+                <span>Fiche d'Inspection</span>
                 <Activity className="w-3.5 h-3.5 text-brass-400 animate-pulse" />
               </div>
               
               <div className="space-y-2.5 pt-1">
                 <div>
-                  <div className="text-[10px] font-mono text-sand/60 uppercase">Fréquence Calibre</div>
-                  <div className="font-serif text-base text-ivory-100 font-medium">{currentWatch.frequency}</div>
+                  <div className="text-[10px] font-mono text-sand/60 uppercase">Mouvement</div>
+                  <div className="font-serif text-base text-ivory-100 font-medium truncate">
+                    {currentWatch.movement || 'Mécanique'}
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 pt-1 border-t border-obsidian-850">
                   <div>
-                    <div className="text-[10px] font-mono text-sand/60 uppercase">Amplitude</div>
-                    <div className="font-mono text-xs text-emerald-400 font-semibold">{currentWatch.amplitude}</div>
+                    <div className="text-[10px] font-mono text-sand/60 uppercase">Diamètre</div>
+                    <div className="font-mono text-xs text-brass-300 font-semibold">
+                      {currentWatch.diameter || '36mm'}
+                    </div>
                   </div>
                   <div>
-                    <div className="text-[10px] font-mono text-sand/60 uppercase">Précision</div>
-                    <div className="font-mono text-xs text-brass-400 font-semibold">{currentWatch.rate}</div>
+                    <div className="text-[10px] font-mono text-sand/60 uppercase">Année</div>
+                    <div className="font-mono text-xs text-ivory-200 font-semibold">
+                      {currentWatch.year || 'Authentifié'}
+                    </div>
                   </div>
                 </div>
 
                 <div className="pt-1 border-t border-obsidian-850">
-                  <div className="text-[10px] font-mono text-sand/60 uppercase">Étanchéité Certifiée</div>
-                  <div className="font-serif text-xs text-ivory-200">{currentWatch.waterproof}</div>
+                  <div className="text-[10px] font-mono text-sand/60 uppercase">Matériaux</div>
+                  <div className="font-serif text-xs text-ivory-200">
+                    {currentWatch.materials || 'Acier Inoxydable'}
+                  </div>
+                </div>
+
+                <div className="pt-1 border-t border-obsidian-850">
+                  <div className="text-[10px] font-mono text-sand/60 uppercase">Écrin & Certificat</div>
+                  <div className="text-[11px] font-sans text-sand/90">
+                    {currentWatch.boxPapers || 'Certificat d’authenticité Le Mouvement'}
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Circular Conic-Gradient Angle Bezel Gauge (Signature Cominvi Animation) */}
-            <div className="p-5 bg-obsidian-900/60 border border-obsidian-800 space-y-3 text-center">
+            {/* Circular Orientation Gauge */}
+            <div className="p-4 bg-obsidian-900/40 border border-obsidian-850/80 backdrop-blur-sm space-y-2 text-center">
               <div className="text-[10px] font-mono text-sand/70 uppercase tracking-wider flex items-center justify-center gap-1.5">
                 <Compass className="w-3.5 h-3.5 text-brass-400" />
-                Orientation & Axe Spatial
+                Orientation 3D : {rotationAngle}°
               </div>
-
-              <div className="relative w-28 h-28 mx-auto flex items-center justify-center">
-                {/* Conic Gradient Track */}
-                <div 
-                  className="w-full h-full rounded-full transition-transform duration-300"
-                  style={{
-                    background: `conic-gradient(from ${rotationAngle}deg, rgba(212, 175, 55, 0.9) 0deg, rgba(212, 175, 55, 0.1) 180deg, transparent 360deg)`,
-                    padding: '3px'
-                  }}
-                >
-                  <div className="w-full h-full bg-obsidian-950 rounded-full flex flex-col items-center justify-center">
-                    <span className="font-mono text-lg font-bold text-ivory-100">{rotationAngle}°</span>
-                    <span className="text-[9px] font-mono uppercase text-brass-400">Azimut 3D</span>
-                  </div>
-                </div>
-              </div>
-
               <p className="text-[10px] font-mono text-sand/60">
-                Déplacez la souris sur la pièce pour modifier l'angle d'incidence de la lumière.
+                Bougez la souris sur la montre pour faire varier la lumière.
               </p>
             </div>
           </div>
 
-          {/* Center 3D Interactive Stage (6 cols) */}
+          {/* Center Stage: ONE GIANT CUTOUT WATCH (Zero background, 100% transparent cutout PNG) */}
           <div className="lg:col-span-6 flex flex-col items-center justify-center relative order-1 lg:order-2">
             
+            {/* Direct Prev / Next Big Arrow Buttons positioned on sides */}
             <div 
               ref={containerRef}
               onMouseMove={handleMouseMove}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={handleMouseLeave}
-              className="relative w-full max-w-md aspect-square bg-gradient-to-b from-obsidian-900/40 to-obsidian-950 border border-obsidian-800/80 p-6 flex items-center justify-center cursor-crosshair overflow-hidden group shadow-[0_20px_80px_rgba(0,0,0,0.9)]"
+              className="relative w-full flex items-center justify-center cursor-crosshair py-2"
               style={{
-                perspective: '1200px'
+                perspective: '1400px',
+                minHeight: '640px'
               }}
             >
-              {/* Dynamic Reflection Glare that tracks cursor */}
+              {/* Prev Button (Floating Left) */}
+              <button
+                onClick={handlePrev}
+                className="absolute left-0 sm:-left-6 top-1/2 -translate-y-1/2 z-40 p-3.5 bg-obsidian-900/90 hover:bg-brass-500 hover:text-obsidian-950 text-ivory-100 border border-brass-600/30 rounded-full shadow-2xl backdrop-blur-md transition-all cursor-pointer hover:scale-110 group"
+                title="Montre précédente (flèche gauche)"
+                aria-label="Montre précédente"
+              >
+                <ChevronLeft className="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" />
+              </button>
+
+              {/* Next Button (Floating Right) */}
+              <button
+                onClick={handleNext}
+                className="absolute right-0 sm:-right-6 top-1/2 -translate-y-1/2 z-40 p-3.5 bg-obsidian-900/90 hover:bg-brass-500 hover:text-obsidian-950 text-ivory-100 border border-brass-600/30 rounded-full shadow-2xl backdrop-blur-md transition-all cursor-pointer hover:scale-110 group"
+                title="Montre suivante (flèche droite)"
+                aria-label="Montre suivante"
+              >
+                <ChevronRight className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" />
+              </button>
+
+              {/* Dynamic Light Sheen tracking cursor */}
               <div 
                 className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-20"
                 style={{
-                  opacity: isHovered ? 0.45 : 0.15,
-                  background: `radial-gradient(circle at ${(mousePos.x + 1) * 50}% ${(mousePos.y + 1) * 50}%, rgba(212, 175, 55, 0.35) 0%, transparent 60%)`
+                  opacity: isHovered ? 0.35 : 0.08,
+                  background: `radial-gradient(circle at ${(mousePos.x + 1) * 50}% ${(mousePos.y + 1) * 50}%, rgba(212, 175, 55, 0.3) 0%, transparent 60%)`
                 }}
               />
 
-              {/* Watch Display with 3D Transform */}
+              {/* 3D Floating Watch Container */}
               <div
-                className="relative w-full h-full flex items-center justify-center transition-transform duration-200 ease-out will-change-transform z-10"
+                className="relative flex items-center justify-center transition-transform duration-200 ease-out will-change-transform z-10"
                 style={{
-                  transform: `rotateY(${mousePos.x * 16}deg) rotateX(${-mousePos.y * 16}deg) scale3d(${isHovered ? 1.05 : 1}, ${isHovered ? 1.05 : 1}, 1)`,
+                  transform: `rotateY(${mousePos.x * 12}deg) rotateX(${-mousePos.y * 12}deg) scale3d(${zoomLevel * (isHovered ? 1.03 : 1)}, ${zoomLevel * (isHovered ? 1.03 : 1)}, 1)`,
                   transformStyle: 'preserve-3d'
                 }}
               >
+                {/* 100% Transparent Cutout PNG of the watch (NO background) */}
                 <img
-                  src={activeView === 'macro' ? currentWatch.altImage : currentWatch.image}
-                  alt={currentWatch.title}
-                  className="w-full h-full object-contain filter drop-shadow-[0_25px_35px_rgba(0,0,0,0.9)] select-none pointer-events-none"
+                  src={currentWatch.cutoutImage}
+                  onError={(e) => {
+                    // Fallback to Shopify image with feathering mask if cutout isn't ready
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = currentWatch.fallbackImage;
+                    e.currentTarget.style.maskImage = 'radial-gradient(ellipse 75% 85% at 50% 50%, black 50%, transparent 95%)';
+                    e.currentTarget.style.webkitMaskImage = 'radial-gradient(ellipse 75% 85% at 50% 50%, black 50%, transparent 95%)';
+                  }}
+                  alt={currentWatch.cleanTitle}
+                  className="h-[520px] sm:h-[620px] lg:h-[680px] w-auto max-w-full object-contain filter drop-shadow-[0_30px_60px_rgba(0,0,0,0.95)] select-none pointer-events-none transition-all duration-300"
                 />
 
-                {/* Interactive Inspection Hotspots Pins */}
-                {currentWatch.hotspots.map((spot) => {
-                  const isActive = activeHotspot.id === spot.id;
+                {/* Hotspot Pins (can be toggled on/off) */}
+                {showHotspots && hotspots.map((spot) => {
+                  const isActive = activeHotspotId === spot.id;
                   return (
                     <button
                       key={spot.id}
-                      onClick={() => setActiveHotspot(spot)}
+                      onClick={() => setActiveHotspotId(spot.id)}
                       className="absolute z-30 -translate-x-1/2 -translate-y-1/2 group/pin cursor-pointer focus:outline-none"
                       style={{
                         left: `${spot.x}%`,
                         top: `${spot.y}%`,
-                        transform: 'translateZ(30px)'
+                        transform: 'translateZ(35px)'
                       }}
                       title={spot.title}
                     >
@@ -344,8 +400,8 @@ export default function WatchInspectorShowcase({ onSelectProduct, navigateTo }) 
                         }`} />
                         <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center transition-all ${
                           isActive 
-                            ? 'bg-brass-400 border-ivory-100 shadow-[0_0_12px_rgba(212,175,55,1)] scale-125' 
-                            : 'bg-obsidian-950 border-brass-400 group-hover/pin:scale-110'
+                            ? 'bg-brass-400 border-ivory-100 shadow-[0_0_15px_rgba(212,175,55,1)] scale-125' 
+                            : 'bg-obsidian-950/90 border-brass-400 group-hover/pin:scale-115'
                         }`}>
                           <span className={`w-1 h-1 rounded-full ${isActive ? 'bg-obsidian-950' : 'bg-brass-400'}`} />
                         </span>
@@ -355,51 +411,34 @@ export default function WatchInspectorShowcase({ onSelectProduct, navigateTo }) 
                 })}
               </div>
 
-              {/* View Angle Switcher Button (Face / Macro) */}
-              <div className="absolute bottom-4 right-4 z-20 flex items-center gap-1.5 bg-obsidian-950/90 border border-obsidian-750 p-1">
-                <button
-                  onClick={() => setActiveView('face')}
-                  className={`px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider transition-colors ${
-                    activeView === 'face' ? 'bg-brass-500 text-obsidian-950 font-bold' : 'text-sand hover:text-ivory-100'
-                  }`}
-                >
-                  Vue Globale
-                </button>
-                <button
-                  onClick={() => setActiveView('macro')}
-                  className={`px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider transition-colors ${
-                    activeView === 'macro' ? 'bg-brass-500 text-obsidian-950 font-bold' : 'text-sand hover:text-ivory-100'
-                  }`}
-                >
-                  Gros Plan
-                </button>
-              </div>
-
             </div>
 
-            {/* Stage Footer Watch Caption */}
-            <div className="mt-4 text-center">
-              <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-brass-400 font-semibold">
-                {currentWatch.brand} • Millésime {currentWatch.year}
+            {/* Watch Brand, Title & Reference Caption */}
+            <div className="mt-3 text-center">
+              <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-brass-400 font-semibold block">
+                {currentWatch.brand} • {currentWatch.year || 'Vintage'} • {currentIndex + 1} / {filteredWatches.length}
               </span>
-              <h3 className="font-serif text-xl text-ivory-100 font-normal uppercase mt-0.5">
-                {currentWatch.title}
+              <h3 className="font-serif text-xl sm:text-2xl text-ivory-100 font-normal uppercase mt-0.5">
+                {currentWatch.cleanTitle}
               </h3>
+              <p className="text-sand/70 text-xs font-mono mt-1">
+                {currentWatch.priceFormatted} {currentWatch.isSold && <span className="text-amber-400/80">(Vendu)</span>}
+              </p>
             </div>
 
           </div>
 
-          {/* Right Hotspot Detail Card (3 cols) */}
+          {/* Right Detail Card for Selected Hotspot (3 cols) */}
           <div className="lg:col-span-3 space-y-4 order-3">
-            <div className="p-6 bg-obsidian-900 border border-brass-600/40 shadow-xl space-y-4 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-brass-500/5 rounded-full blur-2xl pointer-events-none" />
+            <div className="p-6 bg-obsidian-900/90 border border-brass-600/40 shadow-2xl space-y-4 relative overflow-hidden backdrop-blur-md">
+              <div className="absolute top-0 right-0 w-28 h-28 bg-brass-500/5 rounded-full blur-2xl pointer-events-none" />
 
               <div className="flex items-center justify-between text-[10px] font-mono uppercase text-brass-400 font-bold">
                 <span className="flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-brass-400" />
-                  Point Focal Sélectionné
+                  Point Focal
                 </span>
-                <span>{activeHotspot.id.toUpperCase()}</span>
+                <span className="text-sand/60">DÉTAIL</span>
               </div>
 
               <div className="space-y-2">
@@ -412,24 +451,24 @@ export default function WatchInspectorShowcase({ onSelectProduct, navigateTo }) 
               </div>
 
               <div className="pt-3 border-t border-obsidian-800 space-y-1">
-                <div className="text-[10px] font-mono text-sand/60 uppercase">Spécification Haute Horlogerie :</div>
+                <div className="text-[10px] font-mono text-sand/60 uppercase">Spécification Horlogère :</div>
                 <div className="text-xs font-mono font-semibold text-brass-300">
                   {activeHotspot.spec}
                 </div>
               </div>
 
-              {/* Hotspots Quick Switcher Pills */}
+              {/* Hotspots Quick Switcher Buttons */}
               <div className="pt-2">
-                <div className="text-[10px] font-mono text-sand/60 uppercase mb-2">Autres points à examiner :</div>
+                <div className="text-[10px] font-mono text-sand/60 uppercase mb-2">Composants à examiner :</div>
                 <div className="flex flex-wrap gap-1.5">
-                  {currentWatch.hotspots.map((spot) => (
+                  {hotspots.map((spot) => (
                     <button
                       key={spot.id}
-                      onClick={() => setActiveHotspot(spot)}
-                      className={`px-2 py-1 text-[10px] font-mono uppercase border transition-colors cursor-pointer ${
-                        activeHotspot.id === spot.id 
+                      onClick={() => setActiveHotspotId(spot.id)}
+                      className={`px-2.5 py-1 text-[10px] font-mono uppercase border transition-colors cursor-pointer ${
+                        activeHotspotId === spot.id 
                           ? 'border-brass-400 bg-brass-500/20 text-brass-300 font-bold' 
-                          : 'border-obsidian-750 bg-obsidian-950 text-sand hover:text-ivory-100'
+                          : 'border-obsidian-750 bg-obsidian-950/80 text-sand hover:text-ivory-100'
                       }`}
                     >
                       {spot.title.split(' ')[0]}
@@ -438,12 +477,24 @@ export default function WatchInspectorShowcase({ onSelectProduct, navigateTo }) 
                 </div>
               </div>
 
-              <div className="pt-2">
+              {/* Direct Link to Product */}
+              <div className="pt-3 border-t border-obsidian-800 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs text-sand/70">Prix</span>
+                  <span className="font-mono text-sm font-semibold text-ivory-100">{currentWatch.priceFormatted}</span>
+                </div>
+
                 <button
-                  onClick={() => navigateTo('catalogue')}
-                  className="w-full py-2.5 bg-obsidian-950 hover:bg-brass-500 hover:text-obsidian-950 text-ivory-100 border border-obsidian-700 text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                  onClick={() => {
+                    if (onSelectProduct) {
+                      onSelectProduct(currentWatch);
+                    } else if (navigateTo) {
+                      navigateTo(`produit/${currentWatch.slug || currentWatch.id}`);
+                    }
+                  }}
+                  className="w-full py-2.5 bg-brass-500 hover:bg-brass-400 text-obsidian-950 font-bold text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-lg"
                 >
-                  Voir dans le catalogue
+                  Découvrir la fiche produit
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
