@@ -28,6 +28,32 @@ export default function CheckoutModal({ isOpen, onClose, cartItems, onOrderCompl
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    // Save order into localStorage for Admin Panel
+    const newOrderId = `CMD-2026-${Math.floor(100 + Math.random() * 900)}`;
+    const watchTitles = cartItems.map(item => item.title).join(', ');
+    const newOrder = {
+      id: newOrderId,
+      date: new Date().toLocaleDateString('fr-FR'),
+      clientName: `${formData.firstName} ${formData.lastName}`.trim() || 'Client Privé',
+      clientEmail: formData.email || 'contact@client.fr',
+      clientPhone: formData.phone || 'Non renseigné',
+      watchTitle: watchTitles || 'Sélection Horlogère',
+      amount: total,
+      paymentMethod: paymentMethod === 'card' ? 'Carte Bancaire Sécurisée' : paymentMethod === 'alma' ? 'Alma 3x / 4x Garanti' : 'Virement Bancaire SEPA',
+      deliveryType: deliveryType === 'shipping' ? 'Valeur Déclarée Sécurisée 48h' : 'Remise Privée Showroom Lyon',
+      status: 'Paiement Validé - En préparation atelier',
+      trackingNumber: `LM-${Math.floor(1000 + Math.random() * 9000)}-FR`
+    };
+
+    try {
+      const existing = localStorage.getItem('lemouvement_orders');
+      const ordersList = existing ? JSON.parse(existing) : [];
+      localStorage.setItem('lemouvement_orders', JSON.stringify([newOrder, ...ordersList]));
+    } catch (err) {
+      console.error('Erreur sauvegarde commande:', err);
+    }
+
     // Simulate secure transaction
     setTimeout(() => {
       setIsSubmitting(false);

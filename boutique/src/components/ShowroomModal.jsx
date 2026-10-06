@@ -16,6 +16,26 @@ export default function ShowroomModal({ isOpen, onClose, preselectedWatch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Save appointment into localStorage for Admin Panel
+    const newApt = {
+      id: `RDV-${Math.floor(100 + Math.random() * 900)}`,
+      date: `${formData.date || 'Date à convenir'} (${formData.timeSlot})`,
+      clientName: formData.name || 'Client Showroom',
+      clientPhone: formData.phone || 'Non renseigné',
+      clientEmail: formData.email || 'Non renseigné',
+      watchInterest: formData.watchInterest || (preselectedWatch ? preselectedWatch.title : 'Modèle à préciser'),
+      status: 'En attente de confirmation'
+    };
+
+    try {
+      const existing = localStorage.getItem('lemouvement_appointments');
+      const list = existing ? JSON.parse(existing) : [];
+      localStorage.setItem('lemouvement_appointments', JSON.stringify([newApt, ...list]));
+    } catch (err) {
+      console.error('Erreur sauvegarde rendez-vous:', err);
+    }
+
     setSubmitted(true);
   };
 

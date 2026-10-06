@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { X, Search, ArrowRight } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 
-export default function SearchModal({ isOpen, onClose, onSelectProduct }) {
+export default function SearchModal({ isOpen, onClose, onSelectProduct, products = PRODUCTS, navigateTo }) {
   if (!isOpen) return null;
 
   const [query, setQuery] = useState('');
 
-  const filtered = query.trim() === '' ? [] : PRODUCTS.filter(p => {
+  const currentCatalog = products && products.length > 0 ? products : PRODUCTS;
+  const filtered = query.trim() === '' ? [] : currentCatalog.filter(p => {
     const q = query.toLowerCase();
     return p.title.toLowerCase().includes(q) ||
            p.brand.toLowerCase().includes(q) ||
@@ -37,6 +38,12 @@ export default function SearchModal({ isOpen, onClose, onSelectProduct }) {
             placeholder="Rechercher un modèle, une maison, un calibre, une année..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && (query.trim().toLowerCase() === 'admin' || query.trim() === '3105')) {
+                onClose();
+                if (navigateTo) navigateTo('admin');
+              }
+            }}
             className="w-full bg-transparent text-sm sm:text-base text-ivory-100 focus:outline-none placeholder:text-sand/50"
           />
         </div>

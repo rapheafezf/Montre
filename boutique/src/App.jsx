@@ -20,6 +20,7 @@ import ContactPage from './pages/ContactPage';
 import DeliveryReturnsPage from './pages/DeliveryReturnsPage';
 import JournalPage from './pages/JournalPage';
 import LegalPage from './pages/LegalPage';
+import AdminPage from './pages/AdminPage';
 
 import { PRODUCTS } from './data/products';
 import { MessageCircle } from 'lucide-react';
@@ -34,15 +35,44 @@ export default function App() {
   const [showroomWatch, setShowroomWatch] = useState(null);
   const [searchOpen, setSearchOpen] = useState(false);
 
+  // Reactive products catalog state synced with localStorage
+  const [products, setProducts] = useState(() => {
+    const saved = localStorage.getItem('lemouvement_custom_products');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      } catch (e) {
+        console.error('Error loading custom products:', e);
+      }
+    }
+    return PRODUCTS;
+  });
+
+  const handleUpdateProducts = (newProducts) => {
+    setProducts(newProducts);
+    try {
+      localStorage.setItem('lemouvement_custom_products', JSON.stringify(newProducts));
+    } catch (e) {
+      console.error('Failed to save products to localStorage:', e);
+    }
+    if (selectedProduct) {
+      const updatedCurrent = newProducts.find(p => p.id === selectedProduct.id);
+      if (updatedCurrent) setSelectedProduct(updatedCurrent);
+    }
+  };
+
   // Sync hash routing
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace(/^#\/?/, '');
       if (!hash || hash === '') {
         setRoute('home');
+      } else if (hash === 'admin') {
+        setRoute('admin');
       } else if (hash.startsWith('produit/')) {
         const slug = hash.replace('produit/', '');
-        const found = PRODUCTS.find(p => p.slug === slug || p.id === slug);
+        const found = products.find(p => p.slug === slug || p.id === slug);
         if (found) {
           setSelectedProduct(found);
           setRoute('produit');
@@ -58,7 +88,7 @@ export default function App() {
     handleHashChange();
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+  }, [products]);
 
   const navigateTo = (newRoute) => {
     window.location.hash = `#/${newRoute}`;
@@ -119,7 +149,7 @@ export default function App() {
       <main className="flex-1">
         {route === 'home' && (
           <HomePage
-            products={PRODUCTS}
+            products={products}
             onSelectProduct={handleSelectProduct}
             navigateTo={navigateTo}
             openShowroomModal={() => handleOpenShowroom()}
@@ -128,7 +158,7 @@ export default function App() {
 
         {route === 'catalogue' && (
           <CatalogPage
-            products={PRODUCTS}
+            products={products}
             initialBrand="ALL"
             onSelectProduct={handleSelectProduct}
           />
@@ -136,7 +166,7 @@ export default function App() {
 
         {route === 'catalogue-rolex' && (
           <CatalogPage
-            products={PRODUCTS}
+            products={products}
             initialBrand="Rolex"
             onSelectProduct={handleSelectProduct}
           />
@@ -144,7 +174,7 @@ export default function App() {
 
         {route === 'catalogue-cartier' && (
           <CatalogPage
-            products={PRODUCTS}
+            products={products}
             initialBrand="Cartier"
             onSelectProduct={handleSelectProduct}
           />
@@ -152,7 +182,7 @@ export default function App() {
 
         {route === 'catalogue-tudor' && (
           <CatalogPage
-            products={PRODUCTS}
+            products={products}
             initialBrand="Tudor"
             onSelectProduct={handleSelectProduct}
           />
@@ -160,7 +190,7 @@ export default function App() {
 
         {route === 'catalogue-dispo' && (
           <CatalogPage
-            products={PRODUCTS}
+            products={products}
             initialFilter="dispo"
             onSelectProduct={handleSelectProduct}
           />
@@ -168,7 +198,7 @@ export default function App() {
 
         {route === 'catalogue-archives' && (
           <CatalogPage
-            products={PRODUCTS}
+            products={products}
             initialFilter="archives"
             onSelectProduct={handleSelectProduct}
           />
@@ -177,12 +207,21 @@ export default function App() {
         {route === 'produit' && selectedProduct && (
           <ProductDetailPage
             product={selectedProduct}
-            allProducts={PRODUCTS}
+            allProducts={products}
             onAddToCart={handleAddToCart}
             onBuyNow={handleBuyNow}
             onOpenShowroom={handleOpenShowroom}
             onSelectProduct={handleSelectProduct}
             navigateTo={navigateTo}
+          />
+        )}
+
+        {route === 'admin' && (
+          <AdminPage
+            products={products}
+            onUpdateProducts={handleUpdateProducts}
+            navigateTo={navigateTo}
+            onSelectProduct={handleSelectProduct}
           />
         )}
 
@@ -232,6 +271,8 @@ export default function App() {
         isOpen={searchOpen}
         onClose={() => setSearchOpen(false)}
         onSelectProduct={handleSelectProduct}
+        products={products}
+        navigateTo={navigateTo}
       />
 
       {/* Cookie RGPD Banner */}

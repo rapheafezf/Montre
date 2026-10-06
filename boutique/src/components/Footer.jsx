@@ -144,7 +144,15 @@ export default function Footer({ navigateTo }) {
           <span>•</span>
           <span>SIRET : 883 775 017 00014</span>
           <span>•</span>
-          <span className="flex items-center gap-1"><Lock className="w-3 h-3 text-brass-400" /> Paiements 100% Chiffrés SSL 256 bits</span>
+          <button 
+            type="button" 
+            onClick={() => navigateTo('admin')} 
+            className="flex items-center gap-1 hover:text-sand/90 transition-colors text-inherit font-inherit cursor-pointer text-left bg-transparent border-none p-0"
+            title="Paiements sécurisés chiffrés"
+          >
+            <Lock className="w-3 h-3 text-brass-400 hover:text-brass-300 transition-colors" /> 
+            <span>Paiements 100% Chiffrés SSL 256 bits</span>
+          </button>
         </div>
 
         {/* Accepted Payment Icons */}
