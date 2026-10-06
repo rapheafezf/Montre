@@ -1,0 +1,10 @@
+{
+  "buildCommand": "cd boutique && npm run build",
+  "outputDirectory": "boutique/dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

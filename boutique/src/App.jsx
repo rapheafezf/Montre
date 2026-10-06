@@ -66,43 +66,79 @@ export default function App() {
     }
   };
 
-  // Sync hash routing
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace(/^#\/?/, '');
-      if (!hash || hash === '') {
-        setRoute('home');
-      } else if (hash === 'admin') {
-        setRoute('admin');
-      } else if (hash.startsWith('produit/')) {
-        const slug = hash.replace('produit/', '');
-        const found = products.find(p => p.slug === slug || p.id === slug);
-        if (found) {
-          setSelectedProduct(found);
-          setRoute('produit');
-        } else {
-          setRoute('catalogue');
-        }
-      } else {
-        setRoute(hash);
+  // Helper to extract route from current URL (pathname or hash)
+  const getRouteInfo = (productsList) => {
+    // 1. Check pathname: e.g. /admin, /catalogue, /produit/rolex-16234
+    const path = window.location.pathname.replace(/^\/+|\/+$/g, '');
+    // 2. Fallback to hash if pathname is empty (e.g. #/admin)
+    const hash = window.location.hash.replace(/^#\/?/, '');
+    const target = path || hash || '';
+
+    if (!target || target === '') {
+      return { route: 'home', product: null };
+    }
+    if (target === 'admin') {
+      return { route: 'admin', product: null };
+    }
+    if (target.startsWith('produit/')) {
+      const slug = target.replace('produit/', '');
+      const found = productsList.find(p => p.slug === slug || p.id === slug);
+      if (found) {
+        return { route: 'produit', product: found };
       }
-      window.scrollTo(0, 0);
+      return { route: 'catalogue', product: null };
+    }
+    return { route: target, product: null };
+  };
+
+  // Sync routing on load and on back/forward browser navigation
+  useEffect(() => {
+    const handleUrlSync = () => {
+      const { route: newRoute, product } = getRouteInfo(products);
+      setRoute(newRoute);
+      if (product) setSelectedProduct(product);
+
+      // Clean up hash in address bar to clean pathname if hash was used
+      if (window.location.hash) {
+        const cleanPath = newRoute === 'home' 
+          ? '/' 
+          : newRoute === 'produit' && product 
+            ? `/produit/${product.slug}` 
+            : `/${newRoute}`;
+        window.history.replaceState(null, '', cleanPath);
+      }
     };
 
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    handleUrlSync();
+    window.addEventListener('popstate', handleUrlSync);
+    window.addEventListener('hashchange', handleUrlSync);
+    return () => {
+      window.removeEventListener('popstate', handleUrlSync);
+      window.removeEventListener('hashchange', handleUrlSync);
+    };
   }, [products]);
 
   const navigateTo = (newRoute) => {
-    window.location.hash = `#/${newRoute}`;
+    const cleanPath = newRoute === 'home' ? '/' : `/${newRoute}`;
+    if (window.location.pathname !== cleanPath) {
+      window.history.pushState(null, '', cleanPath);
+    }
+    if (window.location.hash) {
+      window.history.replaceState(null, '', cleanPath);
+    }
     setRoute(newRoute);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSelectProduct = (product) => {
     setSelectedProduct(product);
-    window.location.hash = `#/produit/${product.slug}`;
+    const cleanPath = `/produit/${product.slug}`;
+    if (window.location.pathname !== cleanPath) {
+      window.history.pushState(null, '', cleanPath);
+    }
+    if (window.location.hash) {
+      window.history.replaceState(null, '', cleanPath);
+    }
     setRoute('produit');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
