@@ -1,12 +1,12 @@
-import React from 'react';
-import { ArrowRight, ShieldCheck, Clock, MapPin, Truck, Check, Star, MessageCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, ShieldCheck, Clock, MapPin, Truck, Check, Star, MessageCircle, Activity } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
-import HorlogerieMechanismSvg from '../components/HorlogerieMechanismSvg';
-import WatchDialClockSvg from '../components/WatchDialClockSvg';
 import CertificationStampSvg from '../components/CertificationStampSvg';
 import WatchInspectorShowcase from '../components/WatchInspectorShowcase';
 import AtelierProcessProgression from '../components/AtelierProcessProgression';
 import TextScrollReveal from '../components/TextScrollReveal';
+
+const cleanTitle = (str) => (str || '').replace(/\\n/g, '').replace(/\s+/g, ' ').trim();
 
 export default function HomePage({ products, onSelectProduct, navigateTo, openShowroomModal }) {
   // Extract in-stock and featured items
@@ -14,6 +14,15 @@ export default function HomePage({ products, onSelectProduct, navigateTo, openSh
   const rolexWatches = products.filter(p => p.brand === 'Rolex').slice(0, 3);
   const cartierWatches = products.filter(p => p.brand === 'Cartier').slice(0, 3);
   const tudorWatches = products.filter(p => p.brand === 'Tudor').slice(0, 3);
+
+  // Featured hero watch selection by manufacture
+  const [heroBrand, setHeroBrand] = useState('Rolex');
+  const heroWatches = {
+    'Rolex': products.find(p => p.slug === 'rolex-datejust-16234-linen-dial') || products.find(p => p.brand === 'Rolex') || products[0],
+    'Cartier': products.find(p => p.slug === 'cartier-santos-galbee-1564') || products.find(p => p.brand === 'Cartier') || products[1],
+    'Tudor': products.find(p => p.slug === 'tudor-prince-oysterdate-74000') || products.find(p => p.brand === 'Tudor') || products[2],
+  };
+  const activeHeroWatch = heroWatches[heroBrand] || heroWatches['Rolex'];
 
   return (
     <div className="space-y-28">
@@ -91,26 +100,111 @@ export default function HomePage({ products, onSelectProduct, navigateTo, openSh
 
             </div>
 
-            {/* Right Showcase: Real-time Mechanical Caliber & Dial (5 cols) */}
+            {/* Right Showcase: Masterpiece Watch Showcase (5 cols) */}
             <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
-              <div className="relative p-6 sm:p-8 bg-gradient-to-b from-obsidian-900/90 to-obsidian-950 border border-obsidian-800 shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+              <div className="w-full relative p-6 sm:p-7 bg-obsidian-900/90 border border-obsidian-800 shadow-[0_20px_60px_rgba(0,0,0,0.85)] backdrop-blur-md overflow-hidden">
                 
-                {/* SVG Live Horlogerie Calibre Animation */}
-                <div className="relative flex items-center justify-center">
-                  <HorlogerieMechanismSvg className="w-64 h-64 sm:w-72 sm:h-72" />
-                  
-                  {/* Floating Live Real-time Clock Dial */}
-                  <div className="absolute -bottom-6 -right-6 sm:-bottom-8 sm:-right-8 p-1.5 bg-obsidian-950 border border-brass-600/40 shadow-2xl rounded-full">
-                    <WatchDialClockSvg className="w-24 h-24 sm:w-28 sm:h-28" />
+                {/* Soft ambient radial light behind watch */}
+                <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-brass-500/10 rounded-full blur-3xl pointer-events-none" />
+
+                {/* Top Bar: Status and Manufacture selector pills */}
+                <div className="relative z-10 flex items-center justify-between pb-4 border-b border-obsidian-800 gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-300 font-semibold">
+                      Pièce Certifiée
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-1 bg-obsidian-950 p-1 border border-obsidian-800">
+                    {['Rolex', 'Cartier', 'Tudor'].map((brand) => (
+                      <button
+                        key={brand}
+                        onClick={() => setHeroBrand(brand)}
+                        className={`px-3 py-1 text-[10px] font-mono uppercase tracking-wider transition-all cursor-pointer ${
+                          heroBrand === brand
+                            ? 'bg-brass-500 text-obsidian-950 font-bold shadow-sm'
+                            : 'text-sand hover:text-ivory-100 hover:bg-obsidian-900'
+                        }`}
+                      >
+                        {brand}
+                      </button>
+                    ))}
                   </div>
                 </div>
 
-                <div className="mt-8 pt-4 border-t border-obsidian-800/80 text-center">
-                  <div className="text-[10px] uppercase tracking-[0.25em] text-brass-400 font-semibold">
-                    Calibre Mécanique Vivant
+                {/* Center Visual: Large transparent cutout watch */}
+                <div 
+                  onClick={() => onSelectProduct && onSelectProduct(activeHeroWatch)}
+                  className="relative z-10 py-6 flex flex-col items-center justify-center cursor-pointer group"
+                >
+                  <img
+                    src={`/cutouts/${activeHeroWatch.slug || activeHeroWatch.id}.png`}
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = activeHeroWatch.featuredImage || (activeHeroWatch.images && activeHeroWatch.images[0]);
+                    }}
+                    alt={cleanTitle(activeHeroWatch.title)}
+                    className="h-64 sm:h-72 w-auto max-w-full object-contain filter drop-shadow-[0_25px_35px_rgba(0,0,0,0.95)] group-hover:scale-105 transition-transform duration-500"
+                  />
+
+                  {/* Elliptical pedestal shadow */}
+                  <div className="w-44 h-4 bg-obsidian-950/80 rounded-full blur-md -mt-2 pointer-events-none" />
+                </div>
+
+                {/* Bottom Info & Action */}
+                <div className="relative z-10 pt-4 border-t border-obsidian-800 space-y-3">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-brass-400 font-semibold block">
+                        {activeHeroWatch.brand} • Millésime {activeHeroWatch.year || 'Authentifié'}
+                      </span>
+                      <h3 className="font-serif text-lg sm:text-xl text-ivory-100 font-normal uppercase leading-tight mt-0.5">
+                        {cleanTitle(activeHeroWatch.title)}
+                      </h3>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <div className="font-mono text-base sm:text-lg font-bold text-ivory-100">
+                        {activeHeroWatch.priceFormatted}
+                      </div>
+                      <span className="text-[10px] text-emerald-400 font-mono block">En stock</span>
+                    </div>
                   </div>
-                  <div className="font-serif text-xs text-ivory-200 mt-1">
-                    Balancier spiral 28'800 A/h • Échappement à ancre suisse
+
+                  {/* Horology specification pills */}
+                  <div className="flex flex-wrap items-center gap-1.5 pt-1 text-[10px] font-mono text-sand/80">
+                    <span className="px-2 py-0.5 bg-obsidian-950 border border-obsidian-800">
+                      Ø {activeHeroWatch.diameter || '36 mm'}
+                    </span>
+                    <span className="px-2 py-0.5 bg-obsidian-950 border border-obsidian-800">
+                      {activeHeroWatch.materials || 'Acier Oyster'}
+                    </span>
+                    <span className="px-2 py-0.5 bg-obsidian-950 border border-obsidian-800">
+                      {activeHeroWatch.movement || 'Automatique'}
+                    </span>
+                  </div>
+
+                  {/* Direct Action Button */}
+                  <div className="pt-2">
+                    <button
+                      onClick={() => onSelectProduct && onSelectProduct(activeHeroWatch)}
+                      className="w-full py-3 bg-brass-500 hover:bg-brass-400 text-obsidian-950 font-bold text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg group"
+                    >
+                      <span>Découvrir cette pièce d'exception</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+
+                  {/* Precision badge footer */}
+                  <div className="pt-2 border-t border-obsidian-850 flex items-center justify-between text-[9px] font-mono text-sand/60">
+                    <span className="flex items-center gap-1">
+                      <ShieldCheck className="w-3 h-3 text-brass-400" />
+                      Garantie 12 mois écrite
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Activity className="w-3 h-3 text-emerald-400" />
+                      Réglée sur chronocomparateur
+                    </span>
                   </div>
                 </div>
 
