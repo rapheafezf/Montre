@@ -23,18 +23,10 @@
   --color-sand: #989186;
 
   /* Ultra-Luxury Haute Horlogerie & Joaillerie Typography (Didot / Bodoni Moda) */
-  --font-serif: var(--font-luxury-heading, "Bodoni Moda", "Didot", "Prata", Georgia, serif);
-  --font-display: var(--font-luxury-heading, "Bodoni Moda", "Didot", "Prata", Georgia, serif);
-  --font-sans: var(--font-luxury-body, "Plus Jakarta Sans", system-ui, -apple-system, sans-serif);
+  --font-serif: "Bodoni Moda", "Didot", "Prata", Georgia, serif;
+  --font-display: "Bodoni Moda", "Didot", "Prata", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-}
-
-:root {
-  --font-luxury-heading: "Bodoni Moda", "Didot", "Prata", Georgia, serif;
-  --font-luxury-body: "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-luxury-accent: "JetBrains Mono", monospace;
-  --luxury-heading-tracking: 0.10em;
-  --luxury-heading-weight: 500;
 }
 
 html {
@@ -45,20 +37,19 @@ html {
 body {
   background-color: #060709;
   color: #f8f6f0;
-  font-family: var(--font-luxury-body, "Plus Jakarta Sans", sans-serif);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   overflow-x: hidden;
 }
 
-/* Explicit Ultra-Luxury Title Binding SOTA 2026 */
+/* Explicit Ultra-Luxury Title Binding (Didot / Bodoni Moda High-Contrast Serifs) */
 h1, h2, h3, .font-serif, .font-luxury, .font-display {
-  font-family: var(--font-luxury-heading) !important;
+  font-family: "Bodoni Moda", "Didot", "Prata", Georgia, serif !important;
   font-optical-sizing: auto;
-  letter-spacing: var(--luxury-heading-tracking, 0.08em);
-  font-weight: var(--luxury-heading-weight, 500);
+  letter-spacing: 0.08em;
 }
 
 .font-mono, [data-mono] {
-  font-family: var(--font-luxury-accent, "JetBrains Mono", monospace) !important;
+  font-family: "JetBrains Mono", ui-monospace, monospace !important;
 }
 
 /* Custom subtle scrollbar */
