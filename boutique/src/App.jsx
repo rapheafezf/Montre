@@ -21,11 +21,15 @@ import DeliveryReturnsPage from './pages/DeliveryReturnsPage';
 import JournalPage from './pages/JournalPage';
 import LegalPage from './pages/LegalPage';
 import AdminPage from './pages/AdminPage';
+import useLenisSmoothScroll from './hooks/useLenisSmoothScroll';
 
 import { PRODUCTS } from './data/products';
 import { MessageCircle } from 'lucide-react';
 
 export default function App() {
+  // Activate Cominvi-style momentum smooth scroll engine
+  useLenisSmoothScroll();
+
   const [route, setRoute] = useState('home');
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [cart, setCart] = useState([]);

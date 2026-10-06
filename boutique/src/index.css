@@ -175,3 +175,56 @@ h1, h2, h3, .font-serif, .font-luxury, .font-display {
 .animate-jewel {
   animation: jewelGlow 3s ease-in-out infinite;
 }
+
+/* --- COMINVI-STYLE SMOOTH REVEAL & MASK KEYFRAMES --- */
+@keyframes slideUpMask {
+  0% {
+    transform: translateY(115%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUpSlow {
+  0% {
+    transform: translateY(35px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGlowGold {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(212, 186, 125, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(212, 186, 125, 0.45);
+  }
+}
+
+.animate-slide-up-mask {
+  animation: slideUpMask 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.animate-fade-up-slow {
+  animation: fadeUpSlow 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.is-h1-span-wrap {
+  overflow: hidden;
+  display: block;
+}
+
+.is-h1-span {
+  display: inline-block;
+  will-change: transform;
+}
+

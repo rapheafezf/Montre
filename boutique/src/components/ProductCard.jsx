@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Eye, ArrowRight } from 'lucide-react';
 
 const getImageUrl = (url, width = 700) => {
@@ -9,6 +9,23 @@ const getImageUrl = (url, width = 700) => {
 
 export default function ProductCard({ product, onSelect }) {
   const [hovered, setHovered] = useState(false);
+  const cardRef = useRef(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0, glareX: 50, glareY: 50 });
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+    const glareX = ((e.clientX - rect.left) / rect.width) * 100;
+    const glareY = ((e.clientY - rect.top) / rect.height) * 100;
+    setTilt({ x: y * -6, y: x * 6, glareX, glareY });
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+    setTilt({ x: 0, y: 0, glareX: 50, glareY: 50 });
+  };
 
   // Fallback secondary image
   const rawPrimary = product.images && product.images.length > 0 
@@ -27,11 +44,28 @@ export default function ProductCard({ product, onSelect }) {
 
   return (
     <div 
-      className="group bg-obsidian-900/60 border border-obsidian-800 hover:border-brass-500/50 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer relative"
+      ref={cardRef}
+      className="group bg-obsidian-900/60 border border-obsidian-800 hover:border-brass-500/60 transition-[border-color,box-shadow] duration-300 flex flex-col justify-between overflow-hidden cursor-pointer relative will-change-transform shadow-lg"
+      style={{
+        transform: hovered 
+          ? `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.02, 1.02, 1.02)` 
+          : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
+        transition: hovered ? 'transform 0.08s ease-out' : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+        transformStyle: 'preserve-3d'
+      }}
       onClick={() => onSelect(product)}
+      onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseLeave={handleMouseLeave}
     >
+      {/* Dynamic Cursor Glare Reflection Overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-20"
+        style={{
+          opacity: hovered ? 0.35 : 0,
+          background: `radial-gradient(circle at ${tilt.glareX}% ${tilt.glareY}%, rgba(212, 175, 55, 0.3) 0%, transparent 65%)`
+        }}
+      />
       {/* Top Status & Brand Badge */}
       <div className="relative aspect-[4/5] bg-obsidian-950 overflow-hidden select-none">
         {/* Availability Badge with Animated Micro-Calibre */}

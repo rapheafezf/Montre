@@ -4,6 +4,9 @@ import ProductCard from '../components/ProductCard';
 import HorlogerieMechanismSvg from '../components/HorlogerieMechanismSvg';
 import WatchDialClockSvg from '../components/WatchDialClockSvg';
 import CertificationStampSvg from '../components/CertificationStampSvg';
+import WatchInspectorShowcase from '../components/WatchInspectorShowcase';
+import AtelierProcessProgression from '../components/AtelierProcessProgression';
+import TextScrollReveal from '../components/TextScrollReveal';
 
 export default function HomePage({ products, onSelectProduct, navigateTo, openShowroomModal }) {
   // Extract in-stock and featured items
@@ -33,20 +36,29 @@ export default function HomePage({ products, onSelectProduct, navigateTo, openSh
               </div>
 
               <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-ivory-100 font-normal tracking-[0.12em] leading-[1.22] uppercase">
-                Garde-Temps d'Exception & Pièces Certifiées
+                <span className="is-h1-span-wrap">
+                  <span className="is-h1-span animate-slide-up-mask">
+                    Garde-Temps d'Exception
+                  </span>
+                </span>
+                <span className="is-h1-span-wrap mt-1">
+                  <span className="is-h1-span animate-slide-up-mask [animation-delay:200ms] text-brass-300">
+                    & Pièces Certifiées
+                  </span>
+                </span>
               </h1>
 
-              <p className="text-xs sm:text-sm text-sand/90 font-light leading-relaxed max-w-xl">
+              <p className="text-xs sm:text-sm text-sand/90 font-light leading-relaxed max-w-xl animate-fade-up-slow [animation-delay:350ms]">
                 Sélection exigeante de montres de collection, vintage et contemporaines de prestige. Chaque pièce est ouverte en atelier, auscultée au chronocomparateur et garantie 12 mois. Rolex, Cartier, Tudor, Omega.
               </p>
 
-              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 animate-fade-up-slow [animation-delay:450ms]">
                 <button
                   onClick={() => navigateTo('catalogue')}
                   className="px-8 py-4 bg-brass-500 hover:bg-brass-400 text-obsidian-950 text-xs font-semibold uppercase tracking-[0.2em] transition-all shadow-xl flex items-center justify-center gap-2 group cursor-pointer"
                 >
                   Explorer la collection
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
                 </button>
 
                 <button
@@ -58,7 +70,7 @@ export default function HomePage({ products, onSelectProduct, navigateTo, openSh
               </div>
 
               {/* 4 Pillars Metrics with SVG micro-hallmarks */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-obsidian-800/80">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-obsidian-800/80 animate-fade-up-slow [animation-delay:550ms]">
                 <div className="space-y-1">
                   <div className="font-serif text-xl sm:text-2xl text-ivory-100 font-semibold tracking-wider">100%</div>
                   <div className="text-[11px] text-sand/75 tracking-wider uppercase font-medium">Authentifié par écrit</div>
@@ -107,6 +119,106 @@ export default function HomePage({ products, onSelectProduct, navigateTo, openSh
 
           </div>
 
+          {/* Cominvi-style Hero Bottom Floating Cards */}
+          <div className="pt-16 mt-8 border-t border-obsidian-800/60">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
+              <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-brass-400 font-bold">
+                Navigation Rapide • Les Pôles d'Excellence
+              </span>
+              <span className="text-[10px] font-mono text-sand/60">
+                {products.filter(p => !p.isSold).length} pièces disponibles immédiatement
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              
+              {/* Card 1: Rolex */}
+              <div 
+                onClick={() => navigateTo('catalogue-rolex')}
+                className="group relative h-28 sm:h-32 bg-obsidian-900 border border-obsidian-800 hover:border-brass-500/60 overflow-hidden cursor-pointer p-4 flex flex-col justify-between transition-all"
+              >
+                <img 
+                  src="https://lemouvement-watches.fr/cdn/shop/files/DSC02450.jpg?width=400" 
+                  alt="Rolex"
+                  className="absolute inset-0 w-full h-full object-cover opacity-25 group-hover:opacity-40 group-hover:scale-105 transition-all duration-500"
+                />
+                <div className="relative z-10 flex items-center justify-between">
+                  <span className="text-[9px] font-mono uppercase tracking-widest text-brass-400 font-semibold">Genève</span>
+                  <span className="text-[9px] font-mono text-sand/80">Ref. 16234</span>
+                </div>
+                <div className="relative z-10 flex items-center justify-between">
+                  <h4 className="font-serif text-sm sm:text-base text-ivory-100 font-normal uppercase">Rolex Datejust</h4>
+                  <div className="w-6 h-6 rounded-full bg-obsidian-950 border border-brass-600/40 flex items-center justify-center text-brass-400 group-hover:bg-brass-500 group-hover:text-obsidian-950 transition-colors">
+                    <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 2: Cartier */}
+              <div 
+                onClick={() => navigateTo('catalogue-cartier')}
+                className="group relative h-28 sm:h-32 bg-obsidian-900 border border-obsidian-800 hover:border-brass-500/60 overflow-hidden cursor-pointer p-4 flex flex-col justify-between transition-all"
+              >
+                <img 
+                  src="https://lemouvement-watches.fr/cdn/shop/files/DSC02218.jpg?width=400" 
+                  alt="Cartier"
+                  className="absolute inset-0 w-full h-full object-cover opacity-25 group-hover:opacity-40 group-hover:scale-105 transition-all duration-500"
+                />
+                <div className="relative z-10 flex items-center justify-between">
+                  <span className="text-[9px] font-mono uppercase tracking-widest text-brass-400 font-semibold">Paris</span>
+                  <span className="text-[9px] font-mono text-sand/80">Santos Galbée</span>
+                </div>
+                <div className="relative z-10 flex items-center justify-between">
+                  <h4 className="font-serif text-sm sm:text-base text-ivory-100 font-normal uppercase">Cartier Santos</h4>
+                  <div className="w-6 h-6 rounded-full bg-obsidian-950 border border-brass-600/40 flex items-center justify-center text-brass-400 group-hover:bg-brass-500 group-hover:text-obsidian-950 transition-colors">
+                    <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 3: Tudor */}
+              <div 
+                onClick={() => navigateTo('catalogue-tudor')}
+                className="group relative h-28 sm:h-32 bg-obsidian-900 border border-obsidian-800 hover:border-brass-500/60 overflow-hidden cursor-pointer p-4 flex flex-col justify-between transition-all"
+              >
+                <img 
+                  src="https://lemouvement-watches.fr/cdn/shop/files/DSC02321_b420a646-7d52-45a8-b037-791fd35659c9.jpg?width=400" 
+                  alt="Tudor"
+                  className="absolute inset-0 w-full h-full object-cover opacity-25 group-hover:opacity-40 group-hover:scale-105 transition-all duration-500"
+                />
+                <div className="relative z-10 flex items-center justify-between">
+                  <span className="text-[9px] font-mono uppercase tracking-widest text-brass-400 font-semibold">Bienne</span>
+                  <span className="text-[9px] font-mono text-sand/80">Prince Oyster</span>
+                </div>
+                <div className="relative z-10 flex items-center justify-between">
+                  <h4 className="font-serif text-sm sm:text-base text-ivory-100 font-normal uppercase">Tudor Prince</h4>
+                  <div className="w-6 h-6 rounded-full bg-obsidian-950 border border-brass-600/40 flex items-center justify-center text-brass-400 group-hover:bg-brass-500 group-hover:text-obsidian-950 transition-colors">
+                    <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 4: Showroom Privé */}
+              <div 
+                onClick={openShowroomModal}
+                className="group relative h-28 sm:h-32 bg-obsidian-900 border border-obsidian-800 hover:border-brass-500/60 overflow-hidden cursor-pointer p-4 flex flex-col justify-between transition-all"
+              >
+                <div className="absolute inset-0 bg-brass-500/5 group-hover:bg-brass-500/10 transition-colors" />
+                <div className="relative z-10 flex items-center justify-between">
+                  <span className="text-[9px] font-mono uppercase tracking-widest text-brass-400 font-semibold">Communay</span>
+                  <span className="text-[9px] font-mono text-sand/80">Sur Rendez-vous</span>
+                </div>
+                <div className="relative z-10 flex items-center justify-between">
+                  <h4 className="font-serif text-sm sm:text-base text-ivory-100 font-normal uppercase">Showroom Lyon</h4>
+                  <div className="w-6 h-6 rounded-full bg-obsidian-950 border border-brass-600/40 flex items-center justify-center text-brass-400 group-hover:bg-brass-500 group-hover:text-obsidian-950 transition-colors">
+                    <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -140,6 +252,12 @@ export default function HomePage({ products, onSelectProduct, navigateTo, openSh
           ))}
         </div>
       </section>
+
+      {/* 3D Interactive Watch Inspector Showcase (Cominvi section_minerals equivalent) */}
+      <WatchInspectorShowcase 
+        onSelectProduct={onSelectProduct}
+        navigateTo={navigateTo}
+      />
 
       {/* Manufactures (Rolex, Cartier, Tudor) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -236,9 +354,11 @@ export default function HomePage({ products, onSelectProduct, navigateTo, openSh
                 "Une montre vintage est un fragment d'histoire qui mérite d'être porté avec fierté."
               </h2>
 
-              <p className="text-sand text-xs sm:text-sm leading-relaxed font-light">
-                J’ai fondé <strong className="text-ivory-100 font-medium">Le Mouvement</strong> avec une conviction inaltérable : le marché du vintage doit conjuguer la sensibilité des détails à la rigueur technique la plus intransigeante. Pour moi, le prêt-à-porter horloger est la règle absolue. Aucune pièce n'est mise en vente sans avoir été ouverte, diagnostiquée au binoculaire et testée chronométriquement.
-              </p>
+              <TextScrollReveal
+                text="J’ai fondé Le Mouvement avec une conviction inaltérable : le marché du vintage doit conjuguer la sensibilité des détails à la rigueur technique la plus intransigeante. Pour moi, le prêt-à-porter horloger est la règle absolue. Aucune pièce n'est mise en vente sans avoir été ouverte, diagnostiquée au binoculaire et testée chronométriquement."
+                className="text-sm sm:text-base leading-relaxed"
+                activeColor="#F8F6F0"
+              />
 
               <div className="space-y-3.5 pt-2">
                 <div className="flex items-start gap-3">
@@ -313,6 +433,9 @@ export default function HomePage({ products, onSelectProduct, navigateTo, openSh
           </div>
         </div>
       </section>
+
+      {/* Atelier Protocol Progression (Cominvi process-progression equivalent) */}
+      <AtelierProcessProgression navigateTo={navigateTo} />
 
       {/* Consignment & Buying Teaser */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
