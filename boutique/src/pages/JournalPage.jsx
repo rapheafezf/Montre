@@ -65,8 +65,8 @@ export default function JournalPage() {
             >
               ← Retour au sommaire
             </button>
-            <div className="text-xs text-brass-400 font-serif italic">
-              Rédigé par la rédaction Le Mouvement
+            <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-brass-400 font-medium">
+              Rédaction Atelier • Le Mouvement
             </div>
           </div>
         </div>

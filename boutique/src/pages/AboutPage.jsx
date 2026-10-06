@@ -73,12 +73,12 @@ export default function AboutPage({ navigateTo, openShowroomModal }) {
           Basé dans la région lyonnaise, j’accueille les passionnés dans mon showroom privé sur rendez-vous et j’assure un accompagnement sur-mesure à distance pour chaque amateur. Je prépare et scelle personnellement chaque envoi avec le plus grand soin, sécurisé et assuré à 100% de la valeur de la pièce.
         </p>
 
-        <div className="p-6 bg-obsidian-900 border border-brass-600/30 text-center space-y-4 my-8">
-          <p className="font-serif italic text-base text-ivory-100">
-            "Derrière chaque montre se cache une histoire. Ma mission est de vous aider à écrire la vôtre."
+        <div className="p-8 bg-obsidian-900 border border-brass-600/30 text-center space-y-3 my-8">
+          <p className="font-serif text-base sm:text-lg text-ivory-100 font-normal uppercase tracking-wide leading-relaxed">
+            « Derrière chaque montre se cache une histoire. Ma mission est de vous aider à transmettre la vôtre. »
           </p>
-          <div className="text-xs text-brass-400 uppercase tracking-widest font-semibold">
-            — Nyle Abderrahman
+          <div className="text-[11px] font-mono text-brass-400 uppercase tracking-[0.25em] font-semibold">
+            — Nyle Abderrahman • Fondateur
           </div>
         </div>
 

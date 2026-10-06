@@ -83,12 +83,12 @@ export default function CatalogPage({ products, initialBrand, initialFilter, onS
       {/* Title & Description */}
       <div className="border-b border-obsidian-800 pb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <span className="text-[10px] uppercase tracking-widest text-brass-400 font-semibold">Catalogue de la Maison</span>
-          <h1 className="font-serif text-3xl sm:text-5xl text-ivory-100 font-normal mt-1">
+          <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-brass-400 font-semibold">Catalogue de la Maison</span>
+          <h1 className="font-serif text-3xl sm:text-5xl text-ivory-100 font-normal uppercase tracking-[0.03em] mt-1">
             Garde-Temps & Pièces de Collection
           </h1>
-          <p className="text-xs sm:text-sm text-sand mt-2 max-w-xl">
-            Découvrez nos montres sélectionnées, photographiées sous tous les angles, contrôlées en atelier et garanties 12 mois.
+          <p className="text-xs sm:text-sm text-sand/90 mt-2 max-w-xl font-light leading-relaxed">
+            Découvrez nos montres sélectionnées, photographiées sous tous les angles, contrôlées en atelier au chronocomparateur et garanties 12 mois.
           </p>
         </div>
 
@@ -96,7 +96,7 @@ export default function CatalogPage({ products, initialBrand, initialFilter, onS
         <div className="flex items-center gap-3">
           <button
             onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
-            className="md:hidden px-4 py-2 bg-obsidian-900 border border-obsidian-700 text-ivory-100 text-xs flex items-center gap-2"
+            className="md:hidden px-4 py-2 bg-obsidian-900 border border-obsidian-700 text-ivory-100 text-xs font-mono uppercase tracking-wider flex items-center gap-2"
           >
             <SlidersHorizontal className="w-4 h-4 text-brass-400" />
             Filtres
@@ -105,7 +105,7 @@ export default function CatalogPage({ products, initialBrand, initialFilter, onS
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="bg-obsidian-900 border border-obsidian-700 text-ivory-100 px-3 py-2 text-xs focus:border-brass-400 focus:outline-none"
+            className="bg-obsidian-900 border border-obsidian-700 text-ivory-100 px-3 py-2 text-xs font-mono uppercase tracking-wider focus:border-brass-400 focus:outline-none"
           >
             <option value="default">Tri : Sélection par défaut</option>
             <option value="in-stock">En stock en premier</option>

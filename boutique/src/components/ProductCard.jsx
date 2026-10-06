@@ -34,15 +34,19 @@ export default function ProductCard({ product, onSelect }) {
     >
       {/* Top Status & Brand Badge */}
       <div className="relative aspect-[4/5] bg-obsidian-950 overflow-hidden select-none">
-        {/* Availability Badge */}
+        {/* Availability Badge with Animated Micro-Calibre */}
         <div className="absolute top-3 left-3 z-10 pointer-events-none">
           {product.isSold ? (
-            <span className="bg-obsidian-900/90 text-sand text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 border border-obsidian-700 backdrop-blur-sm">
-              Pièce d'Archive (Vendue)
+            <span className="bg-obsidian-900/90 text-sand text-[10px] font-mono tracking-wider uppercase font-semibold px-2.5 py-1 border border-obsidian-700 backdrop-blur-sm">
+              Archive (Vendue)
             </span>
           ) : (
-            <span className="bg-obsidian-950/90 text-brass-300 text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 border border-brass-600/40 backdrop-blur-sm flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="bg-obsidian-950/90 text-brass-300 text-[10px] font-mono tracking-widest uppercase font-semibold px-2.5 py-1 border border-brass-600/40 backdrop-blur-sm flex items-center gap-1.5">
+              <svg className="w-3 h-3 text-brass-400 animate-balance" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" strokeDasharray="2 2" />
+                <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="1.5" />
+                <circle cx="12" cy="12" r="1.5" fill="#dc2626" />
+              </svg>
               En stock
             </span>
           )}
@@ -51,7 +55,7 @@ export default function ProductCard({ product, onSelect }) {
         {/* Year tag if present */}
         {product.year && (
           <div className="absolute top-3 right-3 z-10 pointer-events-none">
-            <span className="bg-obsidian-900/80 text-sand/80 text-[10px] font-mono px-2 py-0.5 border border-obsidian-800 backdrop-blur-sm">
+            <span className="bg-obsidian-900/80 text-sand/90 text-[10px] font-mono px-2 py-0.5 border border-obsidian-800 backdrop-blur-sm">
               {product.year}
             </span>
           </div>
@@ -81,7 +85,7 @@ export default function ProductCard({ product, onSelect }) {
 
         {/* Hover Quick Action Overlay */}
         <div className="absolute inset-0 bg-obsidian-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-          <span className="px-4 py-2 bg-obsidian-900/90 text-ivory-100 text-xs uppercase tracking-widest border border-brass-500/60 flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-transform shadow-xl">
+          <span className="px-4 py-2 bg-obsidian-900/90 text-ivory-100 text-xs font-mono uppercase tracking-[0.2em] border border-brass-500/60 flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-transform shadow-xl">
             <Eye className="w-3.5 h-3.5 text-brass-400" />
             Examiner la pièce
           </span>
@@ -92,17 +96,17 @@ export default function ProductCard({ product, onSelect }) {
       <div className="p-5 flex flex-col justify-between flex-1 border-t border-obsidian-800/80">
         <div>
           <div className="flex items-center justify-between text-xs mb-1">
-            <span className="text-brass-400 uppercase tracking-widest font-semibold text-[11px]">
+            <span className="text-brass-400 font-mono uppercase tracking-[0.25em] font-semibold text-[10px]">
               {product.brand}
             </span>
             {product.diameter && (
-              <span className="text-sand/70 text-[11px]">
+              <span className="text-sand/70 text-[10px] font-mono">
                 {product.diameter}
               </span>
             )}
           </div>
 
-          <h3 className="font-serif text-base sm:text-lg text-ivory-100 font-medium group-hover:text-brass-300 transition-colors line-clamp-1">
+          <h3 className="font-serif text-base sm:text-lg text-ivory-100 font-normal uppercase tracking-[0.03em] group-hover:text-brass-300 transition-colors line-clamp-1">
             {product.title}
           </h3>
 
@@ -114,18 +118,18 @@ export default function ProductCard({ product, onSelect }) {
         {/* Price & Guarantee line */}
         <div className="mt-5 pt-3 border-t border-obsidian-800/50 flex items-end justify-between">
           <div>
-            <div className="font-serif text-lg sm:text-xl font-bold text-ivory-100">
+            <div className="font-serif text-lg sm:text-xl font-normal tracking-wide text-ivory-100">
               {product.price > 0 ? `${product.price.toLocaleString('fr-FR')} €` : 'Prix sur demande'}
             </div>
             {product.price > 0 && !product.isSold && (
-              <div className="text-[10px] text-sand/70 mt-0.5">
+              <div className="text-[10px] text-sand/70 mt-0.5 font-mono">
                 ou 3x <span className="text-ivory-200 font-medium">{almaPrice.toLocaleString('fr-FR')} €</span> sans frais
               </div>
             )}
           </div>
 
           <div className="text-right">
-            <span className="text-[11px] text-sand flex items-center gap-1 group-hover:text-brass-400 transition-colors">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-sand flex items-center gap-1 group-hover:text-brass-400 transition-colors">
               Détails <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </span>
           </div>

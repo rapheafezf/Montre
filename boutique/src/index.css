@@ -1,63 +1,166 @@
 @import "tailwindcss";
 
 @theme {
-  --color-obsidian-950: #070809;
-  --color-obsidian-900: #0e1013;
+  --color-obsidian-950: #060709;
+  --color-obsidian-900: #0c0d10;
   --color-obsidian-850: #121418;
-  --color-obsidian-800: #1a1c22;
-  --color-obsidian-700: #252830;
-  --color-obsidian-600: #353945;
+  --color-obsidian-800: #181a20;
+  --color-obsidian-700: #242730;
+  --color-obsidian-600: #343844;
 
-  --color-brass-300: #e8d5aa;
+  --color-brass-200: #f4e8c8;
+  --color-brass-300: #e5d1a4;
   --color-brass-400: #d4ba7d;
   --color-brass-500: #c5a059;
   --color-brass-600: #ab8441;
   --color-brass-700: #89642e;
 
   --color-ivory-50: #fdfcf9;
-  --color-ivory-100: #f8f5ee;
+  --color-ivory-100: #f8f6f0;
   --color-ivory-200: #eee8da;
   --color-ivory-300: #dfd4bd;
 
-  --color-sand: #9e978e;
+  --color-sand: #989186;
 
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --font-display: "Cormorant Garamond", Georgia, serif;
+  /* Haute Horlogerie Typography */
+  --font-display: "Cinzel", Georgia, serif;
+  --font-serif: "Cinzel", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
 html {
   color-scheme: dark;
+  letter-spacing: -0.01em;
 }
 
 body {
-  background-color: #070809;
-  color: #f8f5ee;
+  background-color: #060709;
+  color: #f8f6f0;
+  font-family: var(--font-sans);
   overflow-x: hidden;
 }
 
 /* Custom subtle scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #0e1013;
+  background: #0c0d10;
 }
 ::-webkit-scrollbar-thumb {
-  background: #252830;
-  border-radius: 3px;
+  background: #242730;
+  border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #c5a059;
 }
 
+/* Haute Horlogerie Gold Gradient Text */
 .gold-gradient-text {
-  background: linear-gradient(135deg, #f5e4bf 0%, #c5a059 50%, #997839 100%);
+  background: linear-gradient(135deg, #f7ecd2 0%, #c5a059 45%, #94712e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+.gold-gradient-subtle {
+  background: linear-gradient(180deg, rgba(212, 186, 125, 0.15) 0%, rgba(197, 160, 89, 0.02) 100%);
+}
+
 .bg-radial-subtle {
-  background: radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.08) 0%, rgba(14, 16, 19, 0) 70%);
+  background: radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.07) 0%, rgba(6, 7, 9, 0) 70%);
+}
+
+/* --- HORLOGERIE SVG KEYFRAMES ANIMATIONS --- */
+
+/* 1. Balancier spiral : oscillation harmonique 28 800 A/h */
+@keyframes balanceOscillate {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(36deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-36deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* 2. Spirale respirante (Hairspring expansion/contraction) */
+@keyframes spiralBreathing {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+/* 3. Rouage horaire continu */
+@keyframes gearClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 4. Rouage anti-horaire continu */
+@keyframes gearCounter {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* 5. Ancre suisse d'échappement (Escapement Lever) */
+@keyframes leverEscapement {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+/* 6. Trotteuse fluide (Continuous Sweep Second) */
+@keyframes sweepSecondsContinuous {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 7. Tracé de poinçon (SVG stroke drawing) */
+@keyframes strokeDrawPath {
+  0% { stroke-dashoffset: 600; opacity: 0; }
+  20% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+/* 8. Pulsation rubis d'échappement */
+@keyframes jewelGlow {
+  0%, 100% { opacity: 0.7; filter: drop-shadow(0 0 2px rgba(220, 38, 38, 0.4)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 8px rgba(220, 38, 38, 0.8)); }
+}
+
+.animate-balance {
+  animation: balanceOscillate 1.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  transform-origin: center;
+}
+
+.animate-hairspring {
+  animation: spiralBreathing 1.8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-gear-slow {
+  animation: gearClockwise 32s linear infinite;
+  transform-origin: center;
+}
+
+.animate-gear-medium {
+  animation: gearCounter 16s linear infinite;
+  transform-origin: center;
+}
+
+.animate-gear-fast {
+  animation: gearClockwise 8s linear infinite;
+  transform-origin: center;
+}
+
+.animate-escapement-lever {
+  animation: leverEscapement 0.9s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-sweep-seconds {
+  animation: sweepSecondsContinuous 60s linear infinite;
+  transform-origin: center;
+}
+
+.animate-jewel {
+  animation: jewelGlow 3s ease-in-out infinite;
 }

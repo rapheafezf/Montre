@@ -100,13 +100,31 @@ export default function Header({ currentRoute, navigateTo, cartCount, openCart, 
             </button>
           </nav>
 
-          {/* Center Brand Identity */}
-          <div className="flex flex-col items-center cursor-pointer text-center" onClick={() => handleNav('home')}>
-            <span className="font-serif text-2xl sm:text-3xl tracking-[0.2em] font-semibold text-ivory-100 hover:text-brass-300 transition-colors">
-              LE MOUVEMENT
-            </span>
-            <span className="text-[9px] tracking-[0.35em] text-sand uppercase font-light mt-0.5">
-              Montres de Collection • Lyon
+          {/* Center Brand Identity with Animated Horlogerie Escapement SVG */}
+          <div className="flex flex-col items-center cursor-pointer text-center group py-1" onClick={() => handleNav('home')}>
+            <div className="flex items-center gap-2.5">
+              {/* Animated Horlogerie Caliber Monogram SVG */}
+              <svg 
+                className="w-6 h-6 text-brass-400 group-hover:text-brass-300 transition-colors" 
+                viewBox="0 0 44 44" 
+                fill="none"
+              >
+                <circle cx="22" cy="22" r="20" stroke="currentColor" strokeWidth="1" strokeDasharray="2 3" opacity="0.6" />
+                <circle cx="22" cy="22" r="16" stroke="currentColor" strokeWidth="0.8" opacity="0.8" />
+                {/* Oscillating balance wheel inside logo */}
+                <g className="animate-balance">
+                  <circle cx="22" cy="22" r="10" stroke="currentColor" strokeWidth="1.2" fill="none" />
+                  <line x1="22" y1="12" x2="22" y2="32" stroke="currentColor" strokeWidth="1" />
+                  <line x1="12" y1="22" x2="32" y2="22" stroke="currentColor" strokeWidth="1" />
+                </g>
+                <circle cx="22" cy="22" r="2.5" fill="currentColor" />
+              </svg>
+              <span className="font-serif text-2xl sm:text-3xl tracking-[0.22em] font-normal text-ivory-100 group-hover:text-brass-300 transition-colors uppercase">
+                Le Mouvement
+              </span>
+            </div>
+            <span className="text-[8.5px] tracking-[0.38em] text-sand/75 uppercase font-medium mt-0.5">
+              Haute Horlogerie • Lyon
             </span>
           </div>
 

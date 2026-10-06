@@ -5,6 +5,9 @@ import {
   ArrowLeft 
 } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
+import CertificationStampSvg from '../components/CertificationStampSvg';
+import ChronocomparateurSvg from '../components/ChronocomparateurSvg';
+import HorlogerieMechanismSvg from '../components/HorlogerieMechanismSvg';
 
 // Safe image URL builder with width parameter
 const getImageUrl = (url, width = 1000) => {
@@ -450,9 +453,38 @@ export default function ProductDetailPage({
               <ShieldCheck className="w-4 h-4 text-brass-400 shrink-0" />
               Chaque détail photographié est authentique et d'époque.
             </span>
-            <span className="text-sand/80 text-[11px] hidden sm:inline">
+            <span className="text-sand/80 text-[11px] hidden sm:inline font-mono">
               Glissez la souris ou votre doigt pour faire défiler
             </span>
+          </div>
+
+          {/* Atelier Horloger Telemetry & Inspection SVG Showcase */}
+          <div className="mt-6 border border-obsidian-800 bg-obsidian-900/40 p-5 space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-brass-400 font-semibold block">
+                  Contrôle Métrologique Atelier
+                </span>
+                <h3 className="font-serif text-lg text-ivory-100 font-normal uppercase tracking-wide mt-0.5">
+                  Rapport Chronocomparateur & Précision
+                </h3>
+              </div>
+              <CertificationStampSvg className="w-16 h-16 sm:w-20 sm:h-20 shrink-0" />
+            </div>
+
+            {/* Live Chronocomparateur SVG Waveform Display */}
+            <ChronocomparateurSvg className="w-full" rate="+02" amplitude="295°" beatError="0.1ms" />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 text-[11px] text-sand/80 font-light border-t border-obsidian-800/60">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-brass-400" />
+                <span>Amplitude saine : barillet & ressort vérifiés</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-brass-400" />
+                <span>Balancier réglé sur 5 positions d'atelier</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -462,29 +494,29 @@ export default function ProductDetailPage({
           {/* Header */}
           <div className="space-y-3 pb-6 border-b border-obsidian-800">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-brass-400 uppercase tracking-widest font-bold">
+              <span className="text-brass-400 font-mono uppercase tracking-[0.25em] font-semibold text-[11px]">
                 {product.brand}
               </span>
               {product.year && (
-                <span className="text-sand/80 font-mono text-xs">
-                  Millésime {product.year}
+                <span className="text-sand/80 font-mono text-xs tracking-wider">
+                  MILLÉSIME {product.year}
                 </span>
               )}
             </div>
 
-            <h1 className="font-serif text-3xl sm:text-4xl text-ivory-100 font-normal leading-tight">
+            <h1 className="font-serif text-3xl sm:text-4xl text-ivory-100 font-normal leading-tight tracking-[0.03em] uppercase">
               {product.title}
             </h1>
 
             {/* Price */}
             <div className="pt-2">
-              <div className="font-serif text-3xl font-bold text-ivory-100">
+              <div className="font-serif text-3xl sm:text-4xl font-normal tracking-wide text-ivory-100">
                 {product.price > 0 ? `${product.price.toLocaleString('fr-FR')} €` : 'Prix sur demande'}
               </div>
               {product.price > 0 && !product.isSold && (
-                <div className="text-xs text-sand/80 mt-1 flex items-center gap-2">
-                  <span>Facilités de paiement :</span>
-                  <span className="text-brass-300 font-medium">3x {alma3x.toLocaleString('fr-FR')} €</span>
+                <div className="text-xs text-sand/80 mt-1.5 flex items-center gap-2 font-mono text-[11px]">
+                  <span>FACILITÉS :</span>
+                  <span className="text-brass-300 font-semibold">3x {alma3x.toLocaleString('fr-FR')} €</span>
                   <span>ou 4x {alma4x.toLocaleString('fr-FR')} € sans frais</span>
                 </div>
               )}
@@ -626,11 +658,38 @@ export default function ProductDetailPage({
                 </div>
               )}
             </div>
+
+            {/* Calibre Architecture Interactive Accordion with Animated SVG */}
+            <div className="border border-obsidian-800 bg-obsidian-950 mt-3">
+              <button
+                type="button"
+                onClick={() => setActiveAccordion(activeAccordion === 'caliber_view' ? '' : 'caliber_view')}
+                className="w-full text-left p-3.5 font-medium text-ivory-100 flex justify-between items-center hover:bg-obsidian-900 transition-colors cursor-pointer"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-brass-400 animate-pulse" />
+                  <span className="font-serif uppercase tracking-wider text-xs text-brass-300">
+                    Vue Animée du Calibre Mécanique en Atelier
+                  </span>
+                </div>
+                <span className="text-sand font-mono text-sm">{activeAccordion === 'caliber_view' ? '−' : '+'}</span>
+              </button>
+              {activeAccordion === 'caliber_view' && (
+                <div className="p-6 pt-3 text-center border-t border-obsidian-850 bg-obsidian-900/40 space-y-4">
+                  <div className="flex justify-center py-2">
+                    <HorlogerieMechanismSvg className="w-56 h-56 sm:w-64 sm:h-64" />
+                  </div>
+                  <div className="text-[11px] text-sand/80 max-w-sm mx-auto leading-relaxed font-light">
+                    Balancier-spiral avec réglage d'inertie, échappement à ancre suisse 28 800 alternances/heure, amortisseurs antichoc et rubis synthétiques d'origine inspectés en atelier.
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Description narrative */}
           <div className="space-y-3 pt-2">
-            <h3 className="font-serif text-lg text-ivory-100 font-medium">L'Avis de la Maison</h3>
+            <h3 className="font-serif text-lg text-ivory-100 font-normal uppercase tracking-wide">L'Avis de la Maison</h3>
             <p className="text-xs sm:text-sm text-sand/90 leading-relaxed font-light">
               {product.description}
             </p>

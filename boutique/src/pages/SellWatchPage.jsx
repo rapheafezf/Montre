@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Upload, CheckCircle2, ShieldCheck, Clock, Landmark, ArrowRight, ArrowLeft } from 'lucide-react';
+import TourbillonEscapementSvg from '../components/TourbillonEscapementSvg';
+import CertificationStampSvg from '../components/CertificationStampSvg';
 
 export default function SellWatchPage() {
   const [step, setStep] = useState(1);
@@ -29,14 +31,19 @@ export default function SellWatchPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
       
-      {/* Header */}
+      {/* Header with Tourbillon SVG */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
-        <span className="text-[10px] uppercase tracking-widest text-brass-400 font-bold">Rachat Cash & Dépôt-Vente</span>
-        <h1 className="font-serif text-3xl sm:text-5xl text-ivory-100 font-normal">
+        <div className="flex justify-center mb-1">
+          <TourbillonEscapementSvg className="w-16 h-16 sm:w-20 sm:h-20" />
+        </div>
+        <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-brass-400 font-semibold">
+          Expertise & Estimation Sous 48H
+        </span>
+        <h1 className="font-serif text-3xl sm:text-5xl text-ivory-100 font-normal uppercase tracking-[0.03em] leading-tight">
           Transmettez Votre Montre au Juste Prix
         </h1>
-        <p className="text-xs sm:text-sm text-sand leading-relaxed">
-          Nous étudions l’ensemble des pièces d’horlogerie de prestige (Rolex, Cartier, Tudor, Omega, TAG Heuer...). Estimation gratuite et confidentielle sous 48 heures.
+        <p className="text-xs sm:text-sm text-sand/90 leading-relaxed font-light">
+          Nous étudions l’ensemble des pièces d’horlogerie de prestige (Rolex, Cartier, Tudor, Omega, TAG Heuer...). Rachat comptant immédiat ou mandat de dépôt-vente optimisé.
         </p>
       </div>
 
