@@ -504,7 +504,7 @@ export default function ProductDetailPage({
               )}
             </div>
 
-            <h1 className="font-serif text-3xl sm:text-4xl text-ivory-100 font-normal leading-tight tracking-[0.03em] uppercase">
+            <h1 className="font-serif text-3xl sm:text-4xl text-ivory-100 font-normal leading-tight tracking-[0.1em] uppercase">
               {product.title}
             </h1>
 

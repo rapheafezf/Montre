@@ -32,7 +32,7 @@ export default function HomePage({ products, onSelectProduct, navigateTo, openSh
                 Maison d'Horlogerie Indépendante • Lyon
               </div>
 
-              <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-ivory-100 font-normal tracking-[0.03em] leading-[1.18] uppercase">
+              <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-ivory-100 font-normal tracking-[0.12em] leading-[1.22] uppercase">
                 Garde-Temps d'Exception & Pièces Certifiées
               </h1>
 
@@ -117,7 +117,7 @@ export default function HomePage({ products, onSelectProduct, navigateTo, openSh
             <span className="text-[10px] uppercase tracking-[0.25em] text-brass-400 font-semibold">
               Disponibilité Immédiate
             </span>
-            <h2 className="font-serif text-2xl sm:text-4xl text-ivory-100 font-normal tracking-wide uppercase mt-1">
+            <h2 className="font-serif text-2xl sm:text-4xl text-ivory-100 font-normal tracking-[0.12em] uppercase mt-1">
               Les Dernières Nouveautés
             </h2>
           </div>
@@ -144,10 +144,10 @@ export default function HomePage({ products, onSelectProduct, navigateTo, openSh
       {/* Manufactures (Rolex, Cartier, Tudor) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
-          <span className="text-[10px] uppercase tracking-[0.25em] text-brass-400 font-semibold">
+          <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-brass-400 font-semibold">
             Les Grandes Signatures
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl text-ivory-100 font-normal tracking-wide uppercase">
+          <h2 className="font-serif text-3xl sm:text-4xl text-ivory-100 font-normal tracking-[0.12em] uppercase">
             Manufactures Horlogères
           </h2>
           <p className="text-xs sm:text-sm text-sand/80 font-light">
