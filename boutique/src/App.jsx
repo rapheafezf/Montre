@@ -6,6 +6,7 @@ import CheckoutModal from './components/CheckoutModal';
 import ShowroomModal from './components/ShowroomModal';
 import SearchModal from './components/SearchModal';
 import CookieBanner from './components/CookieBanner';
+import LuxuryTypographyToolbar from './components/LuxuryTypographyToolbar';
 
 import HomePage from './pages/HomePage';
 import CatalogPage from './pages/CatalogPage';
@@ -252,6 +253,8 @@ export default function App() {
         </span>
       </a>
 
+      {/* SOTA 2026 Interactive Luxury Typography Suite (10 Master Pairings) */}
+      <LuxuryTypographyToolbar />
 
     </div>
   );

@@ -32,6 +32,9 @@
 :root {
   --font-luxury-heading: "Bodoni Moda", "Didot", "Prata", Georgia, serif;
   --font-luxury-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-luxury-accent: "JetBrains Mono", monospace;
+  --luxury-heading-tracking: 0.10em;
+  --luxury-heading-weight: 500;
 }
 
 html {
@@ -46,10 +49,16 @@ body {
   overflow-x: hidden;
 }
 
-/* Explicit Ultra-Luxury Title Binding (Didot / Bodoni Moda High-Contrast Serifs) */
+/* Explicit Ultra-Luxury Title Binding SOTA 2026 */
 h1, h2, h3, .font-serif, .font-luxury, .font-display {
-  font-family: var(--font-luxury-heading, "Bodoni Moda", "Didot", "Prata", Georgia, serif) !important;
+  font-family: var(--font-luxury-heading) !important;
   font-optical-sizing: auto;
+  letter-spacing: var(--luxury-heading-tracking, 0.08em);
+  font-weight: var(--luxury-heading-weight, 500);
+}
+
+.font-mono, [data-mono] {
+  font-family: var(--font-luxury-accent, "JetBrains Mono", monospace) !important;
 }
 
 /* Custom subtle scrollbar */
