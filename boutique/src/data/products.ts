@@ -22,7 +22,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "cartier-santos-galbee-1564",
     "slug": "cartier-santos-galbee-1564",
-    "title": "\\n  Cartier Santos Galbée 1564\\n\\n",
+    "title": "Cartier Santos Galbée 1564",
     "brand": "Cartier",
     "price": 3850.0,
     "priceFormatted": "3 850 €",
@@ -65,7 +65,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-cartier-ballon-bleu-3284",
     "slug": "montre-cartier-ballon-bleu-3284",
-    "title": "\\n  Cartier Ballon Bleu 3284\\n\\n",
+    "title": "Cartier Ballon Bleu 3284",
     "brand": "Cartier",
     "price": 4600.0,
     "priceFormatted": "4 600 €",
@@ -102,7 +102,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-cartier-ballon-bleu-w69011z4",
     "slug": "montre-cartier-ballon-bleu-w69011z4",
-    "title": "\\n  Cartier Ballon Bleu W69011Z4\\n\\n",
+    "title": "Cartier Ballon Bleu W69011Z4",
     "brand": "Cartier",
     "price": 3200.0,
     "priceFormatted": "3 200 €",
@@ -138,7 +138,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-cartier-santos-octagon-w2001683",
     "slug": "montre-cartier-santos-octagon-w2001683",
-    "title": "\\n  Cartier Santos Octagon W2001683\\n\\n",
+    "title": "Cartier Santos Octagon W2001683",
     "brand": "Cartier",
     "price": 2250.0,
     "priceFormatted": "2 250 €",
@@ -180,7 +180,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-cartier-santos-wssa0061",
     "slug": "montre-cartier-santos-wssa0061",
-    "title": "\\n  Cartier Santos Verte WSSA0061\\n\\n",
+    "title": "Cartier Santos Verte WSSA0061",
     "brand": "Cartier",
     "price": 6400.0,
     "priceFormatted": "6 400 €",
@@ -220,7 +220,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-cartier-tank-must-21",
     "slug": "montre-cartier-tank-must-21",
-    "title": "\\n  Cartier Must 21\\n\\n",
+    "title": "Cartier Must 21",
     "brand": "Cartier",
     "price": 800.0,
     "priceFormatted": "800 €",
@@ -258,7 +258,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-cartier-tank-must-vermeil-cadran-burgundy",
     "slug": "montre-cartier-tank-must-vermeil-cadran-burgundy",
-    "title": "\\n  Cartier Tank Must Vermeil Cadran Burgundy\\n\\n",
+    "title": "Cartier Tank Must Vermeil Cadran Burgundy",
     "brand": "Cartier",
     "price": 2400.0,
     "priceFormatted": "2 400 €",
@@ -296,7 +296,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-cartier-tank-must-wsta0054",
     "slug": "montre-cartier-tank-must-wsta0054",
-    "title": "\\n  Cartier Tank Must WSTA0054\\n\\n",
+    "title": "Cartier Tank Must WSTA0054",
     "brand": "Cartier",
     "price": 3300.0,
     "priceFormatted": "3 300 €",
@@ -332,7 +332,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-rolex-datejust-16013",
     "slug": "montre-rolex-datejust-16013",
-    "title": "\\n  Rolex Datejust 16013\\n\\n",
+    "title": "Rolex Datejust 16013",
     "brand": "Rolex",
     "price": 5100.0,
     "priceFormatted": "5 100 €",
@@ -375,7 +375,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-rolex-datejust-16014-1",
     "slug": "montre-rolex-datejust-16014-1",
-    "title": "\\n  Rolex Datejust 16014\\n\\n",
+    "title": "Rolex Datejust 16014",
     "brand": "Rolex",
     "price": 4650.0,
     "priceFormatted": "4 650 €",
@@ -419,7 +419,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-rolex-datejust-16030",
     "slug": "montre-rolex-datejust-16030",
-    "title": "\\n  Rolex Datejust 16030\\n\\n",
+    "title": "Rolex Datejust 16030",
     "brand": "Rolex",
     "price": 4100.0,
     "priceFormatted": "4 100 €",
@@ -465,7 +465,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-rolex-oyster-perpetual-date-15210",
     "slug": "montre-rolex-oyster-perpetual-date-15210",
-    "title": "\\n  Rolex Oyster Perpetual Date 15210\\n\\n",
+    "title": "Rolex Oyster Perpetual Date 15210",
     "brand": "Rolex",
     "price": 3950.0,
     "priceFormatted": "3 950 €",
@@ -510,7 +510,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-rolex-oyster-precision-6480",
     "slug": "montre-rolex-oyster-precision-6480",
-    "title": "\\n  Rolex Oyster Precision 6480\\n\\n",
+    "title": "Rolex Oyster Precision 6480",
     "brand": "Rolex",
     "price": 2350.0,
     "priceFormatted": "2 350 €",
@@ -552,7 +552,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-rolex-oysterdate-precision-6466",
     "slug": "montre-rolex-oysterdate-precision-6466",
-    "title": "\\n  Oysterdate Precision 6466\\n\\n",
+    "title": "Oysterdate Precision 6466",
     "brand": "Autre",
     "price": 2500.0,
     "priceFormatted": "2 500 €",
@@ -595,7 +595,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-rolex-oysterdate-precision-6694",
     "slug": "montre-rolex-oysterdate-precision-6694",
-    "title": "\\n  Rolex Oysterdate Precision 6694\\n\\n",
+    "title": "Rolex Oysterdate Precision 6694",
     "brand": "Rolex",
     "price": 2850.0,
     "priceFormatted": "2 850 €",
@@ -637,7 +637,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-rolex-yacht-master-126621",
     "slug": "montre-rolex-yacht-master-126621",
-    "title": "\\n  Rolex Yacht Master 126621\\n\\n",
+    "title": "Rolex Yacht Master 126621",
     "brand": "Rolex",
     "price": 14900.0,
     "priceFormatted": "14 900 €",
@@ -684,7 +684,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-tag-heuer-carrera-calibre-1887",
     "slug": "montre-tag-heuer-carrera-calibre-1887",
-    "title": "\\n  Tag Heuer Carrera Calibre 1887\\n\\n",
+    "title": "Tag Heuer Carrera Calibre 1887",
     "brand": "TAG Heuer",
     "price": 1400.0,
     "priceFormatted": "1 400 €",
@@ -719,7 +719,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-tudor-oyster-big-rose-7934",
     "slug": "montre-tudor-oyster-big-rose-7934",
-    "title": "\\n  Tudor Oyster Big Rose 7934\\n\\n",
+    "title": "Tudor Oyster Big Rose 7934",
     "brand": "Tudor",
     "price": 1600.0,
     "priceFormatted": "1 600 €",
@@ -759,7 +759,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-tudor-oyster-date-7962",
     "slug": "montre-tudor-oyster-date-7962",
-    "title": "\\n  Tudor Oyster Date 7962\\n\\n",
+    "title": "Tudor Oyster Date 7962",
     "brand": "Tudor",
     "price": 1400.0,
     "priceFormatted": "1 400 €",
@@ -803,7 +803,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-tudor-oyster-date-day-94613",
     "slug": "montre-tudor-oyster-date-day-94613",
-    "title": "\\n  Tudor Oyster Date Day 94613\\n\\n",
+    "title": "Tudor Oyster Date Day 94613",
     "brand": "Tudor",
     "price": 2200.0,
     "priceFormatted": "2 200 €",
@@ -842,7 +842,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-tudor-oyster-prince-7964",
     "slug": "montre-tudor-oyster-prince-7964",
-    "title": "\\n  Tudor Oyster Prince 7964\\n\\n",
+    "title": "Tudor Oyster Prince 7964",
     "brand": "Tudor",
     "price": 1400.0,
     "priceFormatted": "1 400 €",
@@ -884,7 +884,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-tudor-oysterdate-9050",
     "slug": "montre-tudor-oysterdate-9050",
-    "title": "\\n  Tudor Oysterdate 9050\\n\\n",
+    "title": "Tudor Oysterdate 9050",
     "brand": "Tudor",
     "price": 1500.0,
     "priceFormatted": "1 500 €",
@@ -929,7 +929,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "montre-tudor-prince-date-72033",
     "slug": "montre-tudor-prince-date-72033",
-    "title": "\\n  Tudor Prince Date 72033\\n\\n",
+    "title": "Tudor Prince Date 72033",
     "brand": "Tudor",
     "price": 1100.0,
     "priceFormatted": "1 100 €",
@@ -970,7 +970,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "rolex-datejust-16014-silver",
     "slug": "rolex-datejust-16014-silver",
-    "title": "\\n  Rolex Datejust 16014 Silver\\n\\n",
+    "title": "Rolex Datejust 16014 Silver",
     "brand": "Rolex",
     "price": 4750.0,
     "priceFormatted": "4 750 €",
@@ -1015,7 +1015,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "rolex-datejust-16104-linen-dial",
     "slug": "rolex-datejust-16104-linen-dial",
-    "title": "\\n  Rolex Datejust 16104 Linen Dial\\n\\n",
+    "title": "Rolex Datejust 16104 Linen Dial",
     "brand": "Rolex",
     "price": 4850.0,
     "priceFormatted": "4 850 €",
@@ -1061,7 +1061,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "rolex-datejust-16234-linen-dial",
     "slug": "rolex-datejust-16234-linen-dial",
-    "title": "\\n  Rolex Datejust 16234 Linen Dial\\n\\n",
+    "title": "Rolex Datejust 16234 Linen Dial",
     "brand": "Rolex",
     "price": 5700.0,
     "priceFormatted": "5 700 €",
@@ -1108,7 +1108,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "rolex-datejust-16234",
     "slug": "rolex-datejust-16234",
-    "title": "\\n  Rolex Datejust 16234\\n\\n",
+    "title": "Rolex Datejust 16234",
     "brand": "Rolex",
     "price": 5600.0,
     "priceFormatted": "5 600 €",
@@ -1150,7 +1150,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "rolex-oysterdate-precision-6694-gold-dial",
     "slug": "rolex-oysterdate-precision-6694-gold-dial",
-    "title": "\\n  Rolex Oysterdate Precision 6694 Golden\\n\\n",
+    "title": "Rolex Oysterdate Precision 6694 Golden",
     "brand": "Rolex",
     "price": 3100.0,
     "priceFormatted": "3 100 €",
@@ -1194,7 +1194,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "tudor-black-bay-41-79230n",
     "slug": "tudor-black-bay-41-79230n",
-    "title": "\\n  Tudor Black Bay 41 79230N\\n\\n",
+    "title": "Tudor Black Bay 41 79230N",
     "brand": "Tudor",
     "price": 2600.0,
     "priceFormatted": "2 600 €",
@@ -1230,7 +1230,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "tudor-prince-oysterdate-74000",
     "slug": "tudor-prince-oysterdate-74000",
-    "title": "\\n  Tudor Prince Oysterdate 74000\\n\\n",
+    "title": "Tudor Prince Oysterdate 74000",
     "brand": "Tudor",
     "price": 1350.0,
     "priceFormatted": "1 350 €",

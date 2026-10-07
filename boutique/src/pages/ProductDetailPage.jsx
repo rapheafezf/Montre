@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   ShieldCheck, Clock, Truck, RefreshCw, MessageCircle, MapPin, 
   ChevronRight, ChevronLeft, Lock, CheckCircle2, Maximize2, X, 
-  ArrowLeft 
+  ArrowLeft, ShoppingBag 
 } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import CertificationStampSvg from '../components/CertificationStampSvg';
@@ -527,14 +527,25 @@ export default function ProductDetailPage({
           <div className="space-y-3">
             {!product.isSold ? (
               <>
-                <button
-                  type="button"
-                  onClick={() => onBuyNow(product)}
-                  className="w-full py-4 bg-brass-500 hover:bg-brass-400 text-obsidian-950 font-bold text-xs uppercase tracking-widest transition-all shadow-xl flex items-center justify-center gap-2"
-                >
-                  <Lock className="w-4 h-4" />
-                  Acquérir cette pièce — {product.price.toLocaleString('fr-FR')} €
-                </button>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => onBuyNow(product)}
+                    className="py-3.5 px-4 bg-brass-500 hover:bg-brass-400 text-obsidian-950 font-bold text-xs uppercase tracking-widest transition-all shadow-xl flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <Lock className="w-4 h-4" />
+                    Acheter — {product.price.toLocaleString('fr-FR')} €
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => onAddToCart(product)}
+                    className="py-3.5 px-4 bg-obsidian-900 hover:bg-obsidian-850 text-ivory-100 border border-brass-600/40 hover:border-brass-400 font-semibold text-xs uppercase tracking-widest transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <ShoppingBag className="w-4 h-4 text-brass-400" />
+                    Ajouter au panier
+                  </button>
+                </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <a
