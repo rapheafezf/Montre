@@ -53,6 +53,42 @@ export default function Header({
             </button>
           </div>
           <div className="flex items-center gap-4">
+            {/* Theme Toggle in top utility bar */}
+            <button
+              onClick={() => toggleTheme && toggleTheme()}
+              className="flex items-center gap-1.5 text-sand hover:text-ivory-100 transition-colors cursor-pointer text-[10px] tracking-wider"
+              title={theme === 'light' ? 'Basculer en Fond Noir Obsidian' : 'Basculer en Fond Blanc'}
+            >
+              {theme === 'light' ? (
+                <>
+                  <Moon className="w-3 h-3 text-brass-400" />
+                  <span>Fond Noir</span>
+                </>
+              ) : (
+                <>
+                  <Sun className="w-3 h-3 text-brass-400" />
+                  <span>Fond Blanc</span>
+                </>
+              )}
+            </button>
+
+            <span className="text-obsidian-700">|</span>
+
+            {/* Typography Trigger in top utility bar */}
+            {onOpenFontModal && (
+              <>
+                <button
+                  onClick={onOpenFontModal}
+                  className="flex items-center gap-1.5 text-sand hover:text-ivory-100 transition-colors cursor-pointer text-[10px] tracking-wider"
+                  title="Studio Typographie Haute Horlogerie"
+                >
+                  <Type className="w-3 h-3 text-brass-400" />
+                  <span>Police ({activePairingIndex + 1}/10)</span>
+                </button>
+                <span className="text-obsidian-700">|</span>
+              </>
+            )}
+
             <a 
               href="https://wa.me/33756998976" 
               target="_blank" 
@@ -60,77 +96,77 @@ export default function Header({
               className="flex items-center gap-1.5 text-brass-400 hover:text-brass-300 transition-colors"
             >
               <MessageCircle className="w-3 h-3" />
-              Conciergerie WhatsApp : +33 7 56 99 89 76
+              WhatsApp : 07 56 99 89 76
             </a>
           </div>
         </div>
       </div>
 
-      {/* Main Header Navbar */}
+      {/* Main Header Navbar with Guaranteed 3-Zone Architecture */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between min-h-[104px] sm:min-h-[112px] py-4 sm:py-5 lg:py-6 gap-4">
+        <div className="grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center min-h-[96px] sm:min-h-[104px] py-3 sm:py-4 gap-2 sm:gap-4">
           
-          {/* Desktop Left Navigation / Mobile Burger */}
-          <div className="flex-1 flex items-center justify-start min-w-0">
-            {/* Mobile menu button */}
+          {/* Left Column: Desktop Navigation / Mobile Menu & Search */}
+          <div className="flex items-center justify-start min-w-0">
+            {/* Mobile menu and search buttons */}
             <div className="flex items-center lg:hidden">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-ivory-200 hover:text-brass-400 focus:outline-none"
+                className="p-2 text-ivory-200 hover:text-brass-400 focus:outline-none cursor-pointer"
                 aria-label="Ouvrir le menu"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
               <button
                 onClick={openSearchModal}
-                className="p-2 text-ivory-200 hover:text-brass-400 ml-1"
+                className="p-2 text-ivory-200 hover:text-brass-400 ml-1 cursor-pointer"
                 aria-label="Recherche"
               >
                 <Search className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Desktop Left Navigation */}
-            <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8 text-xs uppercase tracking-widest font-medium text-ivory-200">
+            {/* Desktop Left Navigation Links */}
+            <nav className="hidden lg:flex items-center space-x-4 xl:space-x-7 text-[11px] xl:text-xs uppercase tracking-wider xl:tracking-widest font-medium text-ivory-200">
               <button 
                 onClick={() => handleNav('catalogue')}
-                className={`hover:text-brass-400 transition-colors ${currentRoute === 'catalogue' ? 'text-brass-400 border-b border-brass-400 pb-1' : ''}`}
+                className={`whitespace-nowrap hover:text-brass-400 transition-colors py-1 cursor-pointer ${currentRoute === 'catalogue' ? 'text-brass-400 border-b border-brass-400' : ''}`}
               >
                 Toutes les montres
               </button>
               
               <button 
                 onClick={() => handleNav('catalogue-rolex')}
-                className="hover:text-brass-400 transition-colors"
+                className="whitespace-nowrap hover:text-brass-400 transition-colors py-1 cursor-pointer"
               >
                 Rolex
               </button>
               
               <button 
                 onClick={() => handleNav('catalogue-cartier')}
-                className="hover:text-brass-400 transition-colors"
+                className="whitespace-nowrap hover:text-brass-400 transition-colors py-1 cursor-pointer"
               >
                 Cartier
               </button>
 
               <button 
                 onClick={() => handleNav('catalogue-tudor')}
-                className="hover:text-brass-400 transition-colors"
+                className="whitespace-nowrap hover:text-brass-400 transition-colors py-1 cursor-pointer"
               >
                 Tudor
               </button>
             </nav>
           </div>
 
-          {/* Center Brand Identity with Animated Horlogerie Escapement SVG (Ample Breathing Room) */}
+          {/* Center Column: Brand Identity (Mathematically isolated, cannot be overlapped) */}
           <div 
-            className="flex flex-col items-center justify-center cursor-pointer text-center group py-3 sm:py-4 px-3 sm:px-8 shrink-0 my-auto transition-transform hover:scale-[1.01]" 
+            className="flex flex-col items-center justify-center cursor-pointer text-center group py-2 px-2 sm:px-6 shrink-0 transition-transform hover:scale-[1.01]" 
             onClick={() => handleNav('home')}
           >
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5 sm:gap-3">
               {/* Animated Horlogerie Caliber Monogram SVG */}
               <svg 
-                className="w-6 h-6 sm:w-7 sm:h-7 text-brass-400 group-hover:text-brass-300 transition-colors shrink-0" 
+                className="w-5 h-5 sm:w-6 sm:h-6 text-brass-400 group-hover:text-brass-300 transition-colors shrink-0" 
                 viewBox="0 0 44 44" 
                 fill="none"
               >
@@ -144,28 +180,28 @@ export default function Header({
                 </g>
                 <circle cx="22" cy="22" r="2.5" fill="currentColor" />
               </svg>
-              <span className="font-serif text-2xl sm:text-3xl lg:text-[32px] tracking-[0.24em] font-normal text-ivory-100 group-hover:text-brass-300 transition-colors uppercase leading-none">
+              <span className="whitespace-nowrap font-serif text-xl sm:text-2xl lg:text-[28px] xl:text-[31px] tracking-[0.2em] sm:tracking-[0.24em] font-normal text-ivory-100 group-hover:text-brass-300 transition-colors uppercase leading-none">
                 Le Mouvement
               </span>
             </div>
-            <span className="text-[9px] sm:text-[9.5px] tracking-[0.42em] text-sand/80 uppercase font-medium mt-2">
+            <span className="whitespace-nowrap text-[8.5px] sm:text-[9.5px] tracking-[0.35em] sm:tracking-[0.42em] text-sand/80 uppercase font-medium mt-1.5 sm:mt-2">
               Haute Horlogerie • Lyon
             </span>
           </div>
 
-          {/* Desktop Right Navigation & Actions */}
-          <div className="flex-1 flex items-center justify-end space-x-3 sm:space-x-5 min-w-0">
-            <nav className="hidden lg:flex items-center space-x-5 xl:space-x-7 text-xs uppercase tracking-widest font-medium text-ivory-200">
+          {/* Right Column: Desktop Navigation & Actions */}
+          <div className="flex items-center justify-end space-x-3 sm:space-x-5 min-w-0">
+            <nav className="hidden lg:flex items-center space-x-4 xl:space-x-7 text-[11px] xl:text-xs uppercase tracking-wider xl:tracking-widest font-medium text-ivory-200">
               <button 
                 onClick={() => handleNav('vendre')}
-                className={`hover:text-brass-400 transition-colors ${currentRoute === 'vendre' ? 'text-brass-400 border-b border-brass-400 pb-1' : ''}`}
+                className={`whitespace-nowrap hover:text-brass-400 transition-colors py-1 cursor-pointer ${currentRoute === 'vendre' ? 'text-brass-400 border-b border-brass-400' : ''}`}
               >
                 Vendre ma montre
               </button>
               
               <button 
                 onClick={() => handleNav('sourcing')}
-                className={`hover:text-brass-400 transition-colors ${currentRoute === 'sourcing' ? 'text-brass-400 border-b border-brass-400 pb-1' : ''}`}
+                className={`whitespace-nowrap hover:text-brass-400 transition-colors py-1 cursor-pointer ${currentRoute === 'sourcing' ? 'text-brass-400 border-b border-brass-400' : ''}`}
               >
                 Sourcing
               </button>
@@ -173,109 +209,62 @@ export default function Header({
               <div className="relative">
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="flex items-center gap-1 hover:text-brass-400 transition-colors py-2"
+                  className="whitespace-nowrap flex items-center gap-1 hover:text-brass-400 transition-colors py-1 cursor-pointer"
                 >
                   <span>La Maison</span>
                   <ChevronDown className="w-3 h-3" />
                 </button>
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-52 bg-obsidian-900 border border-obsidian-700 shadow-2xl py-2 z-50 text-left">
-                    <button 
-                      onClick={() => handleNav('a-propos')}
-                      className="w-full text-left px-4 py-2 text-xs uppercase tracking-wider text-ivory-200 hover:bg-obsidian-800 hover:text-brass-400"
-                    >
-                      À Propos & Histoire
-                    </button>
-                    <button 
-                      onClick={() => handleNav('authenticite')}
-                      className="w-full text-left px-4 py-2 text-xs uppercase tracking-wider text-ivory-200 hover:bg-obsidian-800 hover:text-brass-400"
-                    >
-                      Authenticité & Garantie
-                    </button>
-                    <button 
-                      onClick={() => handleNav('showroom')}
-                      className="w-full text-left px-4 py-2 text-xs uppercase tracking-wider text-ivory-200 hover:bg-obsidian-800 hover:text-brass-400"
-                    >
-                      Showroom Privé Lyon
-                    </button>
-                    <button 
-                      onClick={() => handleNav('journal')}
-                      className="w-full text-left px-4 py-2 text-xs uppercase tracking-wider text-ivory-200 hover:bg-obsidian-800 hover:text-brass-400"
-                    >
-                      Journal & Guides
-                    </button>
-                  </div>
+                  <>
+                    <div 
+                      className="fixed inset-0 z-40" 
+                      onClick={() => setDropdownOpen(false)} 
+                    />
+                    <div className="absolute right-0 mt-3 w-52 bg-obsidian-900 border border-obsidian-700 shadow-2xl py-2 z-50 text-left">
+                      <button 
+                        onClick={() => handleNav('a-propos')}
+                        className="w-full text-left px-4 py-2 text-xs uppercase tracking-wider text-ivory-200 hover:bg-obsidian-800 hover:text-brass-400"
+                      >
+                        À Propos & Histoire
+                      </button>
+                      <button 
+                        onClick={() => handleNav('authenticite')}
+                        className="w-full text-left px-4 py-2 text-xs uppercase tracking-wider text-ivory-200 hover:bg-obsidian-800 hover:text-brass-400"
+                      >
+                        Authenticité & Garantie
+                      </button>
+                      <button 
+                        onClick={() => handleNav('showroom')}
+                        className="w-full text-left px-4 py-2 text-xs uppercase tracking-wider text-ivory-200 hover:bg-obsidian-800 hover:text-brass-400"
+                      >
+                        Showroom Privé Lyon
+                      </button>
+                      <button 
+                        onClick={() => handleNav('journal')}
+                        className="w-full text-left px-4 py-2 text-xs uppercase tracking-wider text-ivory-200 hover:bg-obsidian-800 hover:text-brass-400"
+                      >
+                        Journal & Guides
+                      </button>
+                    </div>
+                  </>
                 )}
               </div>
             </nav>
 
+            {/* Quick Search Button */}
             <button
               onClick={openSearchModal}
-              className="hidden lg:block text-ivory-200 hover:text-brass-400 transition-colors p-1"
+              className="hidden lg:flex items-center text-ivory-200 hover:text-brass-400 transition-colors p-1.5 cursor-pointer"
               title="Rechercher une montre"
+              aria-label="Rechercher une montre"
             >
               <Search className="w-5 h-5" />
-            </button>
-
-            {/* SOTA 2026 Font Pairing Switcher (10 Polices Haute Horlogerie) */}
-            <div className="flex items-center border border-brass-600/40 bg-obsidian-900/90 shadow-sm p-0.5">
-              <button
-                onClick={() => onCycleFontPairing && onCycleFontPairing(-1)}
-                className="p-1 text-sand hover:text-ivory-100 hover:bg-obsidian-850 transition-colors cursor-pointer"
-                title="Style typographique précédent"
-                aria-label="Style précédent"
-              >
-                <ChevronLeft className="w-3.5 h-3.5" />
-              </button>
-              
-              <button
-                onClick={onOpenFontModal}
-                className="flex items-center gap-1.5 px-2 py-1 text-[11px] font-mono uppercase tracking-wider text-ivory-100 hover:text-brass-300 transition-colors cursor-pointer"
-                title="Ouvrir le studio des 10 typographies de haute horlogerie"
-              >
-                <Type className="w-3.5 h-3.5 text-brass-400" />
-                <span className="font-semibold hidden lg:inline">
-                  {activePairing?.name || 'Police'}
-                </span>
-                <span className="text-[10px] font-mono text-brass-400 font-bold">
-                  ({activePairingIndex + 1}/10)
-                </span>
-              </button>
-
-              <button
-                onClick={() => onCycleFontPairing && onCycleFontPairing(1)}
-                className="p-1 text-sand hover:text-ivory-100 hover:bg-obsidian-850 transition-colors cursor-pointer"
-                title="Style typographique suivant"
-                aria-label="Style suivant"
-              >
-                <ChevronRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-
-            {/* Theme Toggle Button (Fond Blanc / Fond Noir) */}
-            <button
-              onClick={() => toggleTheme && toggleTheme()}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider border border-brass-600/40 bg-obsidian-900/90 hover:border-brass-400 text-ivory-100 transition-all cursor-pointer shadow-sm"
-              title={theme === 'light' ? 'Basculer en Fond Noir Obsidian' : 'Basculer en Fond Blanc Lumineux'}
-              aria-label="Basculer entre Fond Blanc et Fond Noir"
-            >
-              {theme === 'light' ? (
-                <>
-                  <Moon className="w-3.5 h-3.5 text-brass-500" />
-                  <span className="hidden sm:inline font-semibold">Fond Noir</span>
-                </>
-              ) : (
-                <>
-                  <Sun className="w-3.5 h-3.5 text-brass-400" />
-                  <span className="hidden sm:inline font-semibold">Fond Blanc</span>
-                </>
-              )}
             </button>
 
             {/* Cart Trigger */}
             <button
               onClick={openCart}
-              className="relative flex items-center gap-2 p-2 text-ivory-100 hover:text-brass-400 transition-colors group"
+              className="relative flex items-center gap-2 p-2 text-ivory-100 hover:text-brass-400 transition-colors cursor-pointer group"
               aria-label="Voir le panier"
             >
               <ShoppingBag className="w-5 h-5 group-hover:scale-105 transition-transform" />
