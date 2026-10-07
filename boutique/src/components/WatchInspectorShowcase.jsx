@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { 
   Sparkles, Compass, ShieldCheck, Activity, ArrowRight, 
   ChevronLeft, ChevronRight, Eye, EyeOff, Layers, Disc, 
-  Cpu, Wrench, CheckCircle2, Zap, Sliders
+  Cpu, Wrench, CheckCircle2, Zap, Sliders, Sun, Moon
 } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 import WatchExplodedViewSvg from './WatchExplodedViewSvg';
@@ -11,7 +11,7 @@ import CalibreMovementSimulator from './CalibreMovementSimulator';
 // Clean title helper
 const cleanTitle = (str) => (str || '').replace(/\s+/g, ' ').trim();
 
-export default function WatchInspectorShowcase({ onSelectProduct, navigateTo }) {
+export default function WatchInspectorShowcase({ onSelectProduct, navigateTo, theme = 'dark', toggleTheme }) {
   // All 30 watches with transparent cutout fallback
   const allWatches = useMemo(() => {
     return PRODUCTS.map(p => {
@@ -381,26 +381,57 @@ export default function WatchInspectorShowcase({ onSelectProduct, navigateTo }) 
             </button>
           </div>
 
-          {/* Model Selector Bar */}
-          <div className="flex items-center gap-3">
-            <span className="text-xs font-mono uppercase tracking-wider text-sand/70 hidden sm:inline">
-              Modèle ({currentIndex + 1}/{filteredWatches.length}) :
-            </span>
+          {/* Studio Controls: Fond Noir / Fond Blanc Switcher + Model Selector */}
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Background Studio Theme Switcher: Fond Noir vs Fond Blanc */}
+            <div className="flex items-center p-0.5 bg-obsidian-900 border border-brass-600/40">
+              <button
+                onClick={() => toggleTheme && toggleTheme('dark')}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider transition-all cursor-pointer ${
+                  theme === 'dark'
+                    ? 'bg-brass-500 text-obsidian-950 font-bold shadow-md'
+                    : 'text-sand hover:text-ivory-100 hover:bg-obsidian-850'
+                }`}
+                title="Afficher en Studio Fond Noir Obsidian"
+              >
+                <Moon className="w-3.5 h-3.5" />
+                <span>Fond Noir</span>
+              </button>
+              <button
+                onClick={() => toggleTheme && toggleTheme('light')}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider transition-all cursor-pointer ${
+                  theme === 'light'
+                    ? 'bg-brass-500 text-obsidian-950 font-bold shadow-md'
+                    : 'text-sand hover:text-ivory-100 hover:bg-obsidian-850'
+                }`}
+                title="Afficher en Studio Fond Blanc Épuré"
+              >
+                <Sun className="w-3.5 h-3.5" />
+                <span>Fond Blanc</span>
+              </button>
+            </div>
 
-            <select
-              value={currentIndex}
-              onChange={(e) => {
-                setCurrentIndex(Number(e.target.value));
-                setZoomLevel(1);
-              }}
-              className="bg-obsidian-900 border border-brass-600/40 text-ivory-100 font-serif text-sm px-3 py-1.5 cursor-pointer focus:outline-none focus:border-brass-400"
-            >
-              {filteredWatches.map((w, idx) => (
-                <option key={w.id || idx} value={idx} className="bg-obsidian-950 text-ivory-100 font-sans">
-                  {w.brand} — {w.cleanTitle} ({w.priceFormatted})
-                </option>
-              ))}
-            </select>
+            {/* Model Selector Dropdown */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono uppercase tracking-wider text-sand/70 hidden xl:inline">
+                Modèle ({currentIndex + 1}/{filteredWatches.length}) :
+              </span>
+
+              <select
+                value={currentIndex}
+                onChange={(e) => {
+                  setCurrentIndex(Number(e.target.value));
+                  setZoomLevel(1);
+                }}
+                className="bg-obsidian-900 border border-brass-600/40 text-ivory-100 font-serif text-sm px-3 py-1.5 cursor-pointer focus:outline-none focus:border-brass-400"
+              >
+                {filteredWatches.map((w, idx) => (
+                  <option key={w.id || idx} value={idx} className="bg-obsidian-950 text-ivory-100 font-sans">
+                    {w.brand} — {w.cleanTitle} ({w.priceFormatted})
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
         </div>

@@ -5,6 +5,7 @@
   --color-obsidian-900: #0c0d10;
   --color-obsidian-850: #121418;
   --color-obsidian-800: #181a20;
+  --color-obsidian-750: #1e2129;
   --color-obsidian-700: #242730;
   --color-obsidian-600: #343844;
 
@@ -35,10 +36,71 @@ html {
 }
 
 body {
-  background-color: #060709;
-  color: #f8f6f0;
+  background-color: var(--color-obsidian-950);
+  color: var(--color-ivory-100);
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light / White Luxury Theme Overrides */
+html[data-theme="light"],
+[data-theme="light"] {
+  color-scheme: light;
+  --color-obsidian-950: #ffffff;
+  --color-obsidian-900: #faf8f5;
+  --color-obsidian-850: #f2ede2;
+  --color-obsidian-800: #e3ded1;
+  --color-obsidian-750: #d4cdc0;
+  --color-obsidian-700: #c5bdae;
+  --color-obsidian-600: #a59c8b;
+
+  --color-ivory-50: #000000;
+  --color-ivory-100: #101216;
+  --color-ivory-200: #1c2029;
+  --color-ivory-300: #2d323f;
+
+  --color-sand: #5f5a51;
+
+  --color-brass-200: #f6ecd5;
+  --color-brass-300: #936e25;
+  --color-brass-400: #88621d;
+  --color-brass-500: #a67c2e;
+  --color-brass-600: #8d651e;
+  --color-brass-700: #714e13;
+}
+
+html[data-theme="light"] body {
+  background-color: #ffffff !important;
+  color: #101216 !important;
+}
+
+html[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #f2ede2;
+}
+html[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #d4cdc0;
+}
+html[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: #a67c2e;
+}
+
+html[data-theme="light"] .gold-gradient-text {
+  background: linear-gradient(135deg, #a67c2e 0%, #88621d 60%, #5d410f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html[data-theme="light"] .bg-radial-subtle {
+  background: radial-gradient(circle at 50% 0%, rgba(166, 124, 46, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+html[data-theme="light"] .drop-shadow-\[0_30px_60px_rgba\(0\,0\,0\,0\.95\)\] {
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.16)) !important;
+}
+
+html[data-theme="light"] .drop-shadow-\[0_25px_35px_rgba\(0\,0\,0\,0\.95\)\] {
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.14)) !important;
 }
 
 /* Explicit Ultra-Luxury Title Binding (Didot / Bodoni Moda High-Contrast Serifs) */

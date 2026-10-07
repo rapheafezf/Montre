@@ -39,6 +39,25 @@ export default function App() {
   const [showroomWatch, setShowroomWatch] = useState(null);
   const [searchOpen, setSearchOpen] = useState(false);
 
+  // Studio Theme State: 'dark' (Fond Noir) | 'light' (Fond Blanc)
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('lemouvement_theme') || 'dark';
+  });
+
+  const handleToggleTheme = (specificTheme) => {
+    const nextTheme = specificTheme || (theme === 'dark' ? 'light' : 'dark');
+    setTheme(nextTheme);
+    try {
+      localStorage.setItem('lemouvement_theme', nextTheme);
+    } catch (e) {
+      console.error('Failed to save theme preference:', e);
+    }
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
   // Reactive products catalog state synced with localStorage
   const [products, setProducts] = useState(() => {
     const saved = localStorage.getItem('lemouvement_custom_products');
@@ -183,6 +202,8 @@ export default function App() {
         openCart={() => setCartOpen(true)}
         openShowroomModal={() => handleOpenShowroom()}
         openSearchModal={() => setSearchOpen(true)}
+        theme={theme}
+        toggleTheme={handleToggleTheme}
       />
 
       {/* Main View Router */}
@@ -193,6 +214,8 @@ export default function App() {
             onSelectProduct={handleSelectProduct}
             navigateTo={navigateTo}
             openShowroomModal={() => handleOpenShowroom()}
+            theme={theme}
+            toggleTheme={handleToggleTheme}
           />
         )}
 

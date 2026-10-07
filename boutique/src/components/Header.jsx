@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { ShoppingBag, Search, Menu, X, ShieldCheck, Clock, MapPin, MessageCircle, ChevronDown } from 'lucide-react';
+import { ShoppingBag, Search, Menu, X, ShieldCheck, Clock, MapPin, MessageCircle, ChevronDown, Sun, Moon } from 'lucide-react';
 
-export default function Header({ currentRoute, navigateTo, cartCount, openCart, openShowroomModal, openSearchModal }) {
+export default function Header({ currentRoute, navigateTo, cartCount, openCart, openShowroomModal, openSearchModal, theme = 'dark', toggleTheme }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -192,6 +192,26 @@ export default function Header({ currentRoute, navigateTo, cartCount, openCart, 
               <Search className="w-5 h-5" />
             </button>
 
+            {/* Theme Toggle Button (Fond Blanc / Fond Noir) */}
+            <button
+              onClick={() => toggleTheme && toggleTheme()}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider border border-brass-600/40 bg-obsidian-900/90 hover:border-brass-400 text-ivory-100 transition-all cursor-pointer shadow-sm"
+              title={theme === 'light' ? 'Basculer en Fond Noir Obsidian' : 'Basculer en Fond Blanc Lumineux'}
+              aria-label="Basculer entre Fond Blanc et Fond Noir"
+            >
+              {theme === 'light' ? (
+                <>
+                  <Moon className="w-3.5 h-3.5 text-brass-500" />
+                  <span className="hidden sm:inline font-semibold">Fond Noir</span>
+                </>
+              ) : (
+                <>
+                  <Sun className="w-3.5 h-3.5 text-brass-400" />
+                  <span className="hidden sm:inline font-semibold">Fond Blanc</span>
+                </>
+              )}
+            </button>
+
             {/* Cart Trigger */}
             <button
               onClick={openCart}
@@ -281,6 +301,22 @@ export default function Header({ currentRoute, navigateTo, cartCount, openCart, 
               className="block w-full text-left py-1 text-sm tracking-wider uppercase text-ivory-200 hover:text-brass-400"
             >
               Contact & Accès
+            </button>
+          </div>
+
+          {/* Mobile Theme Switcher */}
+          <div className="pt-2 pb-1">
+            <button
+              onClick={() => toggleTheme && toggleTheme()}
+              className="w-full flex items-center justify-between px-3 py-2 border border-brass-600/40 bg-obsidian-900 text-xs font-mono uppercase tracking-wider text-ivory-100"
+            >
+              <span className="flex items-center gap-2">
+                {theme === 'light' ? <Moon className="w-4 h-4 text-brass-500" /> : <Sun className="w-4 h-4 text-brass-400" />}
+                <span>Thème d'affichage :</span>
+              </span>
+              <span className="font-bold text-brass-300">
+                {theme === 'light' ? 'Fond Blanc (Actif)' : 'Fond Noir (Actif)'}
+              </span>
             </button>
           </div>
 
