@@ -29,7 +29,7 @@ export default function HomePage({ products, onSelectProduct, navigateTo, openSh
     <div className="space-y-28">
       
       {/* Hero Section with Live Mechanical Caliber & Watch Dial Clock */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-radial-subtle pt-8 pb-16">
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-radial-subtle pt-12 sm:pt-16 pb-20">
         {/* Subtle ambient light */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-brass-500/5 rounded-full blur-[160px] pointer-events-none" />
 

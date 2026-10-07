@@ -33,7 +33,7 @@ export default function Header({
   return (
     <header className="sticky top-0 z-40 w-full bg-obsidian-950/95 backdrop-blur-md border-b border-obsidian-800 transition-all">
       {/* Top Pre-header Reassurance */}
-      <div className="bg-obsidian-900 border-b border-obsidian-800/60 text-sand text-[11px] uppercase tracking-wider py-1.5 px-4 hidden md:block">
+      <div className="bg-obsidian-900 border-b border-obsidian-800/60 text-sand text-[11px] uppercase tracking-wider py-2.5 px-4 hidden md:block">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5 text-ivory-200">
@@ -68,63 +68,69 @@ export default function Header({
 
       {/* Main Header Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between min-h-[104px] sm:min-h-[112px] py-4 sm:py-5 lg:py-6 gap-4">
           
-          {/* Mobile menu button */}
-          <div className="flex items-center lg:hidden">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-ivory-200 hover:text-brass-400 focus:outline-none"
-              aria-label="Ouvrir le menu"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-            <button
-              onClick={openSearchModal}
-              className="p-2 text-ivory-200 hover:text-brass-400 ml-1"
-              aria-label="Recherche"
-            >
-              <Search className="w-5 h-5" />
-            </button>
+          {/* Desktop Left Navigation / Mobile Burger */}
+          <div className="flex-1 flex items-center justify-start min-w-0">
+            {/* Mobile menu button */}
+            <div className="flex items-center lg:hidden">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 text-ivory-200 hover:text-brass-400 focus:outline-none"
+                aria-label="Ouvrir le menu"
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+              <button
+                onClick={openSearchModal}
+                className="p-2 text-ivory-200 hover:text-brass-400 ml-1"
+                aria-label="Recherche"
+              >
+                <Search className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Desktop Left Navigation */}
+            <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8 text-xs uppercase tracking-widest font-medium text-ivory-200">
+              <button 
+                onClick={() => handleNav('catalogue')}
+                className={`hover:text-brass-400 transition-colors ${currentRoute === 'catalogue' ? 'text-brass-400 border-b border-brass-400 pb-1' : ''}`}
+              >
+                Toutes les montres
+              </button>
+              
+              <button 
+                onClick={() => handleNav('catalogue-rolex')}
+                className="hover:text-brass-400 transition-colors"
+              >
+                Rolex
+              </button>
+              
+              <button 
+                onClick={() => handleNav('catalogue-cartier')}
+                className="hover:text-brass-400 transition-colors"
+              >
+                Cartier
+              </button>
+
+              <button 
+                onClick={() => handleNav('catalogue-tudor')}
+                className="hover:text-brass-400 transition-colors"
+              >
+                Tudor
+              </button>
+            </nav>
           </div>
 
-          {/* Desktop Left Navigation */}
-          <nav className="hidden lg:flex items-center space-x-7 text-xs uppercase tracking-widest font-medium text-ivory-200">
-            <button 
-              onClick={() => handleNav('catalogue')}
-              className={`hover:text-brass-400 transition-colors ${currentRoute === 'catalogue' ? 'text-brass-400 border-b border-brass-400 pb-1' : ''}`}
-            >
-              Toutes les montres
-            </button>
-            
-            <button 
-              onClick={() => handleNav('catalogue-rolex')}
-              className="hover:text-brass-400 transition-colors"
-            >
-              Rolex
-            </button>
-            
-            <button 
-              onClick={() => handleNav('catalogue-cartier')}
-              className="hover:text-brass-400 transition-colors"
-            >
-              Cartier
-            </button>
-
-            <button 
-              onClick={() => handleNav('catalogue-tudor')}
-              className="hover:text-brass-400 transition-colors"
-            >
-              Tudor
-            </button>
-          </nav>
-
-          {/* Center Brand Identity with Animated Horlogerie Escapement SVG */}
-          <div className="flex flex-col items-center cursor-pointer text-center group py-1" onClick={() => handleNav('home')}>
-            <div className="flex items-center gap-2.5">
+          {/* Center Brand Identity with Animated Horlogerie Escapement SVG (Ample Breathing Room) */}
+          <div 
+            className="flex flex-col items-center justify-center cursor-pointer text-center group py-3 sm:py-4 px-3 sm:px-8 shrink-0 my-auto transition-transform hover:scale-[1.01]" 
+            onClick={() => handleNav('home')}
+          >
+            <div className="flex items-center gap-3">
               {/* Animated Horlogerie Caliber Monogram SVG */}
               <svg 
-                className="w-6 h-6 text-brass-400 group-hover:text-brass-300 transition-colors" 
+                className="w-6 h-6 sm:w-7 sm:h-7 text-brass-400 group-hover:text-brass-300 transition-colors shrink-0" 
                 viewBox="0 0 44 44" 
                 fill="none"
               >
@@ -138,18 +144,18 @@ export default function Header({
                 </g>
                 <circle cx="22" cy="22" r="2.5" fill="currentColor" />
               </svg>
-              <span className="font-serif text-2xl sm:text-3xl tracking-[0.22em] font-normal text-ivory-100 group-hover:text-brass-300 transition-colors uppercase">
+              <span className="font-serif text-2xl sm:text-3xl lg:text-[32px] tracking-[0.24em] font-normal text-ivory-100 group-hover:text-brass-300 transition-colors uppercase leading-none">
                 Le Mouvement
               </span>
             </div>
-            <span className="text-[8.5px] tracking-[0.38em] text-sand/75 uppercase font-medium mt-0.5">
+            <span className="text-[9px] sm:text-[9.5px] tracking-[0.42em] text-sand/80 uppercase font-medium mt-2">
               Haute Horlogerie • Lyon
             </span>
           </div>
 
           {/* Desktop Right Navigation & Actions */}
-          <div className="flex items-center space-x-6">
-            <nav className="hidden lg:flex items-center space-x-6 text-xs uppercase tracking-widest font-medium text-ivory-200">
+          <div className="flex-1 flex items-center justify-end space-x-3 sm:space-x-5 min-w-0">
+            <nav className="hidden lg:flex items-center space-x-5 xl:space-x-7 text-xs uppercase tracking-widest font-medium text-ivory-200">
               <button 
                 onClick={() => handleNav('vendre')}
                 className={`hover:text-brass-400 transition-colors ${currentRoute === 'vendre' ? 'text-brass-400 border-b border-brass-400 pb-1' : ''}`}
