@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Mouvement — Présentation Avant / Après de la Refonte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0d12;
+      --bg-card: #121720;
+      --bg-card-hover: #181f2b;
+      --border-color: #242c38;
+      --border-gold: #c5a059;
+      --gold-primary: #c5a059;
+      --gold-light: #dfc288;
+      --gold-dark: #967635;
+      --text-main: #f4f2ee;
+      --text-muted: #9ba3af;
+      --text-dim: #6b7280;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      max-width: 100%;
+      width: 100%;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1240px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header Nav */
+    header.site-header {
+      background: rgba(10, 13, 18, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 16px 0;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .brand-symbol {
+      width: 32px;
+      height: 32px;
+      border: 1px dashed var(--gold-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-primary);
+      font-size: 14px;
+    }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-name {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      font-weight: 600;
+      line-height: 1.1;
+    }
+    .brand-sub {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      font-weight: 500;
+    }
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(197, 160, 89, 0.1);
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      color: var(--gold-light);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 500;
+    }
+    .header-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 72px 0 48px;
+      text-align: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(197, 160, 89, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      color: var(--text-main);
+    }
+    .hero-title span {
+      color: var(--gold-light);
+      font-style: italic;
+      font-family: var(--font-serif);
+      text-transform: none;
+    }
+    .hero-intro {
+      max-width: 780px;
+      margin: 0 auto 32px;
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Le Constat & La Vision */
+    .context-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 36px;
+      margin-bottom: 56px;
+      border-radius: 2px;
+      position: relative;
+    }
+    .context-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--gold-primary);
+    }
+    .context-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 24px;
+    }
+    .context-item {
+      background: rgba(10, 13, 18, 0.5);
+      border: 1px solid rgba(36, 44, 56, 0.7);
+      padding: 20px;
+    }
+    .context-item h4 {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      color: var(--gold-light);
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+    .context-item p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Global View Switcher Bar */
+    .controls-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 16px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 48px;
+      position: sticky;
+      top: 73px;
+      z-index: 90;
+      backdrop-filter: blur(10px);
+    }
+    .controls-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold-primary);
+      font-weight: 600;
+    }
+    .control-groups {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .segmented-control {
+      display: inline-flex;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      padding: 3px;
+      border-radius: 2px;
+    }
+    .segmented-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .segmented-btn.active {
+      background: var(--bg-card);
+      color: var(--gold-light);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-gold);
+    }
+    .segmented-btn:hover:not(.active) {
+      color: var(--text-main);
+    }
+
+    /* Sommaire Vignettes */
+    .toc-section {
+      margin-bottom: 64px;
+    }
+    .toc-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: var(--text-main);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .toc-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-color);
+    }
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .toc-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 16px;
+      text-decoration: none;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .toc-card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-2px);
+      background: var(--bg-card-hover);
+    }
+    .toc-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      background: #000;
+      border: 1px solid var(--border-color);
+    }
+    .toc-num {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold-primary);
+      font-weight: 600;
+    }
+    .toc-heading {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      color: var(--text-main);
+      line-height: 1.3;
+      font-weight: 600;
+    }
+
+    /* Screen Chapter */
+    .screen-chapter {
+      margin-bottom: 96px;
+      scroll-margin-top: 150px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 56px;
+    }
+    .chapter-header {
+      margin-bottom: 32px;
+    }
+    .chapter-badge {
+      display: inline-block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--gold-primary);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .chapter-title {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3.5vw, 36px);
+      color: var(--text-main);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+    .chapter-explanation {
+      font-size: 16px;
+      color: var(--gold-light);
+      max-width: 900px;
+      margin-bottom: 24px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    /* 3 Concrete Points */
+    .points-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .point-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 18px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .point-num {
+      width: 24px;
+      height: 24px;
+      background: rgba(197, 160, 89, 0.15);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .point-content h5 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .point-content p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Comparator Container */
+    .comparator-wrapper {
+      position: relative;
+      background: #000;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+    .comparator-wrapper:hover {
+      border-color: rgba(197, 160, 89, 0.4);
+    }
+
+    /* Slider Container */
+    .split-slider {
+      position: relative;
+      width: 100%;
+      user-select: none;
+      -webkit-user-select: none;
+      overflow: hidden;
+    }
+    /* Fixed aspect ratio */
+    .split-slider.desktop-view {
+      aspect-ratio: 1440 / 900;
+    }
+    .split-slider.mobile-view {
+      aspect-ratio: 390 / 844;
+      max-width: 440px;
+      margin: 0 auto;
+      border: 8px solid #202632;
+      border-radius: 36px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .split-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .split-layer.layer-after {
+      z-index: 1;
+    }
+    .split-layer.layer-before {
+      z-index: 2;
+      overflow: hidden;
+      width: 50%; /* driven by JS slider */
+      border-right: 2px solid var(--gold-primary);
+    }
+    .split-img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+    .split-layer.layer-before .split-img {
+      width: var(--slider-width, 100%);
+      max-width: none;
+    }
+
+    /* State Pills (AVANT / PROPOSITION) */
+    .state-pill {
+      position: absolute;
+      top: 16px;
+      padding: 6px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      border-radius: 2px;
+      z-index: 5;
+      pointer-events: none;
+      backdrop-filter: blur(8px);
+    }
+    .pill-before {
+      left: 16px;
+      background: rgba(20, 24, 28, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #e5e7eb;
+    }
+    .pill-after {
+      right: 16px;
+      background: rgba(197, 160, 89, 0.9);
+      border: 1px solid #dfc288;
+      color: #0a0d12;
+    }
+
+    /* Split Handle */
+    .split-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 40px;
+      margin-left: -20px;
+      z-index: 10;
+      cursor: ew-resize;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      outline: none;
+    }
+    .handle-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+      border: 2px solid #ffffff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0a0d12;
+      font-size: 13px;
+      font-weight: bold;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+    .split-handle:hover .handle-circle,
+    .split-handle:focus .handle-circle {
+      transform: scale(1.12);
+      background: var(--gold-light);
+    }
+
+    /* Side-by-side Mobile View (Mockups) */
+    .side-by-side-container {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 900px;
+      margin: 0 auto 24px;
+    }
+    .side-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 16px;
+      text-align: center;
+    }
+    .side-card-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .side-card.before .side-card-title { color: var(--text-muted); }
+    .side-card.after .side-card-title { color: var(--gold-primary); }
+    .phone-mockup {
+      aspect-ratio: 390 / 844;
+      max-width: 360px;
+      margin: 0 auto;
+      border: 8px solid #202632;
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+      background: #000;
+    }
+    .phone-mockup img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Actions Footer per Comparator */
+    .comparator-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 10px 0;
+    }
+    .comparator-instruction {
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-fullscreen {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-fullscreen:hover {
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 7, 10, 0.95);
+      z-index: 200;
+      padding: 24px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .lightbox-modal.active {
+      display: flex;
+    }
+    .lightbox-header {
+      width: 100%;
+      max-width: 1300px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .lightbox-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--text-main);
+    }
+    .lightbox-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .lightbox-toggle-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      color: var(--gold-light);
+      padding: 8px 16px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-weight: 600;
+    }
+    .lightbox-close-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 14px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .lightbox-content {
+      width: 100%;
+      max-width: 1300px;
+      max-height: 82vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .lightbox-content img {
+      max-width: 100%;
+      max-height: 82vh;
+      object-fit: contain;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Synthesis Table */
+    .summary-table-section {
+      margin: 80px 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 40px;
+      max-width: 100%;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .summary-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      color: var(--text-main);
+      text-align: center;
+    }
+    .summary-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+    .table-responsive {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      display: block;
+      box-sizing: border-box;
+    }
+    .summary-table {
+      width: 100%;
+      min-width: 540px;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    .summary-table th {
+      text-align: left;
+      padding: 14px 18px;
+      background: rgba(10, 13, 18, 0.7);
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 11px;
+      border-bottom: 2px solid var(--border-color);
+    }
+    .summary-table td {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .summary-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .summary-table td strong {
+      color: var(--text-main);
+    }
+    .tag-gain {
+      display: inline-block;
+      padding: 3px 8px;
+      background: rgba(197, 160, 89, 0.15);
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      color: var(--gold-light);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+
+    /* Footer */
+    footer.site-footer {
+      border-top: 1px solid var(--border-color);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 12px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 820px) {
+      .controls-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .control-groups {
+        justify-content: space-between;
+      }
+      .side-by-side-container {
+        grid-template-columns: 1fr;
+      }
+      .summary-table-section {
+        padding: 24px 16px;
+        overflow: hidden;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero {
+        padding: 48px 0 32px;
+      }
+      .context-card {
+        padding: 20px;
+      }
+      .state-pill {
+        font-size: 9px;
+        padding: 4px 8px;
+        top: 8px;
+      }
+      .pill-before { left: 8px; }
+      .pill-after { right: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="brand-logo">
+        <div class="brand-symbol">LM</div>
+        <div class="brand-text">
+          <span class="brand-name">Le Mouvement</span>
+          <span class="brand-sub">Haute Horlogerie • Lyon</span>
+        </div>
+      </a>
+      <div class="header-badge">
+        Document d'Étude & Refonte Digitale
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container" id="top">
+    
+    <!-- Hero Section -->
+    <section class="hero">
+      <span class="hero-tag">Présentation Comparative Pour la Direction</span>
+      <h1 class="hero-title">
+        Refonte Digitale : <span>Avant / Proposition</span>
+      </h1>
+      <p class="hero-intro">
+        Analyse visuelle écran par écran entre le site actuellement en ligne (<a href="https://lemouvement-watches.fr" target="_blank" rel="noopener noreferrer" style="color:var(--gold-light);text-decoration:underline;">lemouvement-watches.fr</a>) et la proposition de nouvelle boutique, pensée pour valoriser vos garde-temps et sécuriser l'acte d'achat.
+      </p>
+    </section>
+
+    <!-- Context & Objectives -->
+    <section class="context-card">
+      <h3 style="font-family:var(--font-serif); font-size:24px; color:var(--text-main); letter-spacing:0.05em; text-transform:uppercase;">
+        Ce qui a été fait et pourquoi
+      </h3>
+      <p style="color:var(--text-muted); font-size:14.5px; margin-top:8px; line-height:1.65;">
+        Le Mouvement sélectionne et transmet des montres d'occasion certifiées, vintage et contemporaines de prestige (Rolex, Cartier, Tudor, Omega) dont les prix varient de 1 500 € à plus de 10 000 €. Sur ces niveaux de prix, l'acheteur en ligne a besoin d'une confiance absolue immédiate. L'ancien site présentait plusieurs freins invisibles qui faisaient fuir les visiteurs qualifiés.
+      </p>
+
+      <div class="context-grid">
+        <div class="context-item">
+          <h4>1. Rassurer dès la première seconde</h4>
+          <p>
+            Sur le site actuel, les engagements (garantie 12 mois, contrôle d'authenticité, expédition sécurisée sous 48h) étaient peu visibles. La proposition les installe en tête de page sur chaque écran, à l'image des plus grandes maisons suisses.
+          </p>
+        </div>
+
+        <div class="context-item">
+          <h4>2. Débloquer l'acte d'achat direct</h4>
+          <p>
+            Le site actuel ne proposait aucun bouton d'achat direct sur les fiches produits : le client était forcé d'envoyer un message WhatsApp pour payer par virement. La proposition intègre un paiement immédiat sécurisé et le paiement en 3x/4x, tout en conservant le contact WhatsApp pour les conseils.
+          </p>
+        </div>
+
+        <div class="context-item">
+          <h4>3. Éliminer les codes techniques</h4>
+          <p>
+            Des identifiants techniques Shopify non traduits polluaient les filtres de recherche. La proposition offre une navigation fluide, épurée et en français horloger accessible.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Global Controls Bar (Sticky) -->
+    <section class="controls-bar" id="controls">
+      <span class="controls-title">Affichage des Captures</span>
+
+      <div class="control-groups">
+        <!-- Device Filter -->
+        <div class="segmented-control" role="group" aria-label="Format d'écran">
+          <button class="segmented-btn active" data-device="desktop" onclick="setGlobalDevice('desktop')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Ordinateur (1440×900)
+          </button>
+          <button class="segmented-btn" data-device="mobile" onclick="setGlobalDevice('mobile')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+            Téléphone (390×844)
+          </button>
+        </div>
+
+        <!-- Mode Filter (Slider vs Side-by-side) -->
+        <div class="segmented-control" role="group" aria-label="Mode comparateur">
+          <button class="segmented-btn active" data-mode="slider" onclick="setGlobalMode('slider')">
+            ↔ Curseur interactif
+          </button>
+          <button class="segmented-btn" data-mode="side" onclick="setGlobalMode('side')">
+            📱 Vue côte à côte
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Table of Contents in Thumbnails -->
+    <section class="toc-section">
+      <h2 class="toc-title">Sommaire des Écrans Comparés</h2>
+      <div class="toc-grid">
+        <a href="#chapitre-1" class="toc-card">
+          <img src="captures/01_accueil_apres_desktop.jpg" alt="Accueil" class="toc-thumb">
+          <span class="toc-num">Écran 01</span>
+          <span class="toc-heading">Page d'Accueil</span>
+        </a>
+        <a href="#chapitre-2" class="toc-card">
+          <img src="captures/02_catalogue_rolex_apres_desktop.jpg" alt="Catalogue Rolex" class="toc-thumb">
+          <span class="toc-num">Écran 02</span>
+          <span class="toc-heading">Catalogue & Recherche</span>
+        </a>
+        <a href="#chapitre-3" class="toc-card">
+          <img src="captures/03_fiche_produit_apres_desktop.jpg" alt="Fiche Produit" class="toc-thumb">
+          <span class="toc-num">Écran 03</span>
+          <span class="toc-heading">Fiche Produit Rolex</span>
+        </a>
+        <a href="#chapitre-4" class="toc-card">
+          <img src="captures/04_panier_checkout_apres_desktop.jpg" alt="Panier & Commande" class="toc-thumb">
+          <span class="toc-num">Écran 04</span>
+          <span class="toc-heading">Panier & Commande</span>
+        </a>
+        <a href="#chapitre-5" class="toc-card">
+          <img src="captures/05_rachat_sourcing_apres_desktop.jpg" alt="Rachat de montres" class="toc-thumb">
+          <span class="toc-num">Écran 05</span>
+          <span class="toc-heading">Rachat & Estimation</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- CHAPITRE 1 : ACCUEIL -->
+    <!-- ======================================================== -->
+    <section class="screen-chapter" id="chapitre-1">
+      <div class="chapter-header">
+        <span class="chapter-badge">Écran 01 • Immersion & Crédibilité</span>
+        <h2 class="chapter-title">Page d'Accueil — La Première Impression</h2>
+        <p class="chapter-explanation">
+          Transformer une vitrine web standard en un univers horloger prestigieux qui rassure et capte l'attention dès les premières secondes.
+        </p>
+
+        <div class="points-grid">
+          <div class="point-card">
+            <div class="point-num">1</div>
+            <div class="point-content">
+              <h5>Réassurance visible d'entrée</h5>
+              <p>Garantie 12 mois, certificat d'authenticité et expédition assurée sous 48h sont affichés tout en haut sans forcer le visiteur à chercher.</p>
+            </div>
+          </div>
+          <div class="point-card">
+            <div class="point-num">2</div>
+            <div class="point-content">
+              <h5>Univers visuel horloger</h5>
+              <p>Un habillage sombre et chaud inspiré des écrins de luxe avec balancier mécanique animé, remplaçant le fond clair générique.</p>
+            </div>
+          </div>
+          <div class="point-card">
+            <div class="point-num">3</div>
+            <div class="point-content">
+              <h5>Orientation client immédiate</h5>
+              <p>Deux choix clairs pour le visiteur : « Explorer la collection » pour acheter, ou « Faire estimer une pièce » pour vendre.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparator -->
+      <div class="comparator-wrapper" data-screen="01_accueil">
+        <!-- Slider Mode -->
+        <div class="split-slider desktop-view" id="slider-01">
+          <div class="split-layer layer-after">
+            <img src="captures/01_accueil_apres_desktop.jpg" alt="Proposition - Accueil" class="split-img img-after">
+            <span class="state-pill pill-after">PROPOSITION</span>
+          </div>
+          <div class="split-layer layer-before">
+            <img src="captures/01_accueil_avant_desktop.jpg" alt="Avant - Accueil" class="split-img img-before">
+            <span class="state-pill pill-before">AVANT (En ligne)</span>
+          </div>
+          <div class="split-handle" tabindex="0" role="slider" aria-valuenow="50" aria-label="Curseur comparateur">
+            <div class="handle-circle">↔</div>
+          </div>
+        </div>
+
+        <!-- Side-by-side Mode (Mobile view) -->
+        <div class="side-by-side-container" id="side-01">
+          <div class="side-card before">
+            <div class="side-card-title">Site Actuel (En ligne)</div>
+            <div class="phone-mockup">
+              <img src="captures/01_accueil_avant_mobile.jpg" alt="Avant - Accueil mobile">
+            </div>
+          </div>
+          <div class="side-card after">
+            <div class="side-card-title">Proposition (Nouvelle version)</div>
+            <div class="phone-mockup">
+              <img src="captures/01_accueil_apres_mobile.jpg" alt="Proposition - Accueil mobile">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparator-footer">
+        <span class="comparator-instruction">
+          Glissez le curseur au doigt ou à la souris pour comparer. Utilisez les flèches du clavier ◀ ▶ pour un réglage fin.
+        </span>
+        <button class="btn-fullscreen" onclick="openLightbox('01_accueil', 'Page d\'Accueil')">
+          ⤢ Plein écran
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- CHAPITRE 2 : CATALOGUE ROLEX -->
+    <!-- ======================================================== -->
+    <section class="screen-chapter" id="chapitre-2">
+      <div class="chapter-header">
+        <span class="chapter-badge">Écran 02 • Parcours & Filtrage</span>
+        <h2 class="chapter-title">Catalogue & Sélection Rolex — Trouver sa Montre</h2>
+        <p class="chapter-explanation">
+          Permettre au client de trouver facilement la montre de ses rêves sans rencontrer de bugs d'affichage ni de termes informatiques incompréhensibles.
+        </p>
+
+        <div class="points-grid">
+          <div class="point-card">
+            <div class="point-num">1</div>
+            <div class="point-content">
+              <h5>Suppression des codes techniques</h5>
+              <p>L'ancien site affichait des codes bruts (ex. <em>gid://shopify/TaxonomyValue/5</em>). La proposition nettoie tous les filtres en français clair.</p>
+            </div>
+          </div>
+          <div class="point-card">
+            <div class="point-num">2</div>
+            <div class="point-content">
+              <h5>Informations clés par montre</h5>
+              <p>Chaque pièce indique clairement son année, son diamètre et son état (disponible immédiatement ou pièce d'archive vendue).</p>
+            </div>
+          </div>
+          <div class="point-card">
+            <div class="point-num">3</div>
+            <div class="point-content">
+              <h5>Photos sur fond homogène</h5>
+              <p>Harmonisation visuelle des cadrans et bracelets pour un rendu digne d'un catalogue de vente aux enchères de prestige.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparator -->
+      <div class="comparator-wrapper" data-screen="02_catalogue_rolex">
+        <div class="split-slider desktop-view" id="slider-02">
+          <div class="split-layer layer-after">
+            <img src="captures/02_catalogue_rolex_apres_desktop.jpg" alt="Proposition - Catalogue Rolex" class="split-img img-after">
+            <span class="state-pill pill-after">PROPOSITION</span>
+          </div>
+          <div class="split-layer layer-before">
+            <img src="captures/02_catalogue_rolex_avant_desktop.jpg" alt="Avant - Catalogue Rolex" class="split-img img-before">
+            <span class="state-pill pill-before">AVANT (En ligne)</span>
+          </div>
+          <div class="split-handle" tabindex="0" role="slider" aria-valuenow="50" aria-label="Curseur comparateur">
+            <div class="handle-circle">↔</div>
+          </div>
+        </div>
+
+        <div class="side-by-side-container" id="side-02">
+          <div class="side-card before">
+            <div class="side-card-title">Site Actuel (En ligne)</div>
+            <div class="phone-mockup">
+              <img src="captures/02_catalogue_rolex_avant_mobile.jpg" alt="Avant - Catalogue mobile">
+            </div>
+          </div>
+          <div class="side-card after">
+            <div class="side-card-title">Proposition (Nouvelle version)</div>
+            <div class="phone-mockup">
+              <img src="captures/02_catalogue_rolex_apres_mobile.jpg" alt="Proposition - Catalogue mobile">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparator-footer">
+        <span class="comparator-instruction">
+          Glissez le curseur pour observer la clarté des cartes montres et la disparition des codes techniques.
+        </span>
+        <button class="btn-fullscreen" onclick="openLightbox('02_catalogue_rolex', 'Catalogue Rolex')">
+          ⤢ Plein écran
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- CHAPITRE 3 : FICHE PRODUIT -->
+    <!-- ======================================================== -->
+    <section class="screen-chapter" id="chapitre-3">
+      <div class="chapter-header">
+        <span class="chapter-badge">Écran 03 • Conversion & Transparence</span>
+        <h2 class="chapter-title">Fiche Produit (Rolex Datejust 16234) — Déclencher l'Achat</h2>
+        <p class="chapter-explanation">
+          Répondre à toutes les hésitations du client avant qu'il ne dépense 5 700 € : état du cadran, garantie, facilités de paiement et achat direct.
+        </p>
+
+        <div class="points-grid">
+          <div class="point-card">
+            <div class="point-num">1</div>
+            <div class="point-content">
+              <h5>Bouton d'achat direct sécurisé</h5>
+              <p>L'ancien site n'avait aucun bouton d'achat direct (contact manuel obligatoire). La proposition permet de commander en 1 clic.</p>
+            </div>
+          </div>
+          <div class="point-card">
+            <div class="point-num">2</div>
+            <div class="point-content">
+              <h5>Paiement fractionné calculé</h5>
+              <p>Affichage immédiat de la mensualité en 3x ou 4x sans frais (ex. 3x 1 900 €), réduisant immédiatement le frein du prix fort.</p>
+            </div>
+          </div>
+          <div class="point-card">
+            <div class="point-num">3</div>
+            <div class="point-content">
+              <h5>Détails techniques structurés</h5>
+              <p>Tableau limpide répertoriant le calibre, le boîtier, le millésime 1989, la révision et la garantie, sans pavé de texte compact.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparator -->
+      <div class="comparator-wrapper" data-screen="03_fiche_produit">
+        <div class="split-slider desktop-view" id="slider-03">
+          <div class="split-layer layer-after">
+            <img src="captures/03_fiche_produit_apres_desktop.jpg" alt="Proposition - Fiche Produit" class="split-img img-after">
+            <span class="state-pill pill-after">PROPOSITION</span>
+          </div>
+          <div class="split-layer layer-before">
+            <img src="captures/03_fiche_produit_avant_desktop.jpg" alt="Avant - Fiche Produit" class="split-img img-before">
+            <span class="state-pill pill-before">AVANT (En ligne)</span>
+          </div>
+          <div class="split-handle" tabindex="0" role="slider" aria-valuenow="50" aria-label="Curseur comparateur">
+            <div class="handle-circle">↔</div>
+          </div>
+        </div>
+
+        <div class="side-by-side-container" id="side-03">
+          <div class="side-card before">
+            <div class="side-card-title">Site Actuel (En ligne)</div>
+            <div class="phone-mockup">
+              <img src="captures/03_fiche_produit_avant_mobile.jpg" alt="Avant - Fiche produit mobile">
+            </div>
+          </div>
+          <div class="side-card after">
+            <div class="side-card-title">Proposition (Nouvelle version)</div>
+            <div class="phone-mockup">
+              <img src="captures/03_fiche_produit_apres_mobile.jpg" alt="Proposition - Fiche produit mobile">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparator-footer">
+        <span class="comparator-instruction">
+          Observez l'apparition du bouton d'achat « Acheter » et « Ajouter au panier », absents sur le site en ligne actuel.
+        </span>
+        <button class="btn-fullscreen" onclick="openLightbox('03_fiche_produit', 'Fiche Produit Rolex')">
+          ⤢ Plein écran
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- CHAPITRE 4 : PANIER & CHECKOUT -->
+    <!-- ======================================================== -->
+    <section class="screen-chapter" id="chapitre-4">
+      <div class="chapter-header">
+        <span class="chapter-badge">Écran 04 • Tunnel de Vente</span>
+        <h2 class="chapter-title">Panier & Processus d'Achat — La Fluidité Sans Friction</h2>
+        <p class="chapter-explanation">
+          Remplacer un écran de panier vide ou contraignant par un tiroir latéral instantané qui accompagne le client sans jamais le dérouter.
+        </p>
+
+        <div class="points-grid">
+          <div class="point-card">
+            <div class="point-num">1</div>
+            <div class="point-content">
+              <h5>Tiroir panier instantané</h5>
+              <p>L'ajout d'une montre ouvre un volet latéral sans recharger la page, préservant l'attention de l'acheteur.</p>
+            </div>
+          </div>
+          <div class="point-card">
+            <div class="point-num">2</div>
+            <div class="point-content">
+              <h5>Récapitulatif de sécurité total</h5>
+              <p>L'assurance ad valorem offerte, la garantie mécanique 12 mois et le délai de retour sous scellé sont confirmés avant le paiement.</p>
+            </div>
+          </div>
+          <div class="point-card">
+            <div class="point-num">3</div>
+            <div class="point-content">
+              <h5>Multiples options de règlement</h5>
+              <p>Paiement CB sécurisé, virement SEPA traçable ou retrait direct en mains propres au showroom privé de Lyon.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparator -->
+      <div class="comparator-wrapper" data-screen="04_panier_checkout">
+        <div class="split-slider desktop-view" id="slider-04">
+          <div class="split-layer layer-after">
+            <img src="captures/04_panier_checkout_apres_desktop.jpg" alt="Proposition - Panier" class="split-img img-after">
+            <span class="state-pill pill-after">PROPOSITION</span>
+          </div>
+          <div class="split-layer layer-before">
+            <img src="captures/04_panier_checkout_avant_desktop.jpg" alt="Avant - Panier vide" class="split-img img-before">
+            <span class="state-pill pill-before">AVANT (En ligne)</span>
+          </div>
+          <div class="split-handle" tabindex="0" role="slider" aria-valuenow="50" aria-label="Curseur comparateur">
+            <div class="handle-circle">↔</div>
+          </div>
+        </div>
+
+        <div class="side-by-side-container" id="side-04">
+          <div class="side-card before">
+            <div class="side-card-title">Site Actuel (En ligne)</div>
+            <div class="phone-mockup">
+              <img src="captures/04_panier_checkout_avant_mobile.jpg" alt="Avant - Panier mobile">
+            </div>
+          </div>
+          <div class="side-card after">
+            <div class="side-card-title">Proposition (Nouvelle version)</div>
+            <div class="phone-mockup">
+              <img src="captures/04_panier_checkout_apres_mobile.jpg" alt="Proposition - Panier mobile">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparator-footer">
+        <span class="comparator-instruction">
+          Comparez la page de panier vide du site actuel face au volet de commande prêt à l'achat de la proposition.
+        </span>
+        <button class="btn-fullscreen" onclick="openLightbox('04_panier_checkout', 'Panier & Commande')">
+          ⤢ Plein écran
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- CHAPITRE 5 : RACHAT & ESTIMATION -->
+    <!-- ======================================================== -->
+    <section class="screen-chapter" id="chapitre-5">
+      <div class="chapter-header">
+        <span class="chapter-badge">Écran 05 • Entrées de Stock</span>
+        <h2 class="chapter-title">Espace Rachat & Estimation — Collecter des Montres</h2>
+        <p class="chapter-explanation">
+          Donner envie aux propriétaires de montres de vous confier leur pièce plutôt que de la vendre sur des plateformes grand public impersonnelles.
+        </p>
+
+        <div class="points-grid">
+          <div class="point-card">
+            <div class="point-num">1</div>
+            <div class="point-content">
+              <h5>Deux options claires expliquées</h5>
+              <p>Rachat comptant immédiat sous 24h ou mandat de dépôt-vente optimisé pour maximiser le prix net vendeur.</p>
+            </div>
+          </div>
+          <div class="point-card">
+            <div class="point-num">2</div>
+            <div class="point-content">
+              <h5>Formulaire guidé étape par étape</h5>
+              <p>L'ancien site ne proposait qu'un formulaire de contact basique. La proposition guide le vendeur (marque, état, photos, papiers).</p>
+            </div>
+          </div>
+          <div class="point-card">
+            <div class="point-num">3</div>
+            <div class="point-content">
+              <h5>Engagement de réponse en 48h</h5>
+              <p>Une promesse d'expertise rapide qui incite immédiatement les collectionneurs à soumettre leur garde-temps.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparator -->
+      <div class="comparator-wrapper" data-screen="05_rachat_sourcing">
+        <div class="split-slider desktop-view" id="slider-05">
+          <div class="split-layer layer-after">
+            <img src="captures/05_rachat_sourcing_apres_desktop.jpg" alt="Proposition - Rachat de montres" class="split-img img-after">
+            <span class="state-pill pill-after">PROPOSITION</span>
+          </div>
+          <div class="split-layer layer-before">
+            <img src="captures/05_rachat_sourcing_avant_desktop.jpg" alt="Avant - Formulaire contact" class="split-img img-before">
+            <span class="state-pill pill-before">AVANT (En ligne)</span>
+          </div>
+          <div class="split-handle" tabindex="0" role="slider" aria-valuenow="50" aria-label="Curseur comparateur">
+            <div class="handle-circle">↔</div>
+          </div>
+        </div>
+
+        <div class="side-by-side-container" id="side-05">
+          <div class="side-card before">
+            <div class="side-card-title">Site Actuel (En ligne)</div>
+            <div class="phone-mockup">
+              <img src="captures/05_rachat_sourcing_avant_mobile.jpg" alt="Avant - Rachat mobile">
+            </div>
+          </div>
+          <div class="side-card after">
+            <div class="side-card-title">Proposition (Nouvelle version)</div>
+            <div class="phone-mockup">
+              <img src="captures/05_rachat_sourcing_apres_mobile.jpg" alt="Proposition - Rachat mobile">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparator-footer">
+        <span class="comparator-instruction">
+          Notez le contraste entre un simple formulaire de contact impersonnel et un véritable espace d'expertise horlogère.
+        </span>
+        <button class="btn-fullscreen" onclick="openLightbox('05_rachat_sourcing', 'Rachat & Sourcing')">
+          ⤢ Plein écran
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SYNTHESE & BILAN CHIFFRE -->
+    <!-- ======================================================== -->
+    <section class="summary-table-section">
+      <h3 class="summary-title">Synthèse des Améliorations Concrètes</h3>
+      <p class="summary-subtitle">
+        Bilan des 5 piliers de conversion comparés entre la version en ligne et la proposition.
+      </p>
+
+      <div class="table-responsive">
+        <table class="summary-table">
+          <thead>
+            <tr>
+              <th>Écran</th>
+              <th>Site Actuel (En ligne)</th>
+              <th>Proposition de Refonte</th>
+              <th>Bénéfice Client & Vente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>01. Accueil</strong></td>
+              <td>Vitrine standard, réassurance discrète, fond beige sans relief horloger.</td>
+              <td>Univers prestigieux sombre, calibres animés, réassurance 12 mois et 48h en tête.</td>
+              <td><span class="tag-gain">+ Confiance immédiate</span></td>
+            </tr>
+            <tr>
+              <td><strong>02. Catalogue</strong></td>
+              <td>Identifiants Shopify bruts (ex. <em>TaxonomyValue</em>), filtres techniques confus.</td>
+              <td>Filtres épurés en français, badges stock/vendue, millésimes et diamètres lisibles.</td>
+              <td><span class="tag-gain">+ Fluidité de recherche</span></td>
+            </tr>
+            <tr>
+              <td><strong>03. Fiche Produit</strong></td>
+              <td>Aucun bouton d'achat direct, contact WhatsApp obligatoire pour virement manuel.</td>
+              <td>Bouton « Acheter », paiement en 3x/4x calculé, fiches techniques 20 points.</td>
+              <td><span class="tag-gain">+ Ventes directes impulsives</span></td>
+            </tr>
+            <tr>
+              <td><strong>04. Panier / Achat</strong></td>
+              <td>Panier vide déconnecté, parcours d'achat non finalisé en ligne.</td>
+              <td>Tiroir instantané sans rechargement, calcul Alma, sécurité de paiement SSL.</td>
+              <td><span class="tag-gain">- Abandons de commande</span></td>
+            </tr>
+            <tr>
+              <td><strong>05. Rachat / Vente</strong></td>
+              <td>Page contact classique avec champs vides, sans guide d'estimation.</td>
+              <td>Espace rachat complet en 3 étapes (rachat comptant 24h ou mandat dépôt-vente).</td>
+              <td><span class="tag-gain">+ Dépôts de pièces rares</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox">
+    <div class="lightbox-header">
+      <h4 class="lightbox-title" id="lightbox-title">Aperçu Plein Écran</h4>
+      <div class="lightbox-controls">
+        <button class="lightbox-toggle-btn" id="lightbox-toggle" onclick="toggleLightboxState()">
+          Afficher : PROPOSITION
+        </button>
+        <button class="lightbox-close-btn" onclick="closeLightbox()" title="Fermer (Échap)">✕</button>
+      </div>
+    </div>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="Aperçu grand format">
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        Document confidentiel préparé pour Nyle Abderrahman — Direction de la Maison Le Mouvement (Lyon).
+      </p>
+      <p style="margin-top:6px; color:#555e6c;">
+        Captures réelles Playwright Chromium • Rendu certifié 1440×900 et 390×844 • Tous droits réservés.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript Engine -->
+  <script>
+    let currentDevice = 'desktop';
+    let currentMode = 'slider';
+
+    // Global Device Switcher (Desktop vs Mobile)
+    function setGlobalDevice(device) {
+      currentDevice = device;
+      
+      // Update buttons
+      document.querySelectorAll('[data-device]').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-device') === device);
+      });
+
+      // Update all sliders
+      document.querySelectorAll('.split-slider').forEach(slider => {
+        slider.classList.toggle('desktop-view', device === 'desktop');
+        slider.classList.toggle('mobile-view', device === 'mobile');
+
+        const wrapper = slider.closest('.comparator-wrapper');
+        const screenId = wrapper.getAttribute('data-screen');
+
+        const imgBefore = slider.querySelector('.img-before');
+        const imgAfter = slider.querySelector('.img-after');
+
+        imgBefore.src = `captures/${screenId}_avant_${device}.jpg`;
+        imgAfter.src = `captures/${screenId}_apres_${device}.jpg`;
+
+        // Reset handle position to 50%
+        setSliderPosition(slider, 50);
+      });
+    }
+
+    // Global Mode Switcher (Curseur interactif vs Côte à côte)
+    function setGlobalMode(mode) {
+      currentMode = mode;
+
+      document.querySelectorAll('[data-mode]').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-mode') === mode);
+      });
+
+      document.querySelectorAll('.comparator-wrapper').forEach(wrapper => {
+        const slider = wrapper.querySelector('.split-slider');
+        const sideBySide = wrapper.querySelector('.side-by-side-container');
+
+        if (mode === 'side') {
+          slider.style.display = 'none';
+          sideBySide.style.display = 'grid';
+        } else {
+          slider.style.display = 'block';
+          sideBySide.style.display = 'none';
+        }
+      });
+    }
+
+    // Initialize Split Sliders
+    function initSliders() {
+      document.querySelectorAll('.split-slider').forEach(slider => {
+        const handle = slider.querySelector('.split-handle');
+        const layerBefore = slider.querySelector('.layer-before');
+        const imgBefore = layerBefore.querySelector('.split-img');
+
+        let isDragging = false;
+
+        function updateSlider(percent) {
+          const clamped = Math.max(0, Math.min(100, percent));
+          layerBefore.style.width = clamped + '%';
+          handle.style.left = clamped + '%';
+          handle.setAttribute('aria-valuenow', Math.round(clamped));
+
+          // Keep image from squishing by locking its width to the container
+          const containerWidth = slider.offsetWidth;
+          imgBefore.style.width = containerWidth + 'px';
+        }
+
+        slider._update = updateSlider;
+        updateSlider(50);
+
+        function getPercentFromEvent(e) {
+          const rect = slider.getBoundingClientRect();
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const pos = clientX - rect.left;
+          return (pos / rect.width) * 100;
+        }
+
+        // Mouse Events
+        handle.addEventListener('mousedown', (e) => {
+          e.preventDefault();
+          isDragging = true;
+        });
+        window.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          updateSlider(getPercentFromEvent(e));
+        });
+        window.addEventListener('mouseup', () => {
+          isDragging = false;
+        });
+
+        // Touch Events
+        handle.addEventListener('touchstart', (e) => {
+          isDragging = true;
+        }, { passive: true });
+        window.addEventListener('touchmove', (e) => {
+          if (!isDragging) return;
+          updateSlider(getPercentFromEvent(e));
+        }, { passive: true });
+        window.addEventListener('touchend', () => {
+          isDragging = false;
+        });
+
+        // Click on slider track
+        slider.addEventListener('click', (e) => {
+          if (e.target.closest('.split-handle')) return;
+          updateSlider(getPercentFromEvent(e));
+        });
+
+        // Keyboard Accessibility (Arrows)
+        handle.addEventListener('keydown', (e) => {
+          const current = parseFloat(handle.style.left) || 50;
+          let step = 5;
+          if (e.shiftKey) step = 15;
+
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            updateSlider(current - step);
+          } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            updateSlider(current + step);
+          } else if (e.key === 'Home') {
+            e.preventDefault();
+            updateSlider(0);
+          } else if (e.key === 'End') {
+            e.preventDefault();
+            updateSlider(100);
+          }
+        });
+
+        // Recalculate on window resize
+        window.addEventListener('resize', () => {
+          const currentPercent = parseFloat(handle.style.left) || 50;
+          updateSlider(currentPercent);
+        });
+      });
+    }
+
+    function setSliderPosition(slider, percent) {
+      if (slider._update) {
+        slider._update(percent);
+      }
+    }
+
+    // Lightbox Functionality
+    let activeLightboxScreen = '';
+    let activeLightboxState = 'apres'; // 'avant' or 'apres'
+
+    function openLightbox(screenId, title) {
+      activeLightboxScreen = screenId;
+      activeLightboxState = 'apres';
+      const modal = document.getElementById('lightbox');
+      const titleEl = document.getElementById('lightbox-title');
+      const imgEl = document.getElementById('lightbox-img');
+      const toggleBtn = document.getElementById('lightbox-toggle');
+
+      titleEl.textContent = `${title} — Proposition`;
+      imgEl.src = `captures/${screenId}_apres_${currentDevice}.jpg`;
+      toggleBtn.textContent = 'BASCULER VERS : AVANT';
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function toggleLightboxState() {
+      activeLightboxState = activeLightboxState === 'apres' ? 'avant' : 'apres';
+      const imgEl = document.getElementById('lightbox-img');
+      const toggleBtn = document.getElementById('lightbox-toggle');
+      const titleEl = document.getElementById('lightbox-title');
+
+      imgEl.src = `captures/${activeLightboxScreen}_${activeLightboxState}_${currentDevice}.jpg`;
+      if (activeLightboxState === 'apres') {
+        toggleBtn.textContent = 'BASCULER VERS : AVANT';
+        titleEl.textContent = titleEl.textContent.replace('Avant (En ligne)', 'Proposition');
+      } else {
+        toggleBtn.textContent = 'BASCULER VERS : PROPOSITION';
+        titleEl.textContent = titleEl.textContent.replace('Proposition', 'Avant (En ligne)');
+      }
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('lightbox');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Escape and Space shortcuts
+    window.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('lightbox');
+      if (!modal.classList.contains('active')) return;
+
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        toggleLightboxState();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initSliders();
+    });
+  </script>
+</body>
+</html>
