@@ -9,7 +9,7 @@ import LiveCalibreShowcase from '../components/LiveCalibreShowcase';
 
 const cleanTitle = (str) => (str || '').replace(/\\n/g, '').replace(/\s+/g, ' ').trim();
 
-export default function HomePage({ products, onSelectProduct, navigateTo, openShowroomModal, theme, toggleTheme }) {
+export default function HomePage({ products, onSelectProduct, navigateTo, openShowroomModal, theme, toggleTheme, fontPairing, onCycleFontPairing, onOpenFontModal }) {
   // Extract in-stock and featured items
   const inStockWatches = products.filter(p => !p.isSold).slice(0, 4);
   const rolexWatches = products.filter(p => p.brand === 'Rolex').slice(0, 3);
@@ -248,6 +248,9 @@ export default function HomePage({ products, onSelectProduct, navigateTo, openSh
         navigateTo={navigateTo}
         theme={theme}
         toggleTheme={toggleTheme}
+        fontPairing={fontPairing}
+        onCycleFontPairing={onCycleFontPairing}
+        onOpenFontModal={onOpenFontModal}
       />
 
 

@@ -103,15 +103,120 @@ html[data-theme="light"] .drop-shadow-\[0_25px_35px_rgba\(0\,0\,0\,0\.95\)\] {
   filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.14)) !important;
 }
 
-/* Explicit Ultra-Luxury Title Binding (Didot / Bodoni Moda High-Contrast Serifs) */
+/* --- 10 SOTA 2026 HAUTE HORLOGERIE FONT PAIRINGS --- */
+:root {
+  --font-heading: "Bodoni Moda", "Didot", "Prata", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-heading-tracking: 0.08em;
+  --font-heading-weight: 500;
+  --font-heading-transform: uppercase;
+}
+
+/* 1. MANUFACTURE ROYALE (Patek Philippe & Vacheron Constantin) */
+html[data-font-pairing="manufacture-royale"] {
+  --font-heading: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-heading-tracking: 0.07em;
+  --font-heading-weight: 600;
+}
+
+/* 2. OCTO ARCHITECTURAL (Bvlgari Octo Finissimo & High-Contrast Didone) */
+html[data-font-pairing="octo-architectural"] {
+  --font-heading: "Bodoni Moda", "Didot", "Prata", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-heading-tracking: 0.09em;
+  --font-heading-weight: 600;
+}
+
+/* 3. TITANIUM CONCEPT (Richard Mille & AP Concept Avant-Garde) */
+html[data-font-pairing="titanium-concept"] {
+  --font-heading: "Syne", "Space Grotesk", sans-serif;
+  --font-body: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-heading-tracking: 0.04em;
+  --font-heading-weight: 800;
+}
+
+/* 4. CHRONOMÈTRE SUISSE (Tudor & Modern Rolex Precision) */
+html[data-font-pairing="chronometre-suisse"] {
+  --font-heading: "Inter", "Plus Jakarta Sans", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-heading-tracking: 0.01em;
+  --font-heading-weight: 800;
+}
+
+/* 5. IMPERIAL CAESAR (Rolex Day-Date 'President' & Roman Lapidary) */
+html[data-font-pairing="imperial-caesar"] {
+  --font-heading: "Cinzel", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-heading-tracking: 0.14em;
+  --font-heading-weight: 700;
+}
+
+/* 6. SAVILE ROW HERITAGE (Jaeger-LeCoultre & British Old Money) */
+html[data-font-pairing="savile-row"] {
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-heading-tracking: 0.06em;
+  --font-heading-weight: 600;
+}
+
+/* 7. ART DÉCO 1931 (Cartier Tank & Années Folles) */
+html[data-font-pairing="art-deco"] {
+  --font-heading: "Italiana", Georgia, serif;
+  --font-body: "Tenor Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-heading-tracking: 0.15em;
+  --font-heading-weight: 400;
+}
+
+/* 8. TOOL WATCH METROLOGY (Omega Speedmaster & Flight Instrument) */
+html[data-font-pairing="tool-watch"] {
+  --font-heading: "Barlow Condensed", sans-serif;
+  --font-body: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-heading-tracking: 0.08em;
+  --font-heading-weight: 700;
+}
+
+/* 9. INDEPENDENT ATELIER (F.P. Journe & Akrivia Bespoke Craft) */
+html[data-font-pairing="independent-atelier"] {
+  --font-heading: "Prata", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-heading-tracking: 0.08em;
+  --font-heading-weight: 400;
+}
+
+/* 10. CYBER TOURBILLON (Modernist Geometric & De Bethune) */
+html[data-font-pairing="cyber-tourbillon"] {
+  --font-heading: "Outfit", "Space Grotesk", sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-heading-tracking: 0.06em;
+  --font-heading-weight: 700;
+}
+
+/* Dynamic Headings and Typography Application */
 h1, h2, h3, .font-serif, .font-luxury, .font-display {
-  font-family: "Bodoni Moda", "Didot", "Prata", Georgia, serif !important;
+  font-family: var(--font-heading) !important;
+  font-weight: var(--font-heading-weight, 500);
+  letter-spacing: var(--font-heading-tracking, 0.08em);
   font-optical-sizing: auto;
-  letter-spacing: 0.08em;
+}
+
+body, .font-sans {
+  font-family: var(--font-body), system-ui, sans-serif !important;
 }
 
 .font-mono, [data-mono] {
-  font-family: "JetBrains Mono", ui-monospace, monospace !important;
+  font-family: var(--font-mono), monospace !important;
 }
 
 /* Custom subtle scrollbar */

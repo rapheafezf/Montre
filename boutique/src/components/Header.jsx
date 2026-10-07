@@ -1,9 +1,28 @@
 import React, { useState } from 'react';
-import { ShoppingBag, Search, Menu, X, ShieldCheck, Clock, MapPin, MessageCircle, ChevronDown, Sun, Moon } from 'lucide-react';
+import { 
+  ShoppingBag, Search, Menu, X, ShieldCheck, Clock, MapPin, 
+  MessageCircle, ChevronDown, ChevronLeft, ChevronRight, Sun, Moon, Type 
+} from 'lucide-react';
+import { FONT_PAIRINGS } from './FontPairingModal';
 
-export default function Header({ currentRoute, navigateTo, cartCount, openCart, openShowroomModal, openSearchModal, theme = 'dark', toggleTheme }) {
+export default function Header({ 
+  currentRoute, 
+  navigateTo, 
+  cartCount, 
+  openCart, 
+  openShowroomModal, 
+  openSearchModal, 
+  theme = 'dark', 
+  toggleTheme,
+  fontPairing = 'manufacture-royale',
+  onCycleFontPairing,
+  onOpenFontModal
+}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const activePairingIndex = FONT_PAIRINGS.findIndex(p => p.id === fontPairing);
+  const activePairing = activePairingIndex >= 0 ? FONT_PAIRINGS[activePairingIndex] : FONT_PAIRINGS[0];
 
   const handleNav = (route) => {
     navigateTo(route);
@@ -192,6 +211,41 @@ export default function Header({ currentRoute, navigateTo, cartCount, openCart, 
               <Search className="w-5 h-5" />
             </button>
 
+            {/* SOTA 2026 Font Pairing Switcher (10 Polices Haute Horlogerie) */}
+            <div className="flex items-center border border-brass-600/40 bg-obsidian-900/90 shadow-sm p-0.5">
+              <button
+                onClick={() => onCycleFontPairing && onCycleFontPairing(-1)}
+                className="p-1 text-sand hover:text-ivory-100 hover:bg-obsidian-850 transition-colors cursor-pointer"
+                title="Style typographique précédent"
+                aria-label="Style précédent"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+              </button>
+              
+              <button
+                onClick={onOpenFontModal}
+                className="flex items-center gap-1.5 px-2 py-1 text-[11px] font-mono uppercase tracking-wider text-ivory-100 hover:text-brass-300 transition-colors cursor-pointer"
+                title="Ouvrir le studio des 10 typographies de haute horlogerie"
+              >
+                <Type className="w-3.5 h-3.5 text-brass-400" />
+                <span className="font-semibold hidden lg:inline">
+                  {activePairing?.name || 'Police'}
+                </span>
+                <span className="text-[10px] font-mono text-brass-400 font-bold">
+                  ({activePairingIndex + 1}/10)
+                </span>
+              </button>
+
+              <button
+                onClick={() => onCycleFontPairing && onCycleFontPairing(1)}
+                className="p-1 text-sand hover:text-ivory-100 hover:bg-obsidian-850 transition-colors cursor-pointer"
+                title="Style typographique suivant"
+                aria-label="Style suivant"
+              >
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
             {/* Theme Toggle Button (Fond Blanc / Fond Noir) */}
             <button
               onClick={() => toggleTheme && toggleTheme()}
@@ -305,7 +359,7 @@ export default function Header({ currentRoute, navigateTo, cartCount, openCart, 
           </div>
 
           {/* Mobile Theme Switcher */}
-          <div className="pt-2 pb-1">
+          <div className="pt-2 pb-1 space-y-2">
             <button
               onClick={() => toggleTheme && toggleTheme()}
               className="w-full flex items-center justify-between px-3 py-2 border border-brass-600/40 bg-obsidian-900 text-xs font-mono uppercase tracking-wider text-ivory-100"
@@ -316,6 +370,23 @@ export default function Header({ currentRoute, navigateTo, cartCount, openCart, 
               </span>
               <span className="font-bold text-brass-300">
                 {theme === 'light' ? 'Fond Blanc (Actif)' : 'Fond Noir (Actif)'}
+              </span>
+            </button>
+
+            {/* Mobile Font Studio Trigger */}
+            <button
+              onClick={() => {
+                if (onOpenFontModal) onOpenFontModal();
+                setMobileMenuOpen(false);
+              }}
+              className="w-full flex items-center justify-between px-3 py-2 border border-brass-600/40 bg-obsidian-900 text-xs font-mono uppercase tracking-wider text-ivory-100"
+            >
+              <span className="flex items-center gap-2">
+                <Type className="w-4 h-4 text-brass-400" />
+                <span>Typographie ({activePairingIndex + 1}/10) :</span>
+              </span>
+              <span className="font-bold text-brass-300">
+                {activePairing?.name}
               </span>
             </button>
           </div>

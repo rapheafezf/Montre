@@ -23,6 +23,7 @@ import LegalPage from './pages/LegalPage';
 import AdminPage from './pages/AdminPage';
 import useLenisSmoothScroll from './hooks/useLenisSmoothScroll';
 
+import FontPairingModal, { FONT_PAIRINGS } from './components/FontPairingModal';
 import { PRODUCTS } from './data/products';
 import { MessageCircle } from 'lucide-react';
 
@@ -57,6 +58,32 @@ export default function App() {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
+
+  // 10 SOTA Haute Horlogerie Font Pairings State
+  const [fontPairing, setFontPairing] = useState(() => {
+    return localStorage.getItem('lemouvement_font_pairing') || 'manufacture-royale';
+  });
+  const [fontModalOpen, setFontModalOpen] = useState(false);
+
+  const handleSelectFontPairing = (pairingId) => {
+    setFontPairing(pairingId);
+    try {
+      localStorage.setItem('lemouvement_font_pairing', pairingId);
+    } catch (e) {
+      console.error('Failed to save font pairing:', e);
+    }
+  };
+
+  const handleCycleFontPairing = (direction = 1) => {
+    const currentIndex = FONT_PAIRINGS.findIndex(p => p.id === fontPairing);
+    const safeIndex = currentIndex >= 0 ? currentIndex : 0;
+    const nextIndex = (safeIndex + direction + FONT_PAIRINGS.length) % FONT_PAIRINGS.length;
+    handleSelectFontPairing(FONT_PAIRINGS[nextIndex].id);
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-font-pairing', fontPairing);
+  }, [fontPairing]);
 
   // Reactive products catalog state synced with localStorage
   const [products, setProducts] = useState(() => {
@@ -204,6 +231,9 @@ export default function App() {
         openSearchModal={() => setSearchOpen(true)}
         theme={theme}
         toggleTheme={handleToggleTheme}
+        fontPairing={fontPairing}
+        onCycleFontPairing={handleCycleFontPairing}
+        onOpenFontModal={() => setFontModalOpen(true)}
       />
 
       {/* Main View Router */}
@@ -216,6 +246,9 @@ export default function App() {
             openShowroomModal={() => handleOpenShowroom()}
             theme={theme}
             toggleTheme={handleToggleTheme}
+            fontPairing={fontPairing}
+            onCycleFontPairing={handleCycleFontPairing}
+            onOpenFontModal={() => setFontModalOpen(true)}
           />
         )}
 
@@ -340,6 +373,14 @@ export default function App() {
 
       {/* Cookie RGPD Banner */}
       <CookieBanner onOpenPrivacy={() => navigateTo('rgpd')} />
+
+      {/* SOTA 2026 Haute Horlogerie Typography Studio Modal */}
+      <FontPairingModal
+        isOpen={fontModalOpen}
+        onClose={() => setFontModalOpen(false)}
+        currentPairingId={fontPairing}
+        onSelectPairing={handleSelectFontPairing}
+      />
 
       {/* Floating Concierge WhatsApp Button */}
       <a

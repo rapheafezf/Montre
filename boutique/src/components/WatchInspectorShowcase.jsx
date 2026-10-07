@@ -2,16 +2,25 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { 
   Sparkles, Compass, ShieldCheck, Activity, ArrowRight, 
   ChevronLeft, ChevronRight, Eye, EyeOff, Layers, Disc, 
-  Cpu, Wrench, CheckCircle2, Zap, Sliders, Sun, Moon
+  Cpu, Wrench, CheckCircle2, Zap, Sliders, Sun, Moon, Type
 } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 import WatchExplodedViewSvg from './WatchExplodedViewSvg';
 import CalibreMovementSimulator from './CalibreMovementSimulator';
+import { FONT_PAIRINGS } from './FontPairingModal';
 
 // Clean title helper
 const cleanTitle = (str) => (str || '').replace(/\s+/g, ' ').trim();
 
-export default function WatchInspectorShowcase({ onSelectProduct, navigateTo, theme = 'dark', toggleTheme }) {
+export default function WatchInspectorShowcase({ 
+  onSelectProduct, 
+  navigateTo, 
+  theme = 'dark', 
+  toggleTheme,
+  fontPairing = 'manufacture-royale',
+  onCycleFontPairing,
+  onOpenFontModal
+}) {
   // All 30 watches with transparent cutout fallback
   const allWatches = useMemo(() => {
     return PRODUCTS.map(p => {
@@ -56,8 +65,11 @@ export default function WatchInspectorShowcase({ onSelectProduct, navigateTo, th
   const [selectedLayerId, setSelectedLayerId] = useState('movement');
   const [selectedLayerData, setSelectedLayerData] = useState(null);
 
-  // Mode 3: Calibre simulation active topic
+  // Calibre simulation active topic
   const [activeCalibreTopic, setActiveCalibreTopic] = useState('escapement');
+
+  const activePairingIndex = FONT_PAIRINGS.findIndex(p => p.id === fontPairing);
+  const activePairing = activePairingIndex >= 0 ? FONT_PAIRINGS[activePairingIndex] : FONT_PAIRINGS[0];
 
   const containerRef = useRef(null);
 
@@ -408,6 +420,35 @@ export default function WatchInspectorShowcase({ onSelectProduct, navigateTo, th
               >
                 <Sun className="w-3.5 h-3.5" />
                 <span>Fond Blanc</span>
+              </button>
+            </div>
+
+            {/* SOTA 2026 Typography Studio Switcher Pill */}
+            <div className="flex items-center p-0.5 bg-obsidian-900 border border-brass-600/40">
+              <button
+                onClick={() => onCycleFontPairing && onCycleFontPairing(-1)}
+                className="p-1 text-sand hover:text-ivory-100 hover:bg-obsidian-850 transition-colors cursor-pointer"
+                title="Typographie précédente"
+                aria-label="Typographie précédente"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+              </button>
+              <button
+                onClick={onOpenFontModal}
+                className="flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider text-ivory-100 hover:text-brass-300 transition-colors cursor-pointer"
+                title="Ouvrir le studio des 10 typographies de haute horlogerie"
+              >
+                <Type className="w-3.5 h-3.5 text-brass-400" />
+                <span className="font-semibold hidden lg:inline">{activePairing?.name}</span>
+                <span className="text-brass-400 font-bold text-[10px]">({activePairingIndex + 1}/10)</span>
+              </button>
+              <button
+                onClick={() => onCycleFontPairing && onCycleFontPairing(1)}
+                className="p-1 text-sand hover:text-ivory-100 hover:bg-obsidian-850 transition-colors cursor-pointer"
+                title="Typographie suivante"
+                aria-label="Typographie suivante"
+              >
+                <ChevronRight className="w-3.5 h-3.5" />
               </button>
             </div>
 
